@@ -1,0 +1,38 @@
+@import "less/mixins.less";
+@color-menu-left: #0315e2;
+@color-navbar: #00f000;
+
+body {
+    background-image: url("../img/lgrey106.jpg");
+}
+
+.navbar-inner {
+    #gradient > .vertical(lighten(@color-navbar,40%), lighten(@color-navbar,80%));
+    .border-radius(10px);
+    border: 2px solid darken(@color-navbar, 30%);
+    .brand {
+        color: darken(@color-navbar, 25%);
+    }
+    .nav {
+        li {
+            a {
+                color: darken(@color-navbar, 30%);
+            }
+            a:hover {
+                color: darken(@color-navbar, 10%);
+            }
+        }
+        .active {
+            a {
+                background-color: darken(@color-navbar, 30%);
+            }
+        }
+    }
+}
+
+#turbo {
+    padding-top: 200px;
+    font-size: 60px;
+    color: red;
+}
+
