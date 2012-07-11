@@ -16,14 +16,14 @@ body {
     .nav {
         li {
             a {
-                color: darken(@color-navbar, 30%);
+                color: saturated(@color-navbar, 40%);
             }
             a:hover {
-                color: darken(@color-navbar, 10%);
+                color: darken(@color-navbar, 30%);
             }
         }
         .active {
-            a {
+            a, a:hover {
                 background-color: darken(@color-navbar, 30%);
             }
         }
