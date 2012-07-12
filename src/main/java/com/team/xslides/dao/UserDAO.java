@@ -10,5 +10,9 @@ public interface UserDAO {
     
     public List<User> listUser();
     
+    public boolean hasUserWithLogin(String login);
+    
+    public boolean hasUserWithEmail(String email);
+    
     public void removeUser(Integer id);
 }
