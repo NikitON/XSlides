@@ -31,11 +31,6 @@ public class UserServiceImpl implements UserService {
     }
     
     @Transactional
-    public boolean hasUserWithLogin(String login) {
-        return userDAO.hasUserWithLogin(login);
-    }
-
-    @Transactional
     public boolean hasUserWithEmail(String email) {
         return userDAO.hasUserWithEmail(email);
     }

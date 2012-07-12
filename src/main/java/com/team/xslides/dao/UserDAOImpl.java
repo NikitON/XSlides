@@ -21,7 +21,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     public void addUser(User user) {
-        if (!hasUserWithEmail(user.getEmail()) && !hasUserWithLogin(user.getLogin())) {
+        if (!hasUserWithEmail(user.getEmail())) {
             getSession().save(user);
         }
     }
@@ -36,12 +36,6 @@ public class UserDAOImpl implements UserDAO {
         if (user != null) {
             getSession().delete(user);
         }
-    }
-
-    public boolean hasUserWithLogin(String login) {
-        Query query = getSession().createQuery("from User u where u.login = :requestLogin");
-        query.setParameter("requestLogin", login);
-        return !query.list().isEmpty();
     }
 
     public boolean hasUserWithEmail(String email) {

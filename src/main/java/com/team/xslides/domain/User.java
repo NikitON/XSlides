@@ -19,9 +19,6 @@ public class User {
 
     @Column(name = "Lastname", nullable = false)
     private String lastname;
-
-    @Column(name = "Login", nullable = false, unique = true)
-    private String login;
     
     @Column(name = "Email", nullable = false, unique = true)
     private String email;
@@ -57,14 +54,6 @@ public class User {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getEmail() {
