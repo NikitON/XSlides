@@ -1,9 +1,15 @@
 package com.team.xslides.domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,19 +17,19 @@ import javax.persistence.Table;
 public class User {
     @Id
     @Column(name = "Id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "Firstname", nullable = false)
+    @Column(name = "Firstname", length = 40)
     private String firstname;
 
-    @Column(name = "Lastname", nullable = false)
+    @Column(name = "Lastname", length = 40)
     private String lastname;
     
-    @Column(name = "Email", nullable = false, unique = true)
+    @Column(name = "Email", nullable = false, unique = true, length = 60)
     private String email;
 
-    @Column(name = "Password", nullable = false)
+    @Column(name = "Password", nullable = false, length = 40)
     private String password;
     
     @Column(name = "Confirmed")
@@ -31,7 +37,10 @@ public class User {
     
     @Column(name = "Admin")
     private Boolean isAdmin;
-
+    /*
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Presentation> presentations;
+     */
     public Integer getId() {
         return id;
     }
@@ -87,6 +96,13 @@ public class User {
     public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-    
-    
+    /*
+    public Set<Presentation> getPresentations() {
+        return presentations;
+    }
+
+    public void setPresentations(Set<Presentation> presentations) {
+        this.presentations = presentations;
+    }
+    */
 }

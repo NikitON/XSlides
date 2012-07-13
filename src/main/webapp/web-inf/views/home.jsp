@@ -27,8 +27,14 @@
 
 					</ul>
 					<ul class="nav pull-right">
+						<c:if test="${logined == false}">
 						<li><a href="login">Login</a></li>
 						<li><a href="registration">Registration</a></li>
+						</c:if>
+						<c:if test="${logined == true}">
+						<li><a href="logout">Logout</a></li>
+						<li><a href="profile">Profile</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>
