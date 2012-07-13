@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService {
     public User getUser(String email, String password){
     	return userDAO.getUser(email, password);
     }
+
+    @Transactional
+    public void switchAdminStatus(Integer id) {
+        userDAO.switchAdminStatus(id);
+    }
 }

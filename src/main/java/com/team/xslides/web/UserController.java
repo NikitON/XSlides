@@ -33,11 +33,23 @@ public class UserController {
     @RequestMapping(value = "/delete/{userId}", method = RequestMethod.POST)
     public ModelAndView removeUser(@PathVariable("userId") Integer id, HttpSession session) {
         User user = new User();
-        ModelAndView mv = new ModelAndView("/administration");
+        ModelAndView mv = new ModelAndView("redirect:/administration");
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {
             mv.setViewName("redirect:/access_denied");
         } else {
            userService.removeUser(id);
+        }
+        return mv;
+    }
+    
+    @RequestMapping(value = "/switchAdmin/{userId}", method = RequestMethod.POST)
+    public ModelAndView switchAdminRights(@PathVariable("userId") Integer id, HttpSession session) {
+        User user = new User();
+        ModelAndView mv = new ModelAndView("redirect:/administration");
+        if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {
+            mv.setViewName("redirect:/access_denied");
+        } else {
+           userService.switchAdminStatus(id);
         }
         return mv;
     }

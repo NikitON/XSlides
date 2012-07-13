@@ -59,4 +59,9 @@ public class UserDAOImpl implements UserDAO {
         	return null;
         return (User)query.list().get(0);
     }
+
+    public void switchAdminStatus(Integer id) {
+        User user = (User) getSession().load(User.class, id);
+        user.setAdmin(!user.getAdmin());
+    }
 }

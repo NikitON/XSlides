@@ -51,13 +51,13 @@
 							<td><c:if test="${user.confirmed}"><i class="icon-ok-sign"></i></c:if></td>
 							<td>
 							<c:if test="${(user.admin == true) && !(adminId == user.id)}">
-							<form action="changeAdmin/${user.id}" method="POST"><button id="changeAdmin" class="btn btn-danger">From Admin</button></form>
+							<form action="switchAdmin/${user.id}" method="POST"><button id="switchAdmin" class="btn btn-danger">From Admin</button></form>
 							</c:if>
 							<c:if test="${(user.admin == true) && (adminId == user.id)}">
-							<button id="changeAdmin" class="btn btn-danger disabled">From Admin</button>
+							<button id="switchAdmin" class="btn btn-danger disabled">From Admin</button>
 							</c:if>
 							<c:if test="${user.admin == false}">
-							<form action="changeAdmin/${user.id}" method="POST"><button id="changeAdmin" class="btn btn-success">To Admin</button></form>
+							<form action="switchAdmin/${user.id}" method="POST"><button id="switchAdmin" class="btn btn-success">To Admin</button></form>
 							</c:if>
 							</td>
 							<td>
