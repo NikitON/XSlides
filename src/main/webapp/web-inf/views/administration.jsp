@@ -22,7 +22,7 @@
 					<ul class="nav">
 						<li><a href="home">Home</a></li>
 						<li><a href="#">About</a></li>
-						<li class="active"><a href="usermanage">Administration</a></li>
+						<li class="active"><a href="administration">Administration</a></li>
 					</ul>
 					<ul class="nav pull-right">
 						<li><a href="logout">Logout</a></li>
@@ -35,11 +35,11 @@
 			<c:if test="${!empty userList}">
 				<table class="table table-striped">
 					<thead>
-						<th>Firstname</th>
-						<th>Lastname</th>
+						<th>First name</th>
+						<th>Last name</th>
 						<th>Email</th>
 						<th>Confirmed</th>
-						<th>Admin</th>
+						<th>Administration</th>
 						<th></th>
 					</thead>
 					<tbody>
@@ -48,9 +48,26 @@
 							<td>${user.firstname}</td>
 							<td>${user.lastname}</td>
 							<td>${user.email}</td>
-							<td>${user.confirmed}</td>
-							<td>${user.admin}</td>
-							<td><a href="delete/${user.id}">Delete</a></td>
+							<td><c:if test="${user.confirmed}"><i class="icon-ok-sign"></i></c:if></td>
+							<td>
+							<c:if test="${(user.admin == true) && !(adminId == user.id)}">
+							<form action="changeAdmin/${user.id}" method="POST"><button id="changeAdmin" class="btn btn-danger">From Admin</button></form>
+							</c:if>
+							<c:if test="${(user.admin == true) && (adminId == user.id)}">
+							<button id="changeAdmin" class="btn btn-danger disabled">From Admin</button>
+							</c:if>
+							<c:if test="${user.admin == false}">
+							<form action="changeAdmin/${user.id}" method="POST"><button id="changeAdmin" class="btn btn-success">To Admin</button></form>
+							</c:if>
+							</td>
+							<td>
+							<c:if test="${adminId == user.id}">
+							<button class="btn btn-danger disabled">Delete</button>
+							</c:if>
+							<c:if test="${!(adminId == user.id)}">
+							<form action="delete/${user.id}" method="POST"><button class="btn btn-danger">Delete</button></form>
+							</c:if>
+							</td>
 						</tr>
 					</c:forEach>
 					</tbody>
