@@ -1,9 +1,15 @@
 package com.team.xslides.domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,27 +17,30 @@ import javax.persistence.Table;
 public class User {
     @Id
     @Column(name = "Id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "Firstname", nullable = false)
+    @Column(name = "Firstname", length = 40)
     private String firstname;
 
-    @Column(name = "Lastname", nullable = false)
+    @Column(name = "Lastname", length = 40)
     private String lastname;
     
-    @Column(name = "Email", nullable = false, unique = true)
+    @Column(name = "Email", nullable = false, unique = true, length = 60)
     private String email;
 
-    @Column(name = "Password", nullable = false)
+    @Column(name = "Password", nullable = false, length = 40)
     private String password;
     
     @Column(name = "Confirmed")
-    private Boolean isConfirmed;
+    private Boolean confirmed;
     
     @Column(name = "Admin")
-    private Boolean isAdmin;
-
+    private Boolean admin;
+    /*
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Presentation> presentations;
+     */
     public Integer getId() {
         return id;
     }
@@ -72,21 +81,28 @@ public class User {
         this.password = password;
     }
 
-    public Boolean getIsConfirmed() {
-        return isConfirmed;
+    public Boolean getConfirmed() {
+        return confirmed;
     }
 
-    public void setIsConfirmed(Boolean isConfirmed) {
-        this.isConfirmed = isConfirmed;
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
     }
 
-    public Boolean getIsAdmin() {
-        return isAdmin;
+    public Boolean getAdmin() {
+        return admin;
     }
 
-    public void setIsAdmin(Boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
-    
-    
+    /*
+    public Set<Presentation> getPresentations() {
+        return presentations;
+    }
+
+    public void setPresentations(Set<Presentation> presentations) {
+        this.presentations = presentations;
+    }
+    */
 }

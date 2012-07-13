@@ -7,10 +7,10 @@ public interface UserService {
 
     public void addUser(User user);
 
-    public List<User> listUser();
+    public List<User> getUsersList();
     
     public boolean hasUserWithEmail(String email);
-
+    
     public void removeUser(Integer id);
     
     public User getUser(String email, String password);

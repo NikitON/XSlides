@@ -13,7 +13,7 @@
 	src="<c:url value="/resources/js/less-1.3.0.min.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>	
-<title>Home</title>
+<title>Congratulations</title>
 </head>
 <body>
 	<div class="container">

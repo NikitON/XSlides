@@ -51,19 +51,27 @@ body {
 }
     
 .LV_valid_field,
-input.LV_valid_field,
 input.LV_valid_field:hover,
 input.LV_valid_field:active,
 textarea.LV_valid_field:hover,
 textarea.LV_valid_field:active {
     border: 1px solid #00CC00;
+    .box-shadow(0 0 10px rgba(0, 204, 0, 0.6);
+}
+
+input.LV_valid_field {
+   border: 1px solid #00CC00;
 }
 
 .LV_invalid_field, 
-input.LV_invalid_field,
 input.LV_invalid_field:hover, 
 input.LV_invalid_field:active,
 textarea.LV_invalid_field:hover, 
 textarea.LV_invalid_field:active, {
+    border: 1px solid #CC0000;
+    .box-shadow(0 0 10px rgba(204, 0, 0, 0.6);
+}
+
+input.LV_invalid_field {
     border: 1px solid #CC0000;
 }

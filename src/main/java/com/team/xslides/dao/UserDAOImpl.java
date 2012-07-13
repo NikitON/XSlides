@@ -22,12 +22,14 @@ public class UserDAOImpl implements UserDAO {
 
     public void addUser(User user) {
         if (!hasUserWithEmail(user.getEmail())) {
+            user.setConfirmed(false);
+            user.setAdmin(false);
             getSession().save(user);
         }
     }
 
     @SuppressWarnings("unchecked")
-    public List<User> listUser() {
+    public List<User> getUsersList() {
         return getSession().createQuery("from User").list();
     }
 
@@ -49,7 +51,6 @@ public class UserDAOImpl implements UserDAO {
         return !query.list().isEmpty();
     }
     
-    @SuppressWarnings("unchecked")
     public User getUser(String email, String password){
     	Query query = getSession().createQuery("from User u where u.email = :requestEmail and u.password = :requestPassword");
         query.setParameter("requestEmail", email);
@@ -58,5 +59,4 @@ public class UserDAOImpl implements UserDAO {
         	return null;
         return (User)query.list().get(0);
     }
-
 }
