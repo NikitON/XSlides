@@ -22,25 +22,40 @@
 					<ul class="nav">
 						<li><a href="home">Home</a></li>
 						<li><a href="#">About</a></li>
-
+						<li class="active"><a href="usermanage">Administration</a></li>
 					</ul>
 					<ul class="nav pull-right">
-						<li class="active"><a href="login">Login</a></li>
-						<li><a href="registration">Registration</a></li>
+						<li><a href="logout">Logout</a></li>
+						<li><a href="profile">Profile</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="span4 offset4">
-				<form:form class="well" action="logining" commandName="user">
-					<form:label path="email" class="span3">E-mail</form:label> 
-					<form:input type="text" class="span3" placeholder="Type your e-mail address..." path="email"/>
-					<form:label path="password" class="span3">Password</form:label> 
-					<form:input type="password" class="span3" placeholder="Type your password..." path="password"/>
-					<div align="center"><button type="submit" class="btn">Login</button></div>
-				</form:form>
-			</div>
+		<div class="well">
+			<c:if test="${!empty userList}">
+				<table class="table table-striped">
+					<thead>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Email</th>
+						<th>Confirmed</th>
+						<th>Admin</th>
+						<th></th>
+					</thead>
+					<tbody>
+					<c:forEach var="user" items="${userList}">
+						<tr>
+							<td>${user.firstname}</td>
+							<td>${user.lastname}</td>
+							<td>${user.email}</td>
+							<td>${user.confirmed}</td>
+							<td>${user.admin}</td>
+							<td><a href="delete/${user.id}">Delete</a></td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</c:if>
 		</div>
 	</div>
 </body>

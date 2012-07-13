@@ -25,20 +25,25 @@
 
 					</ul>
 					<ul class="nav pull-right">
-						<li><a href="login">Login</a></li>
-						<li class="active"><a href="registration">Registration</a></li>
+						<li class="active"><a href="login">Login</a></li>
+						<li><a href="registration">Registration</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="span6 offset1">
-				<form method="POST" action="login">
-					<label path="email">Email</label> 
+				<form class="well" method="POST" action="login">
+					<c:if test="${error}">
+					<div class="alert alert-error">
+					Wrong e-mail or password. Please try again.
+					</div>
+					</c:if>
+					<label>Email</label> 
 					<input id="email" type="text" class="span3" placeholder="Type your email..." name="email" />
-					<label path="password">Password</label> 
+					<label>Password</label> 
 					<input id="password" type="password" class="span3" placeholder="password" name="password" />
-					<div align="center"><button type="submit" class="btn">Register me!</button></div>
+					<div align="center"><button type="submit" class="btn">Login</button></div>
 				</form>
 			</div>
 		</div>

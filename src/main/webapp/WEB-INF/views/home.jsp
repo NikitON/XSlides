@@ -24,7 +24,9 @@
 					<ul class="nav">
 						<li class="active"><a href="home">Home</a></li>
 						<li><a href="#">About</a></li>
-
+						<c:if test="${isadmin}">
+						<li><a href="usermanage">Administration</a></li>
+						</c:if>
 					</ul>
 					<ul class="nav pull-right">
 						<c:if test="${logined == false}">

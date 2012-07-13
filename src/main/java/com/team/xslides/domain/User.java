@@ -33,10 +33,10 @@ public class User {
     private String password;
     
     @Column(name = "Confirmed")
-    private Boolean isConfirmed;
+    private Boolean confirmed;
     
     @Column(name = "Admin")
-    private Boolean isAdmin;
+    private Boolean admin;
     /*
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Presentation> presentations;
@@ -81,20 +81,20 @@ public class User {
         this.password = password;
     }
 
-    public Boolean getIsConfirmed() {
-        return isConfirmed;
+    public Boolean getConfirmed() {
+        return confirmed;
     }
 
-    public void setIsConfirmed(Boolean isConfirmed) {
-        this.isConfirmed = isConfirmed;
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
     }
 
-    public Boolean getIsAdmin() {
-        return isAdmin;
+    public Boolean getAdmin() {
+        return admin;
     }
 
-    public void setIsAdmin(Boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
     /*
     public Set<Presentation> getPresentations() {
