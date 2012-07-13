@@ -1,22 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
-	pageEncoding="utf8"%>
+<%@ page language="java" contentType="text/html; charset=utf8" pageEncoding="utf8"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link href="<c:url value="/resources/styles/bootstrap.css"/>"
-	rel="stylesheet">
-<link href="<c:url value="/resources/styles/bootstrap-responsive.css"/>"
-	rel="stylesheet">
-<link href="<c:url value="/resources/styles/myStyles.less"/>"
-	rel="stylesheet/less">
-<script type="text/javascript"
-	src="<c:url value="/resources/js/less-1.3.0.min.js"/>"></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>	
-<title>Home</title>
+<link href="<c:url value="/resources/styles/bootstrap.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/styles/bootstrap-responsive.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/styles/myStyles.less"/>" rel="stylesheet/less">
+<script type="text/javascript" src="<c:url value="/resources/js/less-1.3.0.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/livevalidation.js"/>"></script>		
+<title>Registration</title>
 </head>
 <body>
 	<div class="container">
@@ -37,19 +32,42 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="span4 offset1">
+			<div class="span6 offset1">
 				<form:form class="well" action="register" commandName="user">
-					<form:label path="firstname">First name</form:label> 
-					<form:input pathtype="text" class="span3" placeholder="Type your firstname..." path="firstname" />
-					<form:label path="lastname">Last name</form:label> 
-					<form:input type="text" class="span3" placeholder="Type your lastname..." path="lastname" />
-					<form:label path="login">Login</form:label> 
-					<form:input type="text" class="span3" placeholder="Type your login..." path="login"/>
+					<form:label path="firstname">First name (you can leave this field empty)</form:label> 
+					<form:input id="firstname" type="text" class="span3" placeholder="Type your firstname..." path="firstname" />
+					<script type="text/javascript">
+						var firstnameCheck = new LiveValidation('firstname', { wait: 500 });
+						firstnameCheck.add(Validate.Length, { maximum: 40});
+					</script>
+					<form:label path="lastname">Last name (you can leave this field empty)</form:label> 
+					<form:input id="lastname" type="text" class="span3" placeholder="Type your lastname..." path="lastname" />
+					<script type="text/javascript">
+						var lastnameCheck = new LiveValidation('lastname', { wait: 500 });
+						lastnameCheck.add(Validate.Length, { maximum: 40});
+					</script>
 					<form:label path="email">E-mail</form:label> 
-					<form:input type="text" class="span3" placeholder="Type your e-mail address..." path="email"/>
+					<form:input id="email" type="text" class="span3" placeholder="Type your e-mail address..." path="email"/>
+					<script type="text/javascript">
+						var emailCheck = new LiveValidation('email', { validMessage: 'Nice email!', wait: 500 });
+						emailCheck.add(Validate.Presence);
+						emailCheck.add(Validate.Email);		          
+						emailCheck.add(Validate.Length, { maximum: 60});
+					</script>
 					<form:label path="password">Password</form:label> 
-					<form:input type="password" class="span3" placeholder="Type your password..." path="password"/>
-					<div align="center"><button type="submit" class="btn">Submit</button></div>
+					<form:input id="password" type="password" class="span3" placeholder="Type your password..." path="password"/>
+					<script type="text/javascript">
+						var passwordLength = new LiveValidation('password', { validMessage: 'Nice password!', wait: 500 });
+						passwordLength.add(Validate.Presence);
+						passwordLength.add(Validate.Length, { minimum: 7 });
+						passwordLength.add(Validate.Length, { maximum: 40});
+					</script><label>Confirm password</label>
+					<input id="confirm" type="password" class="span3" placeholder="Confirm your password..." />
+					<script type="text/javascript">
+						var passwordConfirm = new LiveValidation('confirm', { validMessage: 'Passwords are equal.', wait: 500 });
+						passwordConfirm.add(Validate.Confirmation, { match: 'password' });		          
+					</script>
+					<div align="center"><button type="submit" class="btn">Register me!</button></div>
 				</form:form>
 			</div>
 		</div>

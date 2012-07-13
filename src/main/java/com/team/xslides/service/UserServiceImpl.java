@@ -31,8 +31,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Transactional
-    public boolean isUserExists(String login)
-    {
-    	return userDAO.isUserExists(login);
+    public boolean hasUserWithEmail(String email) {
+        return userDAO.hasUserWithEmail(email);
     }
 }

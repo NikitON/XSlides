@@ -9,6 +9,8 @@ public interface UserDAO {
     public void addUser(User user);
     
     public List<User> listUser();
+     
+    public boolean hasUserWithEmail(String email);
     
     public void removeUser(Integer id);
     
