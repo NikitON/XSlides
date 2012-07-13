@@ -11,7 +11,7 @@ public interface UserService {
     
     public boolean hasUserWithEmail(String email);
     
-    public boolean isUserExist(String email, String password);
-
     public void removeUser(Integer id);
+    
+    public User getUser(String email, String password);
 }

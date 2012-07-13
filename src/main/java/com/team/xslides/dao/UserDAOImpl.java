@@ -39,18 +39,25 @@ public class UserDAOImpl implements UserDAO {
             getSession().delete(user);
         }
     }
+    
+    public boolean isUserExists(String login)
+    {
+	    	return !sessionFactory.getCurrentSession().createQuery("from User where Login='" + login + "'").list().isEmpty();
+    }
 
     public boolean hasUserWithEmail(String email) {
         Query query = getSession().createQuery("from User u where u.email = :requestEmail");
         query.setParameter("requestEmail", email);
         return !query.list().isEmpty();
     }
-
-    public boolean isUserExist(String email, String password) {
-        Query query = getSession().createQuery(
-                "from User u where u.email = :loginEmail and u.password = :loginPassword");
-        query.setParameter("loginEmail", email);
-        query.setParameter("loginPassword", password);
-        return !query.list().isEmpty();
+    
+    @SuppressWarnings("unchecked")
+    public User getUser(String email, String password){
+    	Query query = getSession().createQuery("from User u where u.email = :requestEmail and u.password = :requestPassword");
+        query.setParameter("requestEmail", email);
+        query.setParameter("requestPassword", password);
+        if(query.list().isEmpty())
+        	return null;
+        return (User)query.list().get(0);
     }
 }

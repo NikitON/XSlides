@@ -11,8 +11,10 @@ public interface UserDAO {
     public List<User> listUser();
      
     public boolean hasUserWithEmail(String email);
-    
-    public boolean isUserExist(String email, String password);
-    
+       
     public void removeUser(Integer id);
+    
+    public boolean isUserExists(String login);
+    
+    public User getUser(String email, String password);
 }

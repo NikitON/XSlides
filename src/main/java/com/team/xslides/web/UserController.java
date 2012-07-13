@@ -1,6 +1,7 @@
 package com.team.xslides.web;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.team.xslides.domain.User;
 import com.team.xslides.service.UserService;
@@ -46,28 +47,17 @@ public class UserController {
     }
     
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login() {
-        ModelAndView mv = new ModelAndView("login");
-        return mv;
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView loginTry(HttpServletRequest request) {
-        ModelAndView mv = new ModelAndView();
-        if (userService.isUserExist(request.getParameter("email"), request.getParameter("password"))) {
-            mv.addObject("logined", "true");
-            mv.setViewName("home");
-        } else {
-            mv.addObject("error", "true");
-            mv.setViewName("redirect:/login");
-        }
-        return mv;
+    public String login()
+    {
+    	return "login";
     }
     
-    @RequestMapping("/logout")
-    public ModelAndView logout() {
-        ModelAndView mv = new ModelAndView("home");
-        mv.addObject("logined", "false");
-        return mv;
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login( HttpServletRequest request, HttpSession session )
+    {
+    	User user = userService.getUser(request.getParameter("email"), request.getParameter("password"));
+    	session.removeAttribute("user");
+    	session.setAttribute("user", user);
+    	return "home";
     }
 }

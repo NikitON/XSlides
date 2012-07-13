@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Transactional
-    public boolean isUserExist(String email, String password) {
-        return userDAO.isUserExist(email, password);
+    public User getUser(String email, String password){
+    	return userDAO.getUser(email, password);
     }
 }
