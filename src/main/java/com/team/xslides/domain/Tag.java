@@ -9,21 +9,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Tags")
 public class Tag {
-	@Id
-	@Column(name = "Id")
-	@GeneratedValue
-	private Integer id;
 	
+	@Id
 	@Column(name = "Name")
 	private String name;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

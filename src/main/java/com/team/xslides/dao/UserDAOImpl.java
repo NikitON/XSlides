@@ -28,5 +28,10 @@ public class UserDAOImpl implements UserDAO {
             sessionFactory.getCurrentSession().delete(user);
         }
     }
+    
+    public boolean isUserExists(String login)
+    {
+	    	return !sessionFactory.getCurrentSession().createQuery("from User where Login='" + login + "'").list().isEmpty();
+    }
 
 }

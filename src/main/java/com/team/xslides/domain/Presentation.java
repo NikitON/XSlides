@@ -3,6 +3,7 @@ package com.team.xslides.domain;
 import java.util.Set;
 
 
+
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -13,7 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
-import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "Presentations")

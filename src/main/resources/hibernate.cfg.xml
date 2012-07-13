@@ -7,5 +7,7 @@
 	<session-factory>
 		<property name="hbm2ddl.auto">update</property>
 		<mapping class="com.team.xslides.domain.User" />
+		<mapping class="com.team.xslides.domain.Presentation" />
+		<mapping class="com.team.xslides.domain.Tag" />
 	</session-factory>
 </hibernate-configuration>

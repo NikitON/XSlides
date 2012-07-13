@@ -10,4 +10,6 @@ public interface UserService {
     public List<User> listUser();
 
     public void removeUser(Integer id);
+    
+    public boolean isUserExists(String login);
 }

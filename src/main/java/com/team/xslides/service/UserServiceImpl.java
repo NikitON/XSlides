@@ -29,4 +29,10 @@ public class UserServiceImpl implements UserService {
     public void removeUser(Integer id) {
         userDAO.removeUser(id);
     }
+    
+    @Transactional
+    public boolean isUserExists(String login)
+    {
+    	return userDAO.isUserExists(login);
+    }
 }

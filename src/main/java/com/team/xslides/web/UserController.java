@@ -36,7 +36,10 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user") User user, BindingResult result) {
-        userService.addUser(user);
-        return "registration_success";
+    	if( !userService.isUserExists( user.getLogin() ) ){
+	        userService.addUser(user);
+	        return "registration_success";
+    	}
+    	return "registration_failed";
     }
 }
