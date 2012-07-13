@@ -2,6 +2,9 @@ package com.team.xslides.web;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.team.xslides.domain.User;
 import com.team.xslides.service.UserService;
 
@@ -36,7 +39,25 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user") User user, BindingResult result) {
-        userService.addUser(user);
-        return "registration_success";
+    	if( !userService.hasUserWithEmail( user.getEmail() ) ){
+	        userService.addUser(user);
+	        return "registration_success";
+    	}
+    	return "registration_failed";
+    }
+    
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login()
+    {
+    	return "login";
+    }
+    
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login( HttpServletRequest request, HttpSession session )
+    {
+    	User user = userService.getUser(request.getParameter("email"), request.getParameter("password"));
+    	session.removeAttribute("user");
+    	session.setAttribute("user", user);
+    	return "home";
     }
 }
