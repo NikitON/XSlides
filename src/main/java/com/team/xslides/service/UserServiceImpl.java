@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService {
     public boolean hasUserWithEmail(String email) {
         return userDAO.hasUserWithEmail(email);
     }
+    
+    @Transactional
+    public User getUser(String email, String password){
+    	return userDAO.getUser(email, password);
+    }
 }
