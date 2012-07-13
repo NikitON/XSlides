@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false" pageEncoding="utf8"%>
+<%@ page session="true" pageEncoding="utf8"%>
+<%@ page import="com.team.xslides.domain.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +36,7 @@
 		</div>
 		<div class="hero-unit">
 			<h1>Homepage</h1>
+			<p>Hello, <%= ((User)session.getAttribute("user")).getEmail() %></p>
 			<p>Welcome to XSlides - the best presentation tool ever.</p>
 		</div>
 	</div>
