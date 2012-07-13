@@ -31,18 +31,16 @@ public class LoginController {
             if (user.getConfirmed()) {
                 session.removeAttribute("user");
                 session.setAttribute("user", user);
-                mv.addObject("admin", user.getAdmin());
-                mv.addObject("logged", "true");
-                mv.setViewName("home");
+                mv.setViewName("redirect:/home");
             } else {
                 mv.addObject("error", "true");
                 mv.addObject("message", "Please check your e-mail and follow link.");
-                mv.setViewName("login");
+                mv.setViewName("redirect:/login");
             }
         } else {
             mv.addObject("error", "true");
             mv.addObject("message", "Wrong e-mail or password. Please try again.");
-            mv.setViewName("login");
+            mv.setViewName("redirect:/login");
         }
         return mv;
     }

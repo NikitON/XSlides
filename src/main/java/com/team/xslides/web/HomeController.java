@@ -1,13 +1,9 @@
 package com.team.xslides.web;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.team.xslides.domain.User;
 
 /**
  * Handles requests for the application home page.
@@ -28,15 +24,8 @@ public class HomeController {
     }
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView home(HttpSession session) {
-        User user = new User();
+    public ModelAndView slash() {
         ModelAndView mv = new ModelAndView("home");
-        if ((user = (User) session.getAttribute("user")) == null) {
-            mv.addObject("logged", "false");
-        } else {
-            mv.addObject("logged", "true");
-            mv.addObject("admin", user.getAdmin());
-        }
         return mv;
     }
     

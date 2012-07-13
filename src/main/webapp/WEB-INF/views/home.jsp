@@ -1,9 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page language="java" pageEncoding="utf8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<c:set var="user" value="${sessionScope.user}"/>
 <link href="<c:url value="/resources/styles/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/styles/bootstrap-responsive.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/styles/myStyles.less"/>" rel="stylesheet/less">
@@ -20,16 +21,16 @@
 					<ul class="nav">
 						<li class="active"><a href="home">Home</a></li>
 						<li><a href="#">About</a></li>
-						<c:if test="${admin == true}">
+						<c:if test="${user.admin}">
 						<li><a href="administration">Administration</a></li>
 						</c:if>
 					</ul>
 					<ul class="nav pull-right">
-						<c:if test="${logged == false}">
+						<c:if test="${user == null}">
 						<li><a href="login">Login</a></li>
 						<li><a href="registration">Registration</a></li>
 						</c:if>
-						<c:if test="${logged == true}">
+						<c:if test="${user != null}">
 						<li><a href="logout">Logout</a></li>
 						<li><a href="profile">Profile</a></li>
 						</c:if>

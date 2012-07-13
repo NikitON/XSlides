@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:set var="user" value="${sessionScope.user}"/>
 <link href="<c:url value="/resources/styles/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/styles/bootstrap-responsive.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/styles/myStyles.less"/>" rel="stylesheet/less">
@@ -43,29 +44,29 @@
 						<th></th>
 					</thead>
 					<tbody>
-					<c:forEach var="user" items="${userList}">
+					<c:forEach var="entry" items="${userList}">
 						<tr>
-							<td>${user.firstname}</td>
-							<td>${user.lastname}</td>
-							<td>${user.email}</td>
-							<td><c:if test="${user.confirmed}"><i class="icon-ok-sign"></i></c:if></td>
+							<td>${entry.firstname}</td>
+							<td>${entry.lastname}</td>
+							<td>${entry.email}</td>
+							<td><c:if test="${entry.confirmed}"><i class="icon-ok-sign"></i></c:if></td>
 							<td>
-							<c:if test="${(user.admin == true) && !(adminId == user.id)}">
-							<form action="switchAdmin/${user.id}" method="POST"><button id="switchAdmin" class="btn btn-danger">From Admin</button></form>
+							<c:if test="${(entry.admin == true) && !(user.id == entry.id)}">
+							<form action="switchAdmin/${entry.id}" method="POST"><button id="switchAdmin" class="btn btn-danger">From Admin</button></form>
 							</c:if>
-							<c:if test="${(user.admin == true) && (adminId == user.id)}">
+							<c:if test="${(entry.admin == true) && (user.id == entry.id)}">
 							<button id="switchAdmin" class="btn btn-danger disabled">From Admin</button>
 							</c:if>
-							<c:if test="${user.admin == false}">
-							<form action="switchAdmin/${user.id}" method="POST"><button id="switchAdmin" class="btn btn-success">To Admin</button></form>
+							<c:if test="${entry.admin == false}">
+							<form action="switchAdmin/${entry.id}" method="POST"><button id="switchAdmin" class="btn btn-success">To Admin</button></form>
 							</c:if>
 							</td>
 							<td>
-							<c:if test="${adminId == user.id}">
+							<c:if test="${user.id == entry.id}">
 							<button class="btn btn-danger disabled">Delete</button>
 							</c:if>
-							<c:if test="${!(adminId == user.id)}">
-							<form action="delete/${user.id}" method="POST"><button class="btn btn-danger">Delete</button></form>
+							<c:if test="${!(user.id == entry.id)}">
+							<form action="delete/${entry.id}" method="POST"><button class="btn btn-danger">Delete</button></form>
 							</c:if>
 							</td>
 						</tr>

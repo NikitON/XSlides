@@ -25,7 +25,6 @@ public class UserController {
             mv.setViewName("redirect:/access_denied");
         } else {
             mv.addObject("userList", userService.getUsersList());
-            mv.addObject("adminId", user.getId());
         }
         return mv;
     }
@@ -37,7 +36,7 @@ public class UserController {
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {
             mv.setViewName("redirect:/access_denied");
         } else {
-           userService.removeUser(id);
+            userService.removeUser(id);
         }
         return mv;
     }
@@ -49,7 +48,7 @@ public class UserController {
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {
             mv.setViewName("redirect:/access_denied");
         } else {
-           userService.switchAdminStatus(id);
+            userService.switchAdminStatus(id);
         }
         return mv;
     }

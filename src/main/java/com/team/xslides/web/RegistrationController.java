@@ -24,7 +24,7 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView registration(@ModelAttribute("user") User user) {
-        ModelAndView mv = new ModelAndView("registration");
+        ModelAndView mv = new ModelAndView("redirect:/registration");
         if (userService.hasUserWithEmail(user.getEmail())) {
                 mv.addObject("error", "true");
                 mv.addObject("message", "E-mail is already in use");
