@@ -48,5 +48,15 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("requestEmail", email);
         return !query.list().isEmpty();
     }
+    
+    @SuppressWarnings("unchecked")
+    public User getUser(String email, String password){
+    	Query query = getSession().createQuery("from User u where u.email = :requestEmail and u.password = :requestPassword");
+        query.setParameter("requestEmail", email);
+        query.setParameter("requestPassword", password);
+        if(query.list().isEmpty())
+        	return null;
+        return (User)query.list().get(0);
+    }
 
 }

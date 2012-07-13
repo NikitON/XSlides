@@ -33,6 +33,7 @@ public class PresentationController {
     	Set<Tag> tags = new HashSet<Tag>();
     	Presentation presentation = new Presentation();
     	presentation.setAuthor(((User)session.getAttribute("user")));
+    	System.out.println(((User)session.getAttribute("user")).getEmail());
     	presentation.setName(request.getParameter("name"));
     	String[] tagsStrings = request.getParameter("tags").split(" ");
     	for( int i = 0; i < tagsStrings.length; i++ )

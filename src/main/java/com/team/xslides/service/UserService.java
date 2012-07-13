@@ -13,5 +13,5 @@ public interface UserService {
 
     public void removeUser(Integer id);
     
-    public boolean isUserExists(String login);
+    public User getUser(String email, String password);
 }
