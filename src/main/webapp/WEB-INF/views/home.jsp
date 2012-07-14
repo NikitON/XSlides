@@ -33,6 +33,7 @@
 						<c:if test="${user != null}">
 						<li><a href="logout">Logout</a></li>
 						<li><a href="profile">Profile</a></li>
+						<li><a href="createPresentation">Create presentation</a></li>
 						</c:if>
 					</ul>
 				</div>
