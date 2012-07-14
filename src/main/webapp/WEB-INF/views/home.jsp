@@ -49,7 +49,7 @@
 		</div>
 		<div class="hero-unit">
 			<h1>Homepage</h1>
-			<p>Welcome to XSlides - the best presentation tool ever.</p>
+			<p>Welcome to XSlides "${code}"- the best presentation tool ever.</p>
 		</div>
 	</div>
 </body>

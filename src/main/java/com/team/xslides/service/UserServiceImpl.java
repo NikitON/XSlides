@@ -54,4 +54,14 @@ public class UserServiceImpl implements UserService {
     public List<User> getNotConfirmedList() {
         return userDAO.getNotConfirmedList();
     }
+
+    @Transactional
+    public void setNewPassword(Integer id, String password) {
+        userDAO.setNewPassword(id, password);
+    }
+    
+    @Transactional
+    public User getUser(Integer id) {
+        return userDAO.getUser(id);
+    }
 }

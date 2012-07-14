@@ -34,8 +34,9 @@
 						<c:if test="${user != null}">
 						<li><a href="logout">Logout</a></li>
 						<li class="dropdown">
-							Profile
-							<b class="caret"></b>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Profile	<span class="caret"></span>
+							</a>
 							<ul class="dropdown-menu">
 								<li><a href="settings">Settings</a></li>
 								<li><a href="myPresentations">My Presentations</a>

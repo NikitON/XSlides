@@ -20,7 +20,9 @@ public interface UserDAO {
     
     public void removeUser(Integer id);
     
-    public boolean isUserExists(String login);
-    
     public User getUser(String email, String password);
+    
+    public User getUser(Integer id);
+    
+    public void setNewPassword(Integer id, String password);
 }

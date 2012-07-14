@@ -21,4 +21,8 @@ public interface UserService {
     public void switchConfirmedStatus(Integer id);
     
     public User getUser(String email, String password);
+    
+    public User getUser(Integer id);
+    
+    public void setNewPassword(Integer id, String password);
 }

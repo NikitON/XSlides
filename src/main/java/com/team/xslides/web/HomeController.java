@@ -2,6 +2,7 @@ package com.team.xslides.web;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +26,9 @@ public class HomeController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView slash() {
-        return new ModelAndView("home");
+        ModelAndView mv = new ModelAndView("home");
+        mv.addObject("code", DigestUtils.shaHex("pl5yGqr0rF"));
+        return mv;
     }
     
     @RequestMapping("/access_denied")
