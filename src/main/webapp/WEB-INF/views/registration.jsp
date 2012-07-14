@@ -33,11 +33,7 @@
 		<div class="row">
 			<div class="span6 offset3">
 				<form:form class="well" action="registration" commandName="user">
-					<c:if test="${error}">
-					<div class="alert alert-error">
-					${message}
-					</div>
-					</c:if>
+					<c:if test="${message != null}"><div class="alert alert-error">${message}</div></c:if>
 					<form:label path="firstname" class="span3">First name (you can leave this field empty)</form:label> 
 					<form:input id="firstname" type="text" class="span3" placeholder="Type your firstname..." path="firstname" />
 					<script type="text/javascript">

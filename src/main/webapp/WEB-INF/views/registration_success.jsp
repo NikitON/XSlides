@@ -3,16 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="<c:url value="/resources/styles/bootstrap.css"/>"
-	rel="stylesheet">
-<link href="<c:url value="/resources/styles/bootstrap-responsive.css"/>"
-	rel="stylesheet">
-<link href="<c:url value="/resources/styles/myStyles.less"/>"
-	rel="stylesheet/less">
-<script type="text/javascript"
-	src="<c:url value="/resources/js/less-1.3.0.min.js"/>"></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>	
+<link href="<c:url value="/resources/styles/bootstrap.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/styles/bootstrap-responsive.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/styles/myStyles.less"/>" rel="stylesheet/less">
+<script type="text/javascript" src="<c:url value="/resources/js/less-1.3.0.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <title>Congratulations</title>
 </head>
 <body>
@@ -23,8 +18,7 @@
 					<a class="brand" href="home">XSlides</a>
 					<ul class="nav">
 						<li><a href="home">Home</a></li>
-						<li><a href="#">About</a></li>
-
+						<li><a href="about">About</a></li>
 					</ul>
 					<ul class="nav pull-right">
 						<li><a href="login">Login</a></li>

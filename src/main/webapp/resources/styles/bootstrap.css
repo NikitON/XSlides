@@ -3932,8 +3932,8 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav li.dropdown .dropdown-toggle .caret,
 .navbar .nav li.dropdown.open .caret {
-  border-top-color: #ffffff;
-  border-bottom-color: #ffffff;
+  border-top-color: #005700;
+  border-bottom-color: #005700;
 }
 
 .navbar .nav li.dropdown.active .caret {

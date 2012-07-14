@@ -18,8 +18,12 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login() {
+    public ModelAndView login(HttpSession session) {
         ModelAndView mv = new ModelAndView("login");
+        if (session.getAttribute("user") != null) {
+            mv.addObject("message", "Logout first");
+            mv.setViewName("access_denied");
+        }
         return mv;
     }
     
@@ -33,14 +37,12 @@ public class LoginController {
                 session.setAttribute("user", user);
                 mv.setViewName("redirect:/home");
             } else {
-                mv.addObject("error", "true");
                 mv.addObject("message", "Please check your e-mail and follow link.");
-                mv.setViewName("redirect:/login");
+                mv.setViewName("login");
             }
         } else {
-            mv.addObject("error", "true");
             mv.addObject("message", "Wrong e-mail or password. Please try again.");
-            mv.setViewName("redirect:/login");
+            mv.setViewName("login");
         }
         return mv;
     }
@@ -48,7 +50,12 @@ public class LoginController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView logout(HttpSession session) {
         ModelAndView mv = new ModelAndView("redirect:/home");
-        session.removeAttribute("user");
+        if (session.getAttribute("user") == null) {
+            mv.addObject("message", "You're not logged in");
+            mv.setViewName("access_denied");
+        } else {
+            session.removeAttribute("user");
+        }
         return mv;
     }
 }

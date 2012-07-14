@@ -64,4 +64,14 @@ public class UserDAOImpl implements UserDAO {
         User user = (User) getSession().load(User.class, id);
         user.setAdmin(!user.getAdmin());
     }
+
+    public void switchConfirmedStatus(Integer id) {
+        User user = (User) getSession().load(User.class, id);
+        user.setConfirmed(!user.getConfirmed());
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<User> getNotConfirmedList() {
+        return getSession().createQuery("from User u where u.confirmed = 0").list();
+    }
 }

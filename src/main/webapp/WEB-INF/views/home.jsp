@@ -9,6 +9,7 @@
 <link href="<c:url value="/resources/styles/bootstrap-responsive.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/styles/myStyles.less"/>" rel="stylesheet/less">
 <script type="text/javascript" src="<c:url value="/resources/js/less-1.3.0.min.js"/>"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <title>Home</title>
 </head>
@@ -20,7 +21,7 @@
 					<a class="brand" href="home">XSlides</a>
 					<ul class="nav">
 						<li class="active"><a href="home">Home</a></li>
-						<li><a href="#">About</a></li>
+						<li><a href="about">About</a></li>
 						<c:if test="${user.admin}">
 						<li><a href="administration">Administration</a></li>
 						</c:if>
@@ -32,7 +33,15 @@
 						</c:if>
 						<c:if test="${user != null}">
 						<li><a href="logout">Logout</a></li>
-						<li><a href="profile">Profile</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Profile	<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="settings">Settings</a></li>
+								<li><a href="myPresentations">My Presentations</a>
+							</ul>
+						</li>
 						</c:if>
 					</ul>
 				</div>
