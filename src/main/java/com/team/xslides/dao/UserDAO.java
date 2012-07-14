@@ -11,6 +11,8 @@ public interface UserDAO {
     public List<User> getUsersList();
      
     public boolean hasUserWithEmail(String email);
+    
+    public void switchAdminStatus(Integer id);
        
     public void removeUser(Integer id);
     

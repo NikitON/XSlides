@@ -22,7 +22,6 @@
 					<ul class="nav">
 						<li><a href="home">Home</a></li>
 						<li><a href="#">About</a></li>
-
 					</ul>
 					<ul class="nav pull-right">
 						<li><a href="login">Login</a></li>
@@ -34,6 +33,11 @@
 		<div class="row">
 			<div class="span6 offset3">
 				<form:form class="well" action="registration" commandName="user">
+					<c:if test="${error}">
+					<div class="alert alert-error">
+					${message}
+					</div>
+					</c:if>
 					<form:label path="firstname" class="span3">First name (you can leave this field empty)</form:label> 
 					<form:input id="firstname" type="text" class="span3" placeholder="Type your firstname..." path="firstname" />
 					<script type="text/javascript">

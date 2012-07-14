@@ -37,10 +37,10 @@ public class User {
     
     @Column(name = "Admin")
     private Boolean admin;
-    /*
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Presentation> presentations;
-     */
+
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Presentation> presentations;
+
     public Integer getId() {
         return id;
     }
@@ -96,13 +96,12 @@ public class User {
     public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
-    /*
-    public Set<Presentation> getPresentations() {
-        return presentations;
-    }
 
-    public void setPresentations(Set<Presentation> presentations) {
-        this.presentations = presentations;
-    }
-    */
+//    public Set<Presentation> getPresentations() {
+//        return presentations;
+//    }
+//
+//    public void setPresentations(Set<Presentation> presentations) {
+//        this.presentations = presentations;
+//    }
 }

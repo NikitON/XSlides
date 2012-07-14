@@ -13,7 +13,7 @@ public class PresentationDAOImpl implements PresentationDAO {
 	private SessionFactory sessionFactory;
 
 	public void addPresentation(Presentation presentation) {
-		sessionFactory.getCurrentSession().save(presentation);
+		sessionFactory.getCurrentSession().saveOrUpdate(presentation);
 	}
 
 	public void removePresentation(Integer id) {

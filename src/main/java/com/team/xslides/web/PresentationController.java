@@ -29,7 +29,7 @@ public class PresentationController {
     private PresentationService presentationService;
 
     @RequestMapping(value = "/createPresentation", method = RequestMethod.POST)
-    public String save(HttpServletRequest request, HttpSession session) {
+    public String createPresentation(HttpServletRequest request, HttpSession session) {
     	Set<Tag> tags = new HashSet<Tag>();
     	Presentation presentation = new Presentation();
     	presentation.setAuthor(((User)session.getAttribute("user")));
@@ -60,4 +60,14 @@ public class PresentationController {
     	return "home";
     }
     
+    @RequestMapping(value = "/saveCurrentPresentation")
+    public String saveCurrentPresentation(HttpServletRequest request, HttpSession session) {
+	Presentation presentation = new Presentation();
+	presentation = (Presentation)session.getAttribute("currentPresentation");
+	presentation.setContent(request.getParameter("content"));
+	session.removeAttribute("currentPresentation");
+	session.setAttribute("currentPresentation", presentation);
+	presentationService.addPresentation(presentation);
+	return "message";
+    }
 }

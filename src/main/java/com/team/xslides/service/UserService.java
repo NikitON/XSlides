@@ -13,5 +13,7 @@ public interface UserService {
     
     public void removeUser(Integer id);
     
+    public void switchAdminStatus(Integer id);
+    
     public User getUser(String email, String password);
 }
