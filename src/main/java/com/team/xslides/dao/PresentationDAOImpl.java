@@ -2,8 +2,6 @@ package com.team.xslides.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
-
 import com.team.xslides.domain.Presentation;
 import com.team.xslides.domain.User;
 

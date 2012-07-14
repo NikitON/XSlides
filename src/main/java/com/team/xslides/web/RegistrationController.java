@@ -37,7 +37,7 @@ public class RegistrationController {
     public ModelAndView registration(@ModelAttribute("user") User user) {
         ModelAndView mv = new ModelAndView("registration");
         if (userService.hasUserWithEmail(user.getEmail())) {
-            mv.addObject("message", "E-mail is already in use");
+            mv.addObject("message", "E-mail is already in use.");
         } else {
             if (!emailService.sendConfirmEmail(user,hashService.getHash(user.getEmail()))) {
                 mv.addObject("message", "Sorry. There are problems at our server. Please try again later.");

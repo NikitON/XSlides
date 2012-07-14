@@ -78,6 +78,11 @@ public class UserController {
         return mv;
     }
     
+    @RequestMapping(value = "/forgotPassword", method = RequestMethod.GET)
+    public ModelAndView forgot() {
+        return new ModelAndView("forgot_password");
+    }
+
     @RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
     public ModelAndView forgot(HttpServletRequest request) {
         User user = userService.getUser(request.getParameter("email"));
@@ -88,11 +93,11 @@ public class UserController {
                 mv.addObject("message", "Sorry. There are problems at our server. Please try again later.");
             } else {
                 userService.setNewPassword(user.getId(), newPassword);
-                mv.addObject("success", "Check your e-mail. We sent you new password");
+                mv.addObject("success", "Check your e-mail. We sent you new password.");
                 mv.setViewName("login");
             }
         } else {
-            mv.addObject("message", "No user with such e-mail");
+            mv.addObject("message", "No user with such e-mail.");
         }
         return mv;
     }

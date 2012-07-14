@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,7 @@ public class LoginController {
     public ModelAndView login(HttpSession session) {
         ModelAndView mv = new ModelAndView("login");
         if (session.getAttribute("user") != null) {
-            mv.addObject("message", "Logout first");
+            mv.addObject("message", "Logout first.");
             mv.setViewName("access_denied");
         }
         return mv;
@@ -49,11 +48,6 @@ public class LoginController {
         return mv;
     }
     
-    @RequestMapping(value = "/forgotPassword", method = RequestMethod.GET)
-    public ModelAndView forgot() {
-        return new ModelAndView("forgot_password");
-    }
-
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView logout(HttpSession session) {
         ModelAndView mv = new ModelAndView("redirect:/home");

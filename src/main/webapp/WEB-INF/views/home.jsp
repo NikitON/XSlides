@@ -40,10 +40,9 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="settings">Settings</a></li>
-								<li><a href="myPresentations">My Presentations</a>
+								<li><a href="myPresentations">My Presentations</a></li>
 							</ul>
 						</li>
-						<li><a href="profile">Profile</a></li>
 						</c:if>
 					</ul>
 				</div>
