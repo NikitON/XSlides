@@ -26,7 +26,7 @@ public class Presentation {
 	@Column(name = "Name")
 	private String name;
 
-	@Column(name = "Content")
+	@Column(columnDefinition = "mediumtext", name = "Content")
 	private String content;
 
 	@OneToOne(cascade = CascadeType.ALL)
