@@ -32,6 +32,7 @@
 						<li><a href="registration">Registration</a></li>
 						</c:if>
 						<c:if test="${user != null}">
+						<li><a href="createPresentation">Create presentation</a></li>
 						<li><a href="logout">Logout</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -42,6 +43,7 @@
 								<li><a href="myPresentations">My Presentations</a>
 							</ul>
 						</li>
+						<li><a href="profile">Profile</a></li>
 						</c:if>
 					</ul>
 				</div>
