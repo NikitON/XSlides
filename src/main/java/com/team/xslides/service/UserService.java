@@ -16,4 +16,5 @@ public interface UserService {
     public void switchAdminStatus(Integer id);
     
     public User getUser(String email, String password);
+
 }

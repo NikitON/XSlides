@@ -33,6 +33,7 @@
 						<c:if test="${user != null}">
 						<li><a href="logout">Logout</a></li>
 						<li><a href="profile">Profile</a></li>
+						<li><a href="createPresentation">Create presentation</a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -40,7 +41,6 @@
 		</div>
 		<div class="hero-unit">
 			<h1>Homepage</h1>
-			<p>Hello, <%= ((User)session.getAttribute("user")).getEmail() %></p>
 			<p>Welcome to XSlides - the best presentation tool ever.</p>
 		</div>
 	</div>

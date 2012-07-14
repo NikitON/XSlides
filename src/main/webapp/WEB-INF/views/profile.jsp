@@ -1,11 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<<<<<<< HEAD
-<%@ page session="true" pageEncoding="utf8"%>
-<%@ page import="com.team.xslides.domain.User" %>
-=======
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page language="java" pageEncoding="utf8"%>
->>>>>>> ae1a9abbf9ea0a1968817c41ffadf017fe1769f1
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,15 +33,20 @@
 						<c:if test="${user != null}">
 						<li><a href="logout">Logout</a></li>
 						<li><a href="profile">Profile</a></li>
+						<li><a href="createPresentation">Create presentation</a></li>
 						</c:if>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="hero-unit">
-			<h1>Homepage</h1>
-			<p>Hello, <%= ((User)session.getAttribute("user")).getEmail() %></p>
-			<p>Welcome to XSlides - the best presentation tool ever.</p>
+		<table>
+			<c:forEach items="${presentationsList}" var="presentation">
+				<tr>
+				<td>${presentation.name}</td><td><a href="/xslides/viewPresentation/${ presentation.id }">View</a></td>
+				</tr>
+			</c:forEach>
+		</table>
 		</div>
 	</div>
 </body>
