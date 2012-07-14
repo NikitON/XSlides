@@ -94,4 +94,12 @@ public class UserDAOImpl implements UserDAO {
     private User getUserById(Integer id) {
         return (User) getSession().load(User.class, id);
     }
+
+    public User getUser(String email) {
+        Query query = getSession().createQuery("from User u where u.email = :requestEmail");
+        query.setParameter("requestEmail", email);
+        if(query.list().isEmpty())
+            return null;
+        return (User)query.list().get(0);
+    }
 }

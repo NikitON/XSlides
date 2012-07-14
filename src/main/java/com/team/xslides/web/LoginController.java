@@ -3,6 +3,7 @@ package com.team.xslides.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,12 +47,17 @@ public class LoginController {
         }
         return mv;
     }
+    
+    @RequestMapping(value = "/forgotPassword", method = RequestMethod.GET)
+    public ModelAndView forgot() {
+        return new ModelAndView("forgot_password");
+    }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView logout(HttpSession session) {
         ModelAndView mv = new ModelAndView("redirect:/home");
         if (session.getAttribute("user") == null) {
-            mv.addObject("message", "You're not logged in");
+            mv.addObject("message", "You're not logged in.");
             mv.setViewName("access_denied");
         } else {
             session.removeAttribute("user");

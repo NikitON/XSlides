@@ -26,9 +26,7 @@ public class HomeController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView slash() {
-        ModelAndView mv = new ModelAndView("home");
-        mv.addObject("code", DigestUtils.shaHex("pl5yGqr0rF"));
-        return mv;
+        return new ModelAndView("home");
     }
     
     @RequestMapping("/access_denied")

@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
     public User getUser(Integer id) {
         return userDAO.getUser(id);
     }
+
+    @Transactional
+    public User getUser(String email) {
+        return userDAO.getUser(email);
+    }
 }

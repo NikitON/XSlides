@@ -1,5 +1,6 @@
 package com.team.xslides.web;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.team.xslides.domain.User;
@@ -73,6 +74,25 @@ public class UserController {
             } else {
                 userService.setNewPassword(id, newPassword);
             }
+        }
+        return mv;
+    }
+    
+    @RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
+    public ModelAndView forgot(HttpServletRequest request) {
+        User user = userService.getUser(request.getParameter("email"));
+        ModelAndView mv = new ModelAndView("forgot_password");
+        if (user != null) {
+            String newPassword = RandomStringUtils.randomAlphanumeric(RANDOM_PASSWORD_LENGTH);
+            if (!emailService.sendNewPassowrd(user, newPassword)) {
+                mv.addObject("message", "Sorry. There are problems at our server. Please try again later.");
+            } else {
+                userService.setNewPassword(user.getId(), newPassword);
+                mv.addObject("success", "Check your e-mail. We sent you new password");
+                mv.setViewName("login");
+            }
+        } else {
+            mv.addObject("message", "No user with such e-mail");
         }
         return mv;
     }
