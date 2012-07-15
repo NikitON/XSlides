@@ -65,7 +65,7 @@ public class RegistrationController {
         return mv;
     }
     
-    @RequestMapping("/confirm_success")
+    @RequestMapping("/confirmSuccess")
     public ModelAndView confirmSuccess() {
         return new ModelAndView("confirm_success");
     }

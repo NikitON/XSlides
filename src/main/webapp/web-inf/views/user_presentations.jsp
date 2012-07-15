@@ -11,14 +11,19 @@
 <script type="text/javascript" src="<c:url value="/resources/js/less-1.3.0.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.7.2.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-<title>Home</title>
+<title>My presentations</title>
 </head>
 <body>
 	<div class="container">
-		<%@include file="menu.jsp"%>
+		<%@ include file="menu.jsp" %>
 		<div class="hero-unit">
-			<h1>Homepage</h1>
-			<p>Welcome to XSlides - the best presentation tool ever.</p>
+		<table>
+			<c:forEach items="${presentationsList}" var="presentation">
+				<tr>
+				<td>${presentation.name}</td><td><a href="/xslides/viewPresentation/${ presentation.id }">View</a></td>
+				</tr>
+			</c:forEach>
+		</table>
 		</div>
 	</div>
 </body>
