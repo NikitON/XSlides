@@ -22,10 +22,16 @@ public class ProfileController {
     @Autowired
     private UserService userService;
     
-    @RequestMapping(value = "/{userName}/userPresentations", method = RequestMethod.GET)
-    public ModelAndView userPresentations(@PathVariable("userName")String userName, HttpSession session) {
-        ModelAndView mv = new ModelAndView("user_presentations");
-        mv.addObject("presentationsList", presentationService.presentationsOfUser((User)session.getAttribute("user")));
-	return mv;
+    @RequestMapping(value = "/userPresentations/{id}", method = RequestMethod.GET)
+    public ModelAndView userPresentations(@PathVariable("id") Integer id, HttpSession session) {
+        User user = userService.getUser(id);
+        session.setAttribute("presentationsList", presentationService.presentationsOfUser(user));
+        session.setAttribute("author", user);
+	return new ModelAndView("redirect:/userPresentations");
     }
+    
+    @RequestMapping(value = "/userPresentations", method = RequestMethod.GET)
+    public ModelAndView userPresentations(HttpSession session) {
+        return new ModelAndView("user_presentations");
+    }       
 }

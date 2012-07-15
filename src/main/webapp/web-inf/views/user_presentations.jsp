@@ -16,15 +16,21 @@
 <body>
 	<div class="container">
 		<%@ include file="menu.jsp" %>
-		<div class="hero-unit">
-		<table>
+		<table class="table table-bordered">
+			<caption><h2>Presentations by ${author.firstname} ${author.lastname}</h2></caption>
+			<tbody>
 			<c:forEach items="${presentationsList}" var="presentation">
+				<th colspan="2">${presentation.name}</th>
 				<tr>
-				<td>${presentation.name}</td><td><a href="/xslides/viewPresentation/${ presentation.id }">View</a></td>
+					<td rowspan="2" style="width: 30%">First slide</td>
+					<td style="height: 70%">Description</td>
+				</tr>
+				<tr>
+					<td>Tags</td>
 				</tr>
 			</c:forEach>
+			</tbody>
 		</table>
-		</div>
 	</div>
 </body>
 </html>
