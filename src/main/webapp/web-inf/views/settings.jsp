@@ -3,14 +3,14 @@
 <html>
 <head>
 <%@ include file="static/resources.resource" %>
-<title>Congratulations</title>
+<title>Settings</title>
 </head>
 <body>
 	<div class="container">
-		<%@ include file="static/menu.resource" %>
+		<%@ include file="static/menu.resource"%>
 		<div class="hero-unit">
-			<h1>Congratulations</h1>
-			<p>Your e-mail was confirmed. Use your e-mail and password to login now.</p>
+			<h1>Homepage</h1>
+			<p>Welcome to XSlides - the best presentation tool ever.</p>
 		</div>
 	</div>
 </body>
