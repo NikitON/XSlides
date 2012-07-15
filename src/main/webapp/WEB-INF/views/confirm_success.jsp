@@ -29,7 +29,7 @@
 		</div>
 		<div class="hero-unit">
 			<h1>Congratulations</h1>
-			<p>You was successfully registered. Check out your e-mail to confirm account.</p>
+			<p>Your e-mail was confirmed. Use your e-mail and password to login now.</p>
 		</div>
 	</div>
 </body>

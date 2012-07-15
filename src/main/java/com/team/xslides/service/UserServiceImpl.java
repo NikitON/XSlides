@@ -36,12 +36,37 @@ public class UserServiceImpl implements UserService {
     }
     
     @Transactional
-    public User getUser(String email, String password){
-    	return userDAO.getUser(email, password);
+    public User getUser(String email, String password) {
+        return userDAO.getUser(email, password);
     }
 
     @Transactional
     public void switchAdminStatus(Integer id) {
         userDAO.switchAdminStatus(id);
+    }
+    
+    @Transactional
+    public void switchConfirmedStatus(Integer id) {
+        userDAO.switchConfirmedStatus(id);
+    }
+
+    @Transactional
+    public List<User> getNotConfirmedList() {
+        return userDAO.getNotConfirmedList();
+    }
+
+    @Transactional
+    public void setNewPassword(Integer id, String password) {
+        userDAO.setNewPassword(id, password);
+    }
+    
+    @Transactional
+    public User getUser(Integer id) {
+        return userDAO.getUser(id);
+    }
+
+    @Transactional
+    public User getUser(String email) {
+        return userDAO.getUser(email);
     }
 }

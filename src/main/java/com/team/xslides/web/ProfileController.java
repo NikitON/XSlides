@@ -21,14 +21,12 @@ import com.team.xslides.service.UserService;
 public class ProfileController {
     
     @Autowired
-    private UserService userService;
-    
-    @Autowired
     private PresentationService presentationService;
     
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(Map<String, Object> map, HttpSession session) {
-        map.put("presentationsList", presentationService.presentationsOfUser(((User)session.getAttribute("user"))));
-	return "profile";
+    @RequestMapping(value = "/myPresentations", method = RequestMethod.GET)
+    public ModelAndView profile(HttpSession session) {
+        ModelAndView mv = new ModelAndView("profile");
+        mv.addObject("presentationsList", presentationService.presentationsOfUser(((User)session.getAttribute("user"))));
+	return mv;
     }
 }

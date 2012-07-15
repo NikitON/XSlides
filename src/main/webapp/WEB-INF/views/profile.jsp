@@ -9,8 +9,9 @@
 <link href="<c:url value="/resources/styles/bootstrap-responsive.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/styles/myStyles.less"/>" rel="stylesheet/less">
 <script type="text/javascript" src="<c:url value="/resources/js/less-1.3.0.min.js"/>"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-<title>Home</title>
+<title>My presentations</title>
 </head>
 <body>
 	<div class="container">
@@ -31,9 +32,23 @@
 						<li><a href="registration">Registration</a></li>
 						</c:if>
 						<c:if test="${user != null}">
+<<<<<<< HEAD
 						<li><a href="logout">Logout</a></li>
 						<li><a href="profile">Profile</a></li>
 						<li><a href="createPresentation">Create presentation</a></li>
+=======
+						<li><a href="createPresentation">Create presentation</a></li>
+						<li><a href="logout">Logout</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Profile	<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="settings">Settings</a></li>
+								<li><a href="myPresentations">My Presentations</a></li>
+							</ul>
+						</li>
+>>>>>>> ba70ac54ff2f136c43fe8ee91a93121d124b6e2b
 						</c:if>
 					</ul>
 				</div>
