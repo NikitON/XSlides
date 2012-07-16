@@ -13,9 +13,9 @@
 				<form class="well" method="POST" action="login">
 					<c:if test="${message != null}"><div class="alert alert-error">${message}</div></c:if>
 					<c:if test="${success != null}"><div class="alert alert-success">${success}</div></c:if>
-					<label>Email</label> 
+					<label class="span3">Email</label> 
 					<input id="email" type="text" class="span3" placeholder="Type your email..." name="email" />
-					<label>Password</label> 
+					<label class="span3">Password</label> 
 					<input id="password" type="password" class="span3" placeholder="Type your password..." name="password" />
 					<span class="help-block"><a class="label label-success" href="forgotPassword">Forgot your password?</a></span>
 					<div align="center"><button type="submit" class="btn">Login</button></div>

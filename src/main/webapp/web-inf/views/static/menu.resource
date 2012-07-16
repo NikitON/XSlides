@@ -25,7 +25,8 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="settings">Settings</a></li>
-								<li><a href="userPresentations/${user.id}">My Presentations</a></li>
+								<li><a href="userPresentations/${user.id}">My presentations</a></li>
+								<li><a href="favorites">Favorites</a></li>
 							</ul>
 						</li>
 						</c:if>

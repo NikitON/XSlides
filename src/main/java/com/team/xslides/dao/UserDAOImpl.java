@@ -18,20 +18,12 @@ public class UserDAOImpl implements UserDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Autowired
-    private HashService hashService;
-    
     private Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 
     public void addUser(User user) {
-        if (!hasUserWithEmail(user.getEmail())) {
-            user.setPassword(hashService.getHash(user.getPassword()));
-            user.setConfirmed(false);
-            user.setAdmin(false);
-            getSession().save(user);
-        }
+        getSession().save(user);
     }
 
     @SuppressWarnings("unchecked")
@@ -55,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
     public User getUser(String email, String password){
     	Query query = getSession().createQuery("from User u where u.email = :requestEmail and u.password = :requestPassword");
         query.setParameter("requestEmail", email);
-        query.setParameter("requestPassword", hashService.getHash(password));
+        query.setParameter("requestPassword", password);
         if(query.list().isEmpty())
             return null;
         return (User)query.list().get(0);
@@ -64,13 +56,13 @@ public class UserDAOImpl implements UserDAO {
     public void switchAdminStatus(Integer id) {
         User user = getUserById(id);
         user.setAdmin(!user.getAdmin());
-        getSession().save(user);
+        getSession().saveOrUpdate(user);
     }
 
     public void switchConfirmedStatus(Integer id) {
         User user = getUserById(id);
         user.setConfirmed(!user.getConfirmed());
-        getSession().save(user);
+        getSession().saveOrUpdate(user);
     }
 
     @SuppressWarnings("unchecked")
@@ -80,8 +72,8 @@ public class UserDAOImpl implements UserDAO {
 
     public void setNewPassword(Integer id, String password) {
         User user = getUserById(id);
-        user.setPassword(hashService.getHash(password));
-        getSession().save(user);
+        user.setPassword(password);
+        getSession().saveOrUpdate(user);
     }
     
     public User getUser(Integer id) {
@@ -102,5 +94,11 @@ public class UserDAOImpl implements UserDAO {
         if(query.list().isEmpty())
             return null;
         return (User)query.list().get(0);
+    }
+
+    public void setNewDisplayname(Integer id, String displayname) {
+        User user = getUserById(id);
+        user.setDisplayname(displayname);
+        getSession().saveOrUpdate(user);
     }
 }

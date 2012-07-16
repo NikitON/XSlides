@@ -62,7 +62,7 @@ public class UserController {
     private static final int RANDOM_PASSWORD_LENGTH = 10;
     
     @RequestMapping(value = "/newPassword/{userId}", method = RequestMethod.POST)
-    public ModelAndView setNewPassoword(@PathVariable("userId") Integer id, HttpSession session) {
+    public ModelAndView setNewPassword(@PathVariable("userId") Integer id, HttpSession session) {
         User user;
         ModelAndView mv = new ModelAndView("redirect:/administration");
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {

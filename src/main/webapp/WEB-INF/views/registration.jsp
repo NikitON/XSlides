@@ -14,17 +14,12 @@
 			<div class="span6 offset3">
 				<form:form class="well" action="registration" commandName="user">
 					<c:if test="${message != null}"><div class="alert alert-error">${message}</div></c:if>
-					<form:label path="firstname" class="span3">First name (you can leave this field empty)</form:label> 
-					<form:input id="firstname" type="text" class="span3" placeholder="Type your firstname..." path="firstname" />
+					<form:label path="displayname" class="span3">Display name</form:label> 
+					<form:input id="displayname" type="text" class="span3" placeholder="Type as you'll be seen by others..." path="displayname" />
 					<script type="text/javascript">
-						var firstnameCheck = new LiveValidation('firstname', { wait: 500 });
-						firstnameCheck.add(Validate.Length, { maximum: 40});
-					</script>
-					<form:label path="lastname" class="span3">Last name (you can leave this field empty)</form:label> 
-					<form:input id="lastname" type="text" class="span3" placeholder="Type your lastname..." path="lastname" />
-					<script type="text/javascript">
-						var lastnameCheck = new LiveValidation('lastname', { wait: 500 });
-						lastnameCheck.add(Validate.Length, { maximum: 40});
+						var displaynameCheck = new LiveValidation('displayname', {validMessage: 'Nice name!',  wait: 500 });
+						displaynameCheck.add(Validate.Presence);
+						displaynameCheck.add(Validate.Length, {maximum: 40});
 					</script>
 					<form:label path="email" class="span3">E-mail</form:label> 
 					<form:input id="email" type="text" class="span3" placeholder="Type your e-mail address..." path="email"/>

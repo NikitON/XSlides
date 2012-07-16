@@ -27,4 +27,6 @@ public interface UserDAO {
     public User getUser(Integer id);
     
     public void setNewPassword(Integer id, String password);
+    
+    public void setNewDisplayname(Integer id, String displayname);
 }
