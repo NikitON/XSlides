@@ -14,7 +14,7 @@
 					<c:if test="${message != null}"><div class="alert alert-error">${message}</div></c:if>
 					<label>Email</label> 
 					<input id="email" type="text" class="span3" placeholder="Type your email..." name="email" />
-					<div align="center"><button type="submit" class="btn">Login</button></div>
+					<div align="center"><button type="submit" class="btn">Send</button></div>
 				</form>
 			</div>
 		</div>

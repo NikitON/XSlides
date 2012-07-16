@@ -1,39 +1,7 @@
 @import "less/mixins.less";
-@color-navbar: #00f000;
-@dropdownBackground: red;
 
 body {
     background-image: url("../img/lgrey106.jpg");
-}
-
-.navbar-inner {
-    #gradient > .vertical(lighten(@color-navbar,40%), lighten(@color-navbar,80%));
-    .border-radius(10px);
-    border: 2px solid darken(@color-navbar, 30%);
-    .brand {
-        color: darken(@color-navbar, 25%);
-    }
-    .nav {
-        li {
-            a {
-                color: saturated(@color-navbar, 40%);
-            }
-            a:hover {
-                color: darken(@color-navbar, 30%);
-            }
-        }
-        .active {
-            a, a:hover {
-                background-color: darken(@color-navbar, 30%);
-            }
-        }
-    }
-}
-
-#turbo {
-    padding-top: 200px;
-    font-size: 60px;
-    color: red;
 }
 
 #switchAdmin {
@@ -61,7 +29,7 @@ input.LV_valid_field:active,
 textarea.LV_valid_field:hover,
 textarea.LV_valid_field:active {
     border: 1px solid #00CC00;
-    .box-shadow(0 0 10px rgba(0, 204, 0, 0.6);
+    .box-shadow(0 0 10px rgba(0, 204, 0, 0.6));
 }
 
 input.LV_valid_field {
@@ -72,9 +40,9 @@ input.LV_valid_field {
 input.LV_invalid_field:hover, 
 input.LV_invalid_field:active,
 textarea.LV_invalid_field:hover, 
-textarea.LV_invalid_field:active, {
+textarea.LV_invalid_field:active {
     border: 1px solid #CC0000;
-    .box-shadow(0 0 10px rgba(204, 0, 0, 0.6);
+    .box-shadow(0 0 10px rgba(204, 0, 0, 0.6));
 }
 
 input.LV_invalid_field {
