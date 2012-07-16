@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.xslides.domain.User;
-import com.team.xslides.service.HashService;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
