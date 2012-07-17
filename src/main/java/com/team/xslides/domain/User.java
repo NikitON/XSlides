@@ -15,11 +15,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "Firstname", length = 40)
-    private String firstname;
-
-    @Column(name = "Lastname", length = 40)
-    private String lastname;
+    @Column(name = "Displayname", length = 40)
+    private String displayname;
     
     @Column(name = "Email", nullable = false, unique = true, length = 60)
     private String email;
@@ -41,20 +38,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getDisplayname() {
+        return displayname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setDisplayname(String displayname) {
+        this.displayname = displayname;
     }
 
     public String getEmail() {

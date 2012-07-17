@@ -14,9 +14,15 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDAO userDAO;
-
+    
+    @Autowired
+    private HashService hashService;
+    
     @Transactional
     public void addUser(User user) {
+        user.setPassword(hashService.getHash(user.getPassword()));
+        user.setConfirmed(false);
+        user.setAdmin(false);
         userDAO.addUser(user);
     }
 
@@ -37,7 +43,7 @@ public class UserServiceImpl implements UserService {
     
     @Transactional
     public User getUser(String email, String password) {
-        return userDAO.getUser(email, password);
+        return userDAO.getUser(email, hashService.getHash(password));
     }
 
     @Transactional
@@ -57,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void setNewPassword(Integer id, String password) {
-        userDAO.setNewPassword(id, password);
+        userDAO.setNewPassword(id, hashService.getHash(password));
     }
     
     @Transactional
@@ -68,5 +74,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User getUser(String email) {
         return userDAO.getUser(email);
+    }
+
+    @Transactional
+    public void setNewDisplayname(Integer id, String displayname) {
+        userDAO.setNewDisplayname(id, displayname);
     }
 }

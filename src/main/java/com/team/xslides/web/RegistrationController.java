@@ -52,7 +52,7 @@ public class RegistrationController {
     
     @RequestMapping(value = "/confirm/{digest}", method = RequestMethod.GET)
     public ModelAndView confirmation(@PathVariable("digest") String digest) {
-        ModelAndView mv = new ModelAndView("redirect:/confirm_success");
+        ModelAndView mv = new ModelAndView("redirect:/confirmSuccess");
         List<User> userList = userService.getNotConfirmedList();
         for (User user : userList) {
             if (digest.equals(hashService.getHash(user.getEmail()))) {
@@ -65,7 +65,7 @@ public class RegistrationController {
         return mv;
     }
     
-    @RequestMapping("/confirm_success")
+    @RequestMapping("/confirmSuccess")
     public ModelAndView confirmSuccess() {
         return new ModelAndView("confirm_success");
     }

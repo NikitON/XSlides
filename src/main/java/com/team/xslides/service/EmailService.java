@@ -28,7 +28,7 @@ public class EmailService {
     
     public boolean sendConfirmEmail(User user, String link) {
         try {
-            String html = "<h3>" + user.getFirstname() + " " + user.getLastname() + "</h3>" +
+            String html = "<h3>" + user.getDisplayname() + "</h3>" +
                           "<h4>Welcome and thank you for registering at XSlides!</h4>" +
                           "<h4>Please follow this link to confirm your e-mail:</h4>" +
                           "<a href=http://localhost:8080/XSlides/confirm/" + link + ">Confirm email</a>";
@@ -44,7 +44,7 @@ public class EmailService {
     
     public boolean sendNewPassowrd(User user, String newPassword) {
         try {
-            String html = "<h3>" + user.getFirstname() + " " + user.getLastname() + "</h3>" +
+            String html = "<h3>" + user.getDisplayname() + " " + "</h3>" +
                           "<h4>There is your new password next to this text.</h4>" +
                           "<h4>Use it to login. Further you can change it at your settings page.</h4>" +
                           "<h3>" + newPassword + "</h3>";
