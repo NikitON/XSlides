@@ -59,7 +59,7 @@ $(document).ready(
                 ]
             ],
             about : false,
-            idir : "./js/HtmlBox_4.0.3/images/",
+            idir : "/xslides/resources/js/HtmlBox_4.0.3/images/",
             skin:"blue",
         });
         $("#textOpacity").slider({

@@ -89,6 +89,9 @@
                     <i class="icon-remove-sign icon-white"></i>Exit from editor
                 </a>
             </div>
+            <div id="slides">
+            TEXT
+            </div>
             <div id="editor" onclick="unselectElement();">
             </div>
         </header>

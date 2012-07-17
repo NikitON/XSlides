@@ -32,11 +32,6 @@
 						<li><a href="registration">Registration</a></li>
 						</c:if>
 						<c:if test="${user != null}">
-<<<<<<< HEAD
-						<li><a href="logout">Logout</a></li>
-						<li><a href="profile">Profile</a></li>
-						<li><a href="createPresentation">Create presentation</a></li>
-=======
 						<li><a href="createPresentation">Create presentation</a></li>
 						<li><a href="logout">Logout</a></li>
 						<li class="dropdown">
@@ -48,7 +43,6 @@
 								<li><a href="myPresentations">My Presentations</a></li>
 							</ul>
 						</li>
->>>>>>> ba70ac54ff2f136c43fe8ee91a93121d124b6e2b
 						</c:if>
 					</ul>
 				</div>

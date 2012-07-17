@@ -18,6 +18,10 @@
     overflow:hidden;
 }
 
+#slides{
+	width:100px;
+}
+
 .textInEditor{
     border:solid 1px black;
     background:none; 
