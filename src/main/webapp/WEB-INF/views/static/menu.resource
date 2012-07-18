@@ -8,11 +8,9 @@
 		
 		<c:url var="englishLocaleUrl" value="${window.location.pathname}">
             <c:param name="language" value="en" />
-            <c:set var="language" value="eng" scope="session" />
         </c:url>
         <c:url var="russianLocaleUrl" value="${window.location.pathname}">
             <c:param name="language" value="ru" />
-            <c:set var="language" value="rus" scope="session" />
         </c:url>
 		<div class="navbar">
 			<div class="navbar-inner">
@@ -73,6 +71,7 @@
 			</div>
 		</div>
 		<c:if test="${user != null}">
-		<span class="pull-right label"><spring:message code="label.loggedas"/> ${userName} 
-		<a style="text-decoration:none" href="logout"><span class="label label-inverse"><spring:message code="menu.logout"/></span></a>
-		</span></c:if>
+			<span class="pull-right label"><spring:message code="label.loggedas"/> ${userName} 
+			<a style="text-decoration:none" href="logout"><span class="label label-inverse"><spring:message code="menu.logout"/></span></a>
+			</span>
+		</c:if>

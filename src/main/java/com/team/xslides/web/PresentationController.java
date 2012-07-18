@@ -5,33 +5,30 @@ import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
 
-
-import java.lang.*;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.team.xslides.domain.Presentation;
 import com.team.xslides.service.PresentationService;
+import com.team.xslides.service.UserService;
 import com.team.xslides.domain.User;
 import com.team.xslides.domain.Tag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PresentationController {
 
     @Autowired
     private PresentationService presentationService;
+    
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/createPresentation", method = RequestMethod.POST)
     public String createPresentation(HttpServletRequest request, HttpSession session) {
@@ -84,5 +81,18 @@ public class PresentationController {
 	Integer id = Integer.parseInt(presentationId);
 	map.put("html", presentationService.getContent(id));
 	return "viewPresentation";
+    }
+    
+    @RequestMapping(value = "/userPresentations/{id}", method = RequestMethod.GET)
+    public ModelAndView userPresentations(@PathVariable("id") Integer id, HttpSession session) {
+        User user = userService.getUser(id);
+        session.setAttribute("presentationsList", presentationService.presentationsOfUser(user));
+        session.setAttribute("author", user);
+        return new ModelAndView("redirect:/userPresentations");
+    }
+    
+    @RequestMapping(value = "/userPresentations", method = RequestMethod.GET)
+    public ModelAndView userPresentations(HttpSession session) {
+        return new ModelAndView("user_presentations");
     }
 }
