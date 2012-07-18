@@ -9,8 +9,8 @@
 	<div class="container">
 		<%@ include file="static/menu.resource" %>
 		<div class="hero-unit">
-			<h1><spring:message code="button.delete"/></h1>
-			<p><spring:message code="text.confrirm"/></p>
+			<h1><spring:message code="title.congratulations"/></h1>
+			<p><spring:message code="text.confirm"/></p>
 		</div>
 	</div>
 </body>

@@ -24,7 +24,6 @@
 						</c:if>
 						<c:if test="${user != null}">
 						<li><a href="createPresentation"><spring:message code="menu.createpresentation"/></a></li>
-						<li><a href="logout"><spring:message code="menu.logout"/></a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<spring:message code="menu.profile"/> <span class="caret"></span>
@@ -47,4 +46,7 @@
 				</div>
 			</div>
 		</div>
-		<c:if test="${user != null}"><span class="pull-right label"><spring:message code="label.loggedas"/> ${userName}</span></c:if>
+		<c:if test="${user != null}">
+		<span class="pull-right label"><spring:message code="label.loggedas"/> ${userName} 
+		<a style="text-decoration:none" href="logout"><span class="label label-inverse"><spring:message code="menu.logout"/></span></a>
+		</span></c:if>

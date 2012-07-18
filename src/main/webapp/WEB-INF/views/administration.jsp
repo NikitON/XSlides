@@ -22,9 +22,9 @@
 							<th><spring:message code="label.displayname"/></th>
 							<th><spring:message code="label.email"/></th>
 							<th style="width: 10%"><spring:message code="label.confirmed"/></th>
-							<th style="width: 10%"><spring:message code="label.administration"/></th>
-							<th style="width: 7%"></th>
-							<th style="width: 13%"></th>
+							<th style="width: 12%"><spring:message code="label.administrator"/></th>
+							<th style="width: 10%"></th>
+							<th style="width: 15%"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -35,29 +35,29 @@
 							<td><c:if test="${entry.confirmed}"><div align="center"><i class="icon-ok-sign"></i></div></c:if></td>
 							<td>
 							<c:if test="${(entry.admin == true) && !(user.id == entry.id)}">
-							<form action="switchAdmin/${entry.id}" method="POST"><button id="switchAdmin" class="btn btn-danger"><spring:message code="button.fromadmin"/></button></form>
+							<div align="center"><form action="switchAdmin/${entry.id}" method="POST"><button id="switchAdmin" class="btn btn-danger"><spring:message code="button.fromadmin"/></button></form></div>
 							</c:if>
 							<c:if test="${(entry.admin == true) && (user.id == entry.id)}">
-							<button id="switchAdmin" class="btn btn-danger disabled"><spring:message code="button.fromadmin"/></button>
+							<div align="center"><button id="switchAdmin" class="btn btn-danger disabled"><spring:message code="button.fromadmin"/></button></div>
 							</c:if>
 							<c:if test="${entry.admin == false}">
-							<form action="switchAdmin/${entry.id}" method="POST"><button id="switchAdmin" class="btn btn-success"><spring:message code="button.toadmin"/></button></form>
+							<div align="center"><form action="switchAdmin/${entry.id}" method="POST"><button id="switchAdmin" class="btn btn-success"><spring:message code="button.toadmin"/></button></form></div>
 							</c:if>
 							</td>
 							<c:if test="${user.id == entry.id}">
 							<td>
-							<button class="btn btn-danger disabled"><spring:message code="button.delete"/></button>
+							<div align="center"><button class="btn btn-danger disabled"><spring:message code="button.delete"/></button></div>
 							</td>
 							<td>
-							<button class="btn btn-warning disabled"><spring:message code="button.newpassword"/></button>
+							<div align="center"><button class="btn btn-warning disabled"><spring:message code="button.newpassword"/></button></div>
 							</td>
 							</c:if>
 							<c:if test="${!(user.id == entry.id)}">
 							<td>
-							<form action="delete/${entry.id}" method="POST"><button class="btn btn-danger"><spring:message code="button.delete"/></button></form>
+							<div align="center"><form action="delete/${entry.id}" method="POST"><button class="btn btn-danger"><spring:message code="button.delete"/></button></form></div>
 							</td>
 							<td>
-							<form action="newPassword/${entry.id}" method="POST"><button class="btn btn-warning"><spring:message code="button.newpassword"/></button></form>
+							<div align="center"><form action="newPassword/${entry.id}" method="POST"><button class="btn btn-warning"><spring:message code="button.newpassword"/></button></form></div>
 							</td>
 							</c:if>
 						</tr>
