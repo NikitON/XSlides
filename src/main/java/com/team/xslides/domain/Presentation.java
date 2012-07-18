@@ -29,11 +29,22 @@ public class Presentation {
 	@Column(columnDefinition = "mediumtext", name = "Content")
 	private String content;
 
+	@Column(columnDefinition = "mediumtext", name = "JSON")
+	private String json;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private User author;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Tag> tags;
+	
+	public String getJson() {
+	    return json;
+	}
+
+	public void setJson(String json) {
+	    this.json = json;
+	}
 
 	public Integer getId() {
 		return id;

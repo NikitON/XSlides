@@ -13,4 +13,8 @@ public interface PresentationDAO {
 	public List<Presentation> presentationsOfUser( User author );
 	
 	public String getContent( Integer id );
+	
+	public Presentation getPresentation( Integer id );
+	
+	public String getPresentationJson( Integer id );
 }

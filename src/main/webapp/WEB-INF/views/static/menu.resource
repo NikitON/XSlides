@@ -40,7 +40,7 @@
 						</c:if>
 						<c:if test="${user != null}">
 						<li>
-						<a href="createPresentation"> <i class="icon-file icon-white"></i><spring:message code="menu.createpresentation"/></a>
+						<a href="createPresentation" target="_blank"> <i class="icon-file icon-white"></i><spring:message code="menu.createpresentation"/></a>
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">

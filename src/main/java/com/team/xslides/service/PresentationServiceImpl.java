@@ -35,4 +35,14 @@ public class PresentationServiceImpl implements PresentationService {
 	public String getContent( Integer id ){
 	    	return presentationDAO.getContent(id);
 	}
+	
+	@Transactional
+	public Presentation getPresentation( Integer id ){
+	    	return presentationDAO.getPresentation(id);
+	}
+	
+	@Transactional
+	public String getPresentationJson( Integer id ){
+	    return presentationDAO.getPresentationJson(id);
+	}
 }

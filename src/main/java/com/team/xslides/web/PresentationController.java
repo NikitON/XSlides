@@ -31,10 +31,13 @@ public class PresentationController {
     private UserService userService;
 
     @RequestMapping(value = "/createPresentation", method = RequestMethod.POST)
-    public String createPresentation(HttpServletRequest request, HttpSession session) {
+    public ModelAndView createPresentation(HttpServletRequest request, HttpSession session) {
 	if(session.getAttribute("user")==null)
-	    return "home";
-    	Set<Tag> tags = new HashSet<Tag>();
+	{
+	    ModelAndView mv = new ModelAndView("home");
+	    return mv;
+	}
+	Set<Tag> tags = new HashSet<Tag>();
     	Presentation presentation = new Presentation();
     	presentation.setAuthor(((User)session.getAttribute("user")));
     	presentation.setName(request.getParameter("name"));
@@ -48,7 +51,9 @@ public class PresentationController {
     	presentation.setTags(tags);
     	session.setAttribute("currentPresentation", presentation);
     	presentationService.addPresentation(presentation);
-    	return "editor";
+    	ModelAndView mv = new ModelAndView("editor");
+    	mv.addObject("id", presentation.getId());
+    	return mv;
     }
     
     @RequestMapping(value = "/createPresentation")
@@ -60,26 +65,55 @@ public class PresentationController {
     
     @RequestMapping(value = "/showcurrent")
     public String show(HttpSession session) {
-    	System.out.print(((Presentation)session.getAttribute("currentPresentation")).getName());
-    	return "form";
+    	
+    	return "index";
     }
     
-    @RequestMapping(value = "/saveCurrentPresentation")
-    public String saveCurrentPresentation(HttpSession session, HttpServletRequest request) {
+    @RequestMapping(value = "/saveCurrentPresentation", method=RequestMethod.POST)
+    public ModelAndView saveCurrentPresentation(HttpSession session, HttpServletRequest request) {
+	ModelAndView mv = new ModelAndView("message");
 	if(session.getAttribute("user") ==  null)
-	    return "redirect:/home";
-	Presentation presentation = ((Presentation)session.getAttribute("currentPresentation"));
-	presentation.setContent(request.getParameter("content"));
-	session.removeAttribute("currentPresentation");
-	session.setAttribute("currentPresentation", presentation);
+	{
+	    mv.addObject("message", "Login, please");
+	    return mv;
+	}
+	Presentation presentation = presentationService.getPresentation(Integer.parseInt(request.getParameter("id")));
+	if( !presentation.getAuthor().getId().equals( ( (User)session.getAttribute("user") ).getId() ) )
+	{
+	    System.out.println(presentation.getAuthor().getId().toString()+" "+((User)session.getAttribute("user")).getId().toString());
+	    mv.addObject("message", "It's not your presentation");
+	    return mv;
+	}
+	presentation.setContent(
+		request.getParameter("content")
+		);
+	presentation.setJson(
+		request.getParameter("json")
+		);
+	//session.removeAttribute("currentPresentation");
+	//session.setAttribute("currentPresentation", presentation);
 	presentationService.addPresentation(presentation);
-	return "message";
+	mv.addObject("message", "Save ok");
+	return mv;
     }
     
     @RequestMapping(value = "/viewPresentation/{presentationId}")
     public String viewPresentation(@PathVariable("presentationId")String presentationId, Map<String, Object> map){
 	Integer id = Integer.parseInt(presentationId);
+	//Presentation presentation = presentationService.getPresentation(id);
 	map.put("html", presentationService.getContent(id));
+	//map.put("width", presentation.getWidth());
+	//map.put("height", presentation.getHeight());
+	return "viewPresentation";
+    }
+    
+    @RequestMapping(value = "/getPresentationJSON/{presentationId}")
+    public String getPresentationJSON(@PathVariable("presentationId")String presentationId, Map<String, Object> map){
+	Integer id = Integer.parseInt(presentationId);
+	//Presentation presentation = presentationService.getPresentation(id);
+	map.put("html", presentationService.getPresentationJson(id));
+	//map.put("width", presentation.getWidth());
+	//map.put("height", presentation.getHeight());
 	return "viewPresentation";
     }
     

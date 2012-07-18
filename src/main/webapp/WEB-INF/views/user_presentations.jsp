@@ -21,16 +21,16 @@
 			</c:if>
 			<c:forEach items="${presentationsList}" var="presentation">
 				<th colspan="2">
-				<div class="pull-left">${presentation.name}</div>
+				<div class="pull-left"><a href="viewPresentation/${presentation.id }" target="_blank">${presentation.name}</a></div>
 				<c:if test="${author.id == user.id}">
 					<div class="pull-right">
-						<a class="btn btn-success" href="#"><i class="icon-pencil icon-white"></i> <spring:message code="button.edit"/></a>
+						<a class="btn btn-success" href="http://localhost:8080/xslides/resources/Strut/index.html?id=${presentation.id }" target="_blank"><i class="icon-pencil icon-white"></i> <spring:message code="button.edit"/></a>
 						<a class="btn btn-danger" href="#"><i class="icon-remove icon-white"></i> <spring:message code="button.delete"/></a>
 					</div>
 				</c:if>
 				</th>
 				<tr>
-					<td rowspan="2" style="width: 25%"><a href="viewPresentation/${presentation.id}">First slide</a></td>
+					<td rowspan="2" style="width: 25%"><a href="viewPresentation/${presentation.id}" target="_blank">First slide</a></td>
 					<td>
 						<h3>
 						<c:if test="${author.id == user.id}">

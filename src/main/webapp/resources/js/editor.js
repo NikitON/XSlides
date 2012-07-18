@@ -62,7 +62,7 @@ $(document).ready(
                 ]
             ],
             about : false,
-            idir : "/resources/js/HtmlBox_4.0.3/images/",
+            idir : "/xslides/resources/js/HtmlBox_4.0.3/images/",
             skin:"blue",
         });
         $("#addTextDialog").on('hidden', function () {
@@ -137,8 +137,11 @@ function addVideoItem()
 
 function setEditorSize()
 {
+    //$("#editor").width( $(document).width() - 20 );
+    //$("#editor").height( $(document).height() - $("#editorMenu").height() - 20 );
     $("#editor").width(1000);
     $("#editor").height(500);
+    //alert( $("#editor").width() + " " + $("#editor").height() );
 }
 
 function addText()
@@ -291,6 +294,7 @@ function savePresentation()
 	"/XSlides/saveCurrentPresentation",
 	{content : $("#presentation").html().replaceAll("border: 1px solid black;","")}
 	);
+    //alert( $("#presentation").html().replaceAll("border: 1px solid black;","") );
 }
 
 function selectSlide(id)
