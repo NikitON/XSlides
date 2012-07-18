@@ -19,6 +19,7 @@
 					<script type="text/javascript">
 						var displaynameCheck = new LiveValidation('displayname', {validMessage: 'Nice name!',  wait: 500 });
 						displaynameCheck.add(Validate.Presence);
+						displaynameCheck.add(Validate.Format, {pattern: /^[\w]+$/ } );
 						displaynameCheck.add(Validate.Length, {maximum: 40});
 					</script>
 					<label class="span3"><spring:message code="label.email"/></label> 
