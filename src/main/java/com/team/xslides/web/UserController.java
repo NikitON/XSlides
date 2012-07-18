@@ -80,15 +80,10 @@ public class UserController {
         return mv;
     }
     
-    @RequestMapping(value = "/forgotPassword", method = RequestMethod.GET)
-    public ModelAndView forgot() {
-        return new ModelAndView("forgot_password");
-    }
-
     @RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
     public ModelAndView forgot(HttpServletRequest request) {
         User user = userService.getUser(request.getParameter("email"));
-        ModelAndView mv = new ModelAndView("forgot_password");
+        ModelAndView mv = new ModelAndView("login");
         if (user != null) {
             String newPassword = RandomStringUtils.randomAlphanumeric(RANDOM_PASSWORD_LENGTH);
             if (!emailService.sendNewPassowrd(user, newPassword)) {
@@ -96,7 +91,6 @@ public class UserController {
             } else {
                 userService.setNewPassword(user.getId(), newPassword);
                 mv.addObject("newSended", true);
-                mv.setViewName("login");
             }
         } else {
             mv.addObject("errorNoUser", true);

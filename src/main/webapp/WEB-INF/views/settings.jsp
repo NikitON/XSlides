@@ -20,7 +20,9 @@
 							<th style="width: 25%"><spring:message code="label.displayname"/></th>
 							<td>${user.displayname}</td>
 							<td>
-							<div align="center"><a class="btn btn-warning" data-toggle="modal" href="#changeName" ><spring:message code="button.change"/></a></div>
+							<div align="center"><a class="btn btn-warning" data-toggle="modal" href="#changeName" >
+							<i class="icon-pencil icon-white"></i> <spring:message code="button.change"/>
+							</a></div>
 							</td>
 						</tr>
 						<tr>
@@ -30,7 +32,9 @@
 						</tr>
 						<tr>
 							<td colspan="3" align="center">
-							<div align="center"><a class="btn btn-danger" data-toggle="modal" href="#changePassword" ><spring:message code="button.changepassword"/></a></div>
+							<div align="center"><a class="btn btn-danger" data-toggle="modal" href="#changePassword" >
+							<i class="icon-pencil icon-white"></i> <spring:message code="button.changepassword"/>
+							</a></div>
 							</td>
 						</tr>
 					</tbody>
@@ -57,11 +61,13 @@
 				<input id="password" type="password" class="span3" placeholder="<spring:message code="input.password"/>" name="password" />
 	  		</div>
 			<div class="modal-footer">
-			    <button type="submit" class="btn btn-success"><spring:message code="button.savechanges"/></button>
+			    <button type="submit" class="btn btn-success">
+			    <i class="icon-ok icon-white"></i> <spring:message code="button.savechanges"/>
+			    </button>
 			</div>
 		</form>
 	</div>
-		<div class="modal fade hide" id="changePassword">
+	<div class="modal fade hide" id="changePassword">
   		<div class="modal-header">
     		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
     		<h3><spring:message code="label.newpassword"/></h3>
@@ -86,7 +92,9 @@
 				<input id="password" type="password" class="span3" placeholder="<spring:message code="input.currentpassword"/>" name="password" />
 	  		</div>
 			<div class="modal-footer">
-			    <button type="submit" class="btn btn-success"><spring:message code="button.savechanges"/></button>
+			    <button type="submit" class="btn btn-success">
+			    <i class="icon-ok icon-white"></i> <spring:message code="button.savechanges"/>
+			    </button>
 			</div>
 		</form>
 	</div>
