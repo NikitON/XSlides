@@ -32,8 +32,11 @@ public class ProfileController {
     }
     
     @RequestMapping(value = "/userPresentations", method = RequestMethod.GET)
-    public ModelAndView userPresentations() {
-        return new ModelAndView("user_presentations");
+    public ModelAndView userPresentations(HttpSession session) {
+        ModelAndView mv = new ModelAndView("user_presentations");
+        mv.addObject("author", session.getAttribute("author"));
+        session.removeAttribute("author");
+        return mv;
     }
     
     @RequestMapping(value = "/settings", method = RequestMethod.GET)
@@ -46,14 +49,14 @@ public class ProfileController {
         User user;
         ModelAndView mv = new ModelAndView("settings");
         if ((user = (User) session.getAttribute("user")) == null) {
-            mv.setViewName("redirect:/access_denied");
+            mv.setViewName("redirect:/accessDenied");
         } else {
             if ((user = userService.getUser(user.getEmail(), request.getParameter("password"))) == null) {
-                mv.addObject("message","Wrong password.");
+                mv.addObject("errorPassword", true);
             } else {
                 userService.setNewDisplayname(user.getId(), request.getParameter("displayname"));
                 session.setAttribute("user", userService.getUser(user.getId()));
-                mv.addObject("success", "Your display name was successfully changed.");
+                mv.addObject("nameChanged", true);
             }
         }
         return mv;
@@ -64,14 +67,14 @@ public class ProfileController {
         User user;
         ModelAndView mv = new ModelAndView("settings");
         if ((user = (User) session.getAttribute("user")) == null) {
-            mv.setViewName("redirect:/access_denied");
+            mv.setViewName("redirect:/accessDenied");
         } else {
             if ((user = userService.getUser(user.getEmail(), request.getParameter("password"))) == null) {
-                mv.addObject("message","Wrong password.");
+                mv.addObject("errorPassword", true);
             } else {
                 userService.setNewPassword(user.getId(), request.getParameter("newPassword"));
                 session.setAttribute("user", userService.getUser(user.getId()));
-                mv.addObject("success", "Your password was successfully changed.");
+                mv.addObject("passwordChanged", true);
             }
         }
         return mv;

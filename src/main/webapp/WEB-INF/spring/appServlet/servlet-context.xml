@@ -5,6 +5,22 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+	<beans:bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<beans:property name="defaultLocale" value="ru" />
+	</beans:bean>
+ 
+	<beans:bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<beans:property name="paramName" value="language" />
+	</beans:bean>
+	
+	<interceptors>  
+        <beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+              <beans:property name="paramName" value="language" />
+        </beans:bean>
+	</interceptors>
+
 	<!-- DispatcherServlet Context: определяет настройки одного сервлета; бины, 
 		которые доступны только ему -->
 

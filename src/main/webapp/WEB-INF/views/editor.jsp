@@ -6,11 +6,11 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap/css/bootstrap.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap/css/bootstrap-responsive.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/editor.css"/>">
-    <script src="<c:url value="/resources/js/jquery-1.7.2.js"/>"></script>
-    <script src="<c:url value="/resources/js/jquery-ui-1.8.21.custom.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/HtmlBox_4.0.3/htmlbox.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/bootstrap/bootstrap-modal.js"/>"></script>
-    <script src="<c:url value="/resources/js/editor.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.7.2.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-ui-1.8.21.custom.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/HtmlBox_4.0.3/htmlbox.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/bootstrap/bootstrap-modal.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/editor.js"/>"></script>
     </head>
     <body>
         <header>
@@ -78,14 +78,13 @@
                 <a class="btn btn-primary disabled operationWithSelected" onclick="moveDown();" href="#">
                     <i class="icon-arrow-down icon-white"></i>Move down
                 </a>
-                </a>
                 <a class="btn btn-primary" onclick="savePresentation();" href="#">
                 Save
                 </a>
                 <a class="btn btn-primary" onclick="$('#slideProperties').toggle('slow');" href="#">
                 Slide properties
                 </a>
-                <a class="btn btn-primary" href="/xslides/">
+                <a class="btn btn-primary" href="/XSlides/">
                 Exit
                 </a>
                 <div id="slidePanel">

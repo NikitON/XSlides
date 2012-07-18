@@ -4,32 +4,33 @@
 <head>
 <%@ include file="static/resources.resource" %>
 <script type="text/javascript" src="<c:url value="/resources/js/livevalidation.js"/>"></script>
-<title>Settings</title>
+<title><spring:message code="title.settings"/></title>
 </head>
 <body>
 	<div class="container">
 		<%@ include file="static/menu.resource"%>
 		<div class="row">
 			<div class="well span6 offset3">
-				<c:if test="${message != null}"><div class="alert alert-error">${message}</div></c:if>
-				<c:if test="${success != null}"><div class="alert alert-success">${success}</div></c:if>
+				<c:if test="${errorPassword}"><div class="alert alert-error"><spring:message code="message.wrongpassword"/></div></c:if>
+				<c:if test="${nameChanged}"><div class="alert alert-success"><spring:message code="message.namechanged"/></div></c:if>
+				<c:if test="${passwordChanged}"><div class="alert alert-success"><spring:message code="message.passwordchanged"/></div></c:if>
 				<table class="table table-striped table-bordered">
 					<tbody>
 						<tr>
-							<th style="width: 25%">Display name</th>
+							<th style="width: 25%"><spring:message code="label.displayname"/></th>
 							<td>${user.displayname}</td>
 							<td>
-							<div align="center"><a class="btn btn-warning" data-toggle="modal" href="#changeName" >Change</a></div>
+							<div align="center"><a class="btn btn-warning" data-toggle="modal" href="#changeName" ><spring:message code="button.change"/></a></div>
 							</td>
 						</tr>
 						<tr>
-							<th style="width: 25%">E-mail</th>
+							<th style="width: 25%"><spring:message code="label.email"/></th>
 							<td>${user.email}</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td colspan="3" align="center">
-							<div align="center"><a class="btn btn-danger" data-toggle="modal" href="#changePassword" >Change password</a></div>
+							<div align="center"><a class="btn btn-danger" data-toggle="modal" href="#changePassword" ><spring:message code="button.changepassword"/></a></div>
 							</td>
 						</tr>
 					</tbody>
@@ -39,53 +40,53 @@
 	</div>
 	<div class="modal fade hide" id="changeName">
   		<div class="modal-header">
-    		<button type="button" class="close" data-dismiss="modal">close</button>
-    		<h3>New display name</h3>
+    		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
+    		<h3><spring:message code="label.newdisplayname"/></h3>
   		</div>
   		<form method="POST" action="newName">
 	  		<div class="modal-body">
-	  			<h3 class="offset1">Your current name is: ${user.displayname}</h3>
-	    		<label class="span3">New name</label> 
-				<input id="displayname" type="text" class="span3" placeholder="New displayname..." name="displayname" />
+	  			<h3 class="offset1"><spring:message code="text.currentname"/> ${user.displayname}</h3>
+	    		<label class="span3"><spring:message code="label.newdisplayname"/></label> 
+				<input id="displayname" type="text" class="span3" placeholder="<spring:message code="input.newdisplayname"/>" name="displayname" />
 				<script type="text/javascript">
 					var displaynameCheck = new LiveValidation('displayname', {validMessage: 'Nice name!',  wait: 500 });
 					displaynameCheck.add(Validate.Presence);
 					displaynameCheck.add(Validate.Length, {maximum: 40});
 				</script>
-				<label class="span3">Password</label> 
-				<input id="password" type="password" class="span3" placeholder="Password..." name="password" />
+				<label class="span3"><spring:message code="label.password"/></label> 
+				<input id="password" type="password" class="span3" placeholder="<spring:message code="input.password"/>" name="password" />
 	  		</div>
 			<div class="modal-footer">
-			    <button type="submit" class="btn btn-success">Save changes</button>
+			    <button type="submit" class="btn btn-success"><spring:message code="button.savechanges"/></button>
 			</div>
 		</form>
 	</div>
 		<div class="modal fade hide" id="changePassword">
   		<div class="modal-header">
-    		<button type="button" class="close" data-dismiss="modal">close</button>
-    		<h3>New password</h3>
+    		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
+    		<h3><spring:message code="label.newpassword"/></h3>
   		</div>
   		<form method="POST" action="newPassword">
 	  		<div class="modal-body">
-	    		<label class="span3">New password</label> 
-				<input id="newPassword" type="password" class="span3" placeholder="Type new password..." name="newPassword"/>
+	    		<label class="span3"><spring:message code="label.newpassword"/></label> 
+				<input id="newPassword" type="password" class="span3" placeholder="<spring:message code="input.newpassword"/>" name="newPassword"/>
 				<script type="text/javascript">
 					var passwordLength = new LiveValidation('newPassword', { validMessage: 'Nice password!', wait: 500 });
 					passwordLength.add(Validate.Presence);
 					passwordLength.add(Validate.Length, { minimum: 7 });
 					passwordLength.add(Validate.Length, { maximum: 40});
 				</script>
-				<label class="span3">Confirm new password</label>
-				<input id="confirm" type="password" class="span3" placeholder="Confirm new password..." />
+				<label class="span3"><spring:message code="label.confirmnewpassword"/></label>
+				<input id="confirm" type="password" class="span3" placeholder="<spring:message code="input.confirmnewpassword"/>" />
 				<script type="text/javascript">
 					var passwordConfirm = new LiveValidation('confirm', { validMessage: 'Passwords are equal.', wait: 500 });
 					passwordConfirm.add(Validate.Confirmation, { match: 'newPassword' });		          
 				</script>
-				<label class="span3">Current password</label> 
-				<input id="password" type="password" class="span3" placeholder="Current password..." name="password" />
+				<label class="span3"><spring:message code="label.currentpassword"/></label> 
+				<input id="password" type="password" class="span3" placeholder="<spring:message code="input.currentpassword"/>" name="password" />
 	  		</div>
 			<div class="modal-footer">
-			    <button type="submit" class="btn btn-success">Save changes</button>
+			    <button type="submit" class="btn btn-success"><spring:message code="button.savechanges"/></button>
 			</div>
 		</form>
 	</div>

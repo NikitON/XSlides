@@ -1,6 +1,6 @@
 package com.team.xslides.web;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ public class HomeController {
     public ModelAndView index() {
         return new ModelAndView("redirect:/");
     }
-
+    
     @RequestMapping("/home")
     public ModelAndView home() {
         return new ModelAndView("redirect:/");
@@ -28,10 +28,15 @@ public class HomeController {
         return new ModelAndView("home");
     }
     
-    @RequestMapping("/access_denied")
-    public ModelAndView accessDenied(HttpServletRequest request) {
+    @RequestMapping("/accessDenied")
+    public ModelAndView accessDenied(HttpSession session) {
         ModelAndView mv = new ModelAndView("access_denied");
-        mv.addObject("message", request.getParameter("message"));
+        mv.addObject("errorNotRegistered", session.getAttribute("errorNotRegistered"));
+        mv.addObject("errorLogged", session.getAttribute("errorLogged"));
+        mv.addObject("errorNotLogged", session.getAttribute("errorNotLogged"));
+        session.removeAttribute("errorNotLogged");
+        session.removeAttribute("errorLogged");
+        session.removeAttribute("errorNotRegistered");
         return mv;
     }
 }

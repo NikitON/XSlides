@@ -22,8 +22,8 @@ public class LoginController {
     public ModelAndView login(HttpSession session) {
         ModelAndView mv = new ModelAndView("login");
         if (session.getAttribute("user") != null) {
-            mv.addObject("message", "Logout first.");
-            mv.setViewName("access_denied");
+            session.setAttribute("errorLogged", true);
+            mv.setViewName("accessDenied");
         }
         return mv;
     }
@@ -38,11 +38,11 @@ public class LoginController {
                 session.setAttribute("user", user);
                 mv.setViewName("redirect:/home");
             } else {
-                mv.addObject("message", "Please check your e-mail and follow link.");
+                mv.addObject("errorCheck", true);
                 mv.setViewName("login");
             }
         } else {
-            mv.addObject("message", "Wrong e-mail or password. Please try again.");
+            mv.addObject("errorEmail", true);
             mv.setViewName("login");
         }
         return mv;
@@ -52,8 +52,8 @@ public class LoginController {
     public ModelAndView logout(HttpSession session) {
         ModelAndView mv = new ModelAndView("redirect:/home");
         if (session.getAttribute("user") == null) {
-            mv.addObject("message", "You're not logged in.");
-            mv.setViewName("access_denied");
+            session.setAttribute("errorNotLogged", true);
+            mv.setViewName("accessDenied");
         } else {
             session.removeAttribute("user");
         }

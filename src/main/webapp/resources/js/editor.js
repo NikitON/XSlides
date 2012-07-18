@@ -62,7 +62,7 @@ $(document).ready(
                 ]
             ],
             about : false,
-            idir : "./js/HtmlBox_4.0.3/images/",
+            idir : "/resources/js/HtmlBox_4.0.3/images/",
             skin:"blue",
         });
         $("#addTextDialog").on('hidden', function () {
@@ -137,8 +137,8 @@ function addVideoItem()
 
 function setEditorSize()
 {
-    $("#editor").width( $(document).width() - 20 );
-    $("#editor").height( $(document).height() - $("#editorMenu").height() - 20 );
+    $("#editor").width(1000);
+    $("#editor").height(500);
 }
 
 function addText()
@@ -288,7 +288,7 @@ function addSlide()
 function savePresentation()
 {
 	$.get(
-	"/xslides/saveCurrentPresentation",
+	"/XSlides/saveCurrentPresentation",
 	{content : $("#presentation").html().replaceAll("border: 1px solid black;","")}
 	);
 }

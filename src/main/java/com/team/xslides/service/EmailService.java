@@ -30,7 +30,7 @@ public class EmailService {
             String html = "<h3>" + user.getDisplayname() + "</h3>" +
                           "<h4>Welcome and thank you for registering at XSlides!</h4>" +
                           "<h4>Please follow this link to confirm your e-mail:</h4>" +
-                          "<a href=http://localhost:8080/XSlides/confirm/" + link + ">Confirm email</a>";
+                          "<a href=http://localhost:8080/XSlides/confirm/" + link + ">Confirm e-mail</a>";
             email.setSubject("XSlides registration");
             email.setContent(html, "text/html");
             email.addTo(user.getEmail());

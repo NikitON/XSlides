@@ -11,8 +11,8 @@
         font-size: 2em;
         }
         .step  {
-        width: 1260px;
-        height: 809px;
+        width: 1000px;
+        height: 500px;
         }
         .no-support-message  {
         display: none;

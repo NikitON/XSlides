@@ -3,14 +3,14 @@
 <html>
 <head>
 <%@ include file="static/resources.resource" %>
-<title>Congratulations</title>
+<title><spring:message code="title.congratulations"/></title>
 </head>
 <body>
 	<div class="container">
 		<%@ include file="static/menu.resource" %>
 		<div class="hero-unit">
-			<h1>Congratulations</h1>
-			<p>Your e-mail was confirmed. Use your e-mail and password to login now.</p>
+			<h1><spring:message code="button.delete"/></h1>
+			<p><spring:message code="text.confrirm"/></p>
 		</div>
 	</div>
 </body>
