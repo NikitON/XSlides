@@ -42,7 +42,7 @@
 		};
     	</script>
     	
-		<script type="text/javascript" data-main="/xslides/resources/Strut/scripts/main" src="<c:url value="/resources/Strut/scripts/require.js"/>"></script>
+		<script type="text/javascript" data-main="/XSlides/resources/Strut/scripts/main" src="<c:url value="/resources/Strut/scripts/require.js"/>"></script>
 		<script type="text/javascript" src="<c:url value="/resources/Strut/preview_export/scripts/impress.js"/>"></script>
 	</head>
 	<body>

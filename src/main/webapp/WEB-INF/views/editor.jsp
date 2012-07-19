@@ -2,11 +2,10 @@
 <html>
 <head>
 <script type="text/javascript">
-<!--
+
 function delayer(){
     window.location = "http://localhost:8080/xslides/resources/Strut/index.html?id=${id}";
 }
-//-->
 </script>
 </head>
 <body onLoad="setTimeout('delayer()', 1000)">

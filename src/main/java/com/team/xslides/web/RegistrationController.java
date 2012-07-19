@@ -2,9 +2,11 @@ package com.team.xslides.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,20 +30,21 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registration() {
-        ModelAndView mv = new ModelAndView("registration");
-        mv.addObject("user", new User());
-        return mv;
+        return new ModelAndView("registration");
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView registration(@ModelAttribute("user") User user) {
+    public ModelAndView registration(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("registration");
+        User user = new User();
+        user.setDisplayname(request.getParameter("displayname"));
+        user.setEmail(request.getParameter("email"));
+        user.setPassword(request.getParameter("password"));
         if (userService.hasUserWithEmail(user.getEmail())) {
-            mv.addObject("message", "E-mail is already in use.");
+            mv.addObject("errorEmailInUse", true);
         } else {
             if (!emailService.sendConfirmEmail(user,hashService.getHash(user.getEmail()))) {
-                mv.addObject("message", "Sorry. There are problems at our server. Please try again later.");
-                mv.setViewName("registration");
+                mv.addObject("errorServer", true);
             } else {
                 userService.addUser(user);
                 mv.setViewName("registration_success");
@@ -51,7 +54,7 @@ public class RegistrationController {
     }
     
     @RequestMapping(value = "/confirm/{digest}", method = RequestMethod.GET)
-    public ModelAndView confirmation(@PathVariable("digest") String digest) {
+    public ModelAndView confirmation(@PathVariable("digest") String digest, HttpSession session) {
         ModelAndView mv = new ModelAndView("redirect:/confirmSuccess");
         List<User> userList = userService.getNotConfirmedList();
         for (User user : userList) {
@@ -60,8 +63,8 @@ public class RegistrationController {
                 return mv;
             }
         } 
-        mv.addObject("message", "You're already confirmed or not registered yet.");
-        mv.setViewName("redirect:/access_denied");
+        session.setAttribute("errorNotRegistered", true);
+        mv.setViewName("redirect:/accessDenied");
         return mv;
     }
     

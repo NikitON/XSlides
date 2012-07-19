@@ -3612,17 +3612,10 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 	border-bottom: 0;
 }
 
-<<<<<<< HEAD
-.navbar .nav li.dropdown .dropdown-toggle .caret,.navbar .nav li.dropdown.open .caret
-	{
-	border-top-color: #ffffff;
-	border-bottom-color: #ffffff;
-=======
 .navbar .nav li.dropdown .dropdown-toggle .caret,
 .navbar .nav li.dropdown.open .caret {
-  border-top-color: #005700;
-  border-bottom-color: #005700;
->>>>>>> ba70ac54ff2f136c43fe8ee91a93121d124b6e2b
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
 }
 
 .navbar .nav li.dropdown.active .caret {
@@ -4274,7 +4267,6 @@ to {
 
 to {
 	background-position: 0 0;
-<<<<<<< HEAD
 }
 
 }
@@ -4287,20 +4279,6 @@ to {
 	background-position: 0 0;
 }
 
-=======
-}
-
-}
-@
--ms-keyframes progress-bar-stripes {from { background-position:40px0;
-	
-}
-
-to {
-	background-position: 0 0;
-}
-
->>>>>>> ba70ac54ff2f136c43fe8ee91a93121d124b6e2b
 }
 @
 -o-keyframes progress-bar-stripes {from { background-position:00;
@@ -4750,8 +4728,4 @@ to {
 
 .invisible {
 	visibility: hidden;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ba70ac54ff2f136c43fe8ee91a93121d124b6e2b

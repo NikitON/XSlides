@@ -4,7 +4,7 @@
 <head>
 <%@ include file="static/resources.resource" %>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.tagcanvas.js"/>"></script>
-<title>Home</title>
+<title><spring:message code="title.home"/></title>
 </head>
 <body>
 	<div class="container">
@@ -33,6 +33,7 @@
 			}
 		});
 		</script>
+		
 		<div align="center" id="tagCloudContainer">
 		 	<canvas width="800" height="300" id="tagCloud">
 		 	</canvas>

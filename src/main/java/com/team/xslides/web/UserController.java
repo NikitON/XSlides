@@ -1,7 +1,6 @@
 package com.team.xslides.web;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpSession;
 
 import com.team.xslides.domain.User;
@@ -29,10 +28,12 @@ public class UserController {
         User user;
         ModelAndView mv = new ModelAndView("administration");
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin()) {
-            mv.setViewName("redirect:/access_denied");
+            mv.setViewName("redirect:/accessDenied");
         } else {
+            mv.addObject("errorServer",session.getAttribute("errorServer"));
             mv.addObject("userList", userService.getUsersList());
         }
+        session.removeAttribute("errorServer");
         return mv;
     }
     
@@ -41,7 +42,7 @@ public class UserController {
         User user;
         ModelAndView mv = new ModelAndView("redirect:/administration");
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {
-            mv.setViewName("redirect:/access_denied");
+            mv.setViewName("redirect:/accessDenied");
         } else {
             userService.removeUser(id);
         }
@@ -53,7 +54,7 @@ public class UserController {
         User user;
         ModelAndView mv = new ModelAndView("redirect:/administration");
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {
-            mv.setViewName("redirect:/access_denied");
+            mv.setViewName("redirect:/accessDenied");
         } else {
             userService.switchAdminStatus(id);
         }
@@ -67,11 +68,11 @@ public class UserController {
         User user;
         ModelAndView mv = new ModelAndView("redirect:/administration");
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {
-            mv.setViewName("redirect:/access_denied");
+            mv.setViewName("redirect:/accessDenied");
         } else {
             String newPassword = RandomStringUtils.randomAlphanumeric(RANDOM_PASSWORD_LENGTH);
             if (!emailService.sendNewPassowrd(userService.getUser(id),newPassword)) {
-                mv.addObject("message", "Sorry. There are problems at our server. Please try again later.");
+                session.setAttribute("errorServer", true);
             } else {
                 userService.setNewPassword(id, newPassword);
             }
@@ -79,26 +80,20 @@ public class UserController {
         return mv;
     }
     
-    @RequestMapping(value = "/forgotPassword", method = RequestMethod.GET)
-    public ModelAndView forgot() {
-        return new ModelAndView("forgot_password");
-    }
-
     @RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
     public ModelAndView forgot(HttpServletRequest request) {
         User user = userService.getUser(request.getParameter("email"));
-        ModelAndView mv = new ModelAndView("forgot_password");
+        ModelAndView mv = new ModelAndView("login");
         if (user != null) {
             String newPassword = RandomStringUtils.randomAlphanumeric(RANDOM_PASSWORD_LENGTH);
             if (!emailService.sendNewPassowrd(user, newPassword)) {
-                mv.addObject("message", "Sorry. There are problems at our server. Please try again later.");
+                mv.addObject("errorServer", true);
             } else {
                 userService.setNewPassword(user.getId(), newPassword);
-                mv.addObject("success", "Check your e-mail. We sent you new password.");
-                mv.setViewName("login");
+                mv.addObject("newSended", true);
             }
         } else {
-            mv.addObject("message", "No user with such e-mail.");
+            mv.addObject("errorNoUser", true);
         }
         return mv;
     }

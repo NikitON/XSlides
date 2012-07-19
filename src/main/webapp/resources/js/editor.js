@@ -291,7 +291,7 @@ function addSlide()
 function savePresentation()
 {
 	$.get(
-	"/xslides/saveCurrentPresentation",
+	"/XSlides/saveCurrentPresentation",
 	{content : $("#presentation").html().replaceAll("border: 1px solid black;","")}
 	);
     //alert( $("#presentation").html().replaceAll("border: 1px solid black;","") );
