@@ -41,4 +41,15 @@ public class PresentationDAOImpl implements PresentationDAO {
 	    Presentation presentation = (Presentation)sessionFactory.getCurrentSession().load(Presentation.class, id);
 	    return presentation.getContent();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Presentation getPresentation( Integer id ){
+	    Presentation presentation = (Presentation)sessionFactory.getCurrentSession().createQuery("from Presentation where id='"+id.toString()+"'").list().get(0);
+	    return presentation;
+	}
+	
+	public String getPresentationJson( Integer id ){
+	    Presentation presentation = (Presentation)sessionFactory.getCurrentSession().load(Presentation.class, id);
+	    return presentation.getJson();
+	}
 }

@@ -15,7 +15,7 @@
 				<tr><td><h3>User have no presentations yet</h3></td></tr>
 			</c:if>
 			<c:forEach items="${presentationsList}" var="presentation">
-				<th colspan="2">${presentation.name}</th>
+				<th colspan="2"><a href="viewPresentation/${presentation.id }" target="_blank">${presentation.name}</a> <a href="http://localhost:8080/xslides/resources/Strut/index.html?id=${presentation.id }" target="_blank">Edit</a></th>
 				<tr>
 					<td rowspan="2" style="width: 30%">First slide</td>
 					<td style="height: 70%">Description</td>

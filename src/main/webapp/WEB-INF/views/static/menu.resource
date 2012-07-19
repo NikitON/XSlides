@@ -17,7 +17,7 @@
 						<li><a href="registration">Registration</a></li>
 						</c:if>
 						<c:if test="${user != null}">
-						<li><a href="createPresentation">Create presentation</a></li>
+						<li><a href="createPresentation" target="_blank">Create presentation</a></li>
 						<li><a href="logout">Logout</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
