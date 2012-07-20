@@ -25,7 +25,6 @@
 				<c:if test="${presentation.author.id == user.id}">
 					<div class="pull-right">
 						<a class="btn btn-success" href="http://localhost:8080/XSlides/resources/Strut/index.html?id=${presentation.id}" target="_blank"><i class="icon-pencil icon-white"></i> <spring:message code="button.edit"/></a>
-						<a class="btn btn-danger" href="#"><i class="icon-trash icon-white"></i> <spring:message code="button.delete"/></a>
 					</div>
 				</c:if>
 				</th>

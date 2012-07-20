@@ -64,7 +64,7 @@
 							</c:if>
 							<c:if test="${!(user.id == entry.id)}">
 							<td>
-							<div align="center"><form action="delete/${entry.id}" method="POST"><button class="btn btn-danger">
+							<div align="center"><form action="deleteUser/${entry.id}" method="POST"><button class="btn btn-danger">
 							<i class="icon-remove icon-white"></i> <spring:message code="button.delete"/>
 							</button></form></div>
 							</td>

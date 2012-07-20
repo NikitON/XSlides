@@ -7,9 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 
@@ -27,7 +27,7 @@ public class Presentation {
     @Column(name = "Theme")
     private String theme;
 
-    @Column(name = "Description")
+    @Column(columnDefinition = "mediumtext", name = "Description")
     private String description;
 
     @Column(columnDefinition = "mediumtext", name = "Content")
@@ -36,9 +36,9 @@ public class Presentation {
     @Column(columnDefinition = "mediumtext", name = "JSON")
     private String json;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private User author;
-
+    
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Tag> tags;
 

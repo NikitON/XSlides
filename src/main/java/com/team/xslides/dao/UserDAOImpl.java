@@ -1,5 +1,6 @@
 package com.team.xslides.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -9,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.team.xslides.domain.Presentation;
 import com.team.xslides.domain.User;
 
 @Repository
@@ -43,13 +45,16 @@ public class UserDAOImpl implements UserDAO {
         return !query.list().isEmpty();
     }
     
+    @SuppressWarnings("unchecked")
     public User getUser(String email, String password){
     	Query query = getSession().createQuery("from User u where u.email = :requestEmail and u.password = :requestPassword");
         query.setParameter("requestEmail", email);
         query.setParameter("requestPassword", password);
-        if(query.list().isEmpty())
+        List<User> list;
+        if((list = query.list()).isEmpty()) {
             return null;
-        return (User)query.list().get(0);
+        }
+        return list.get(0);
     }
 
     public void switchAdminStatus(Integer id) {
@@ -75,29 +80,39 @@ public class UserDAOImpl implements UserDAO {
         getSession().saveOrUpdate(user);
     }
     
+    @SuppressWarnings("unchecked")
     public User getUser(Integer id) {
         Query query = getSession().createQuery("from User u where u.id = :requestId");
         query.setParameter("requestId", id);
-        if(query.list().isEmpty())
+        List<User> list;
+        if((list = query.list()).isEmpty()) {
             return null;
-        return (User) query.list().get(0);
+        }
+        return list.get(0);
     }
     
     private User getUserById(Integer id) {
         return (User) getSession().load(User.class, id);
     }
 
+    @SuppressWarnings("unchecked")
     public User getUser(String email) {
         Query query = getSession().createQuery("from User u where u.email = :requestEmail");
         query.setParameter("requestEmail", email);
-        if(query.list().isEmpty())
+        List<User> list;
+        if((list = query.list()).isEmpty()) {
             return null;
-        return (User)query.list().get(0);
+        }
+        return list.get(0);
     }
 
     public void setNewDisplayname(Integer id, String displayname) {
         User user = getUserById(id);
         user.setDisplayname(displayname);
         getSession().saveOrUpdate(user);
+    }
+
+    public List<Presentation> getUserPresentations(Integer id) {
+        return new ArrayList<Presentation>(getUserById(id).getPresentations());
     }
 }

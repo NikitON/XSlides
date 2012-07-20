@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import com.team.xslides.domain.Presentation;
-import com.team.xslides.domain.User;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -21,7 +20,6 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.LockObtainFailedException;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,24 +36,14 @@ public class PresentationDAOImpl implements PresentationDAO {
     }
 
     public void removePresentation(Integer id) {
-        Presentation presentation = (Presentation) getSession().load(Presentation.class, id);
+        Presentation presentation = getPresentationById(id);
         if (null != presentation) {
             getSession().delete(presentation);
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Presentation> presentationsOfUser(User author) {
-        Query query = getSession().createQuery("from Presentation u where u.author = :requestAuthor");
-        query.setParameter("requestAuthor", author);
-        if (query.list().isEmpty())
-            return null;
-        return (List<Presentation>) query.list();
-    }
-
     public String getContent(Integer id) {
-        Presentation presentation = (Presentation) getSession().load(Presentation.class, id);
-        return presentation.getContent();
+        return getPresentationById(id).getContent();
     }
 
     public Presentation getPresentation(Integer id) {
@@ -65,8 +53,7 @@ public class PresentationDAOImpl implements PresentationDAO {
     }
 
     public String getPresentationJson(Integer id) {
-        Presentation presentation = (Presentation) getSession().load(Presentation.class, id);
-        return presentation.getJson();
+        return getPresentationById(id).getJson();
     }
 
     @SuppressWarnings("unchecked")
@@ -134,11 +121,8 @@ public class PresentationDAOImpl implements PresentationDAO {
             return getSession().createQuery(query.toString()).list();
         }
     }
-
-//    private void buildQuery(BooleanQuery query, String searchQuery) {
-//        query.add(new QueryParser(Version.LUCENE_36,)),BooleanClause.Occur.SHOULD);
-//        query.add(new TermQuery(new Term("theme", searchQuery)),BooleanClause.Occur.SHOULD);
-//        query.add(new TermQuery(new Term("description", searchQuery)),BooleanClause.Occur.SHOULD);
-//        query.add(new TermQuery(new Term("content", searchQuery)),BooleanClause.Occur.SHOULD);
-//    }
+    
+    private Presentation getPresentationById(Integer id) {
+        return (Presentation) getSession().load(Presentation.class, id);
+    }
 }
