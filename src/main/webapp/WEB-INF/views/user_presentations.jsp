@@ -27,14 +27,13 @@
 					</h3>
 				</div>
 				<c:if test="${author.id == user.id}">
-					<div class="pull-right">
+					<div style="margin: 0 0 -20px 0" class="pull-right">
 						<form action="deletePresentation/${presentation.id}" method="POST">
 							<button class="btn btn-danger"><i class="icon-trash icon-white"></i> <spring:message code="button.delete"/></button>
 						</form>
 					</div>
-					<div class="pull-right">
+					<div style="padding: 0 5px 0 0" class="pull-right">
 						<a class="btn btn-success" href="http://localhost:8080/XSlides/resources/Strut/index.html?id=${presentation.id}" target="_blank"><i class="icon-pencil icon-white"></i> <spring:message code="button.edit"/></a>
-						
 					</div>
 				</c:if>
 				</th>

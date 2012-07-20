@@ -36,10 +36,10 @@ public class Presentation {
     @Column(columnDefinition = "mediumtext", name = "JSON")
     private String json;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private User author;
     
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Tag> tags;
 
     public String getJson() {
