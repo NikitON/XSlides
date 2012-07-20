@@ -23,7 +23,7 @@ public class LoginController {
         ModelAndView mv = new ModelAndView("login");
         if (session.getAttribute("user") != null) {
             session.setAttribute("errorLogged", true);
-            mv.setViewName("accessDenied");
+            mv.setViewName("redirect:/accessDenied");
         }
         return mv;
     }
@@ -53,7 +53,7 @@ public class LoginController {
         ModelAndView mv = new ModelAndView("redirect:/home");
         if (session.getAttribute("user") == null) {
             session.setAttribute("errorNotLogged", true);
-            mv.setViewName("accessDenied");
+            mv.setViewName("redirect:/accessDenied");
         } else {
             session.removeAttribute("user");
         }

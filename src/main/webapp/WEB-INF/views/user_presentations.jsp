@@ -19,13 +19,13 @@
 			<c:if test="${empty presentationsList}">
 				<tr><td colspan="2"><h3><spring:message code="text.nopresentations"/></h3></td></tr>
 			</c:if>
-			<c:forEach items="${presentationsList}" var="presentation">
+			<c:forEach var="presentation" items="${presentationsList}">
 				<th colspan="2">
-				<div class="pull-left"><a href="viewPresentation/${presentation.id }" target="_blank">${presentation.name}</a></div>
+				<div class="pull-left"><a href="viewPresentation/${presentation.id}" target="_blank">${presentation.title}</a></div>
 				<c:if test="${author.id == user.id}">
 					<div class="pull-right">
-						<a class="btn btn-success" href="http://localhost:8080/xslides/resources/Strut/index.html?id=${presentation.id }" target="_blank"><i class="icon-pencil icon-white"></i> <spring:message code="button.edit"/></a>
-						<a class="btn btn-danger" href="#"><i class="icon-remove icon-white"></i> <spring:message code="button.delete"/></a>
+						<a class="btn btn-success" href="http://localhost:8080/XSlides/resources/Strut/index.html?id=${presentation.id}" target="_blank"><i class="icon-pencil icon-white"></i> <spring:message code="button.edit"/></a>
+						<a class="btn btn-danger" href="#"><i class="icon-trash icon-white"></i> <spring:message code="button.delete"/></a>
 					</div>
 				</c:if>
 				</th>
@@ -36,7 +36,7 @@
 						<c:if test="${author.id == user.id}">
 							<a style="text-decoration:none" href="#"><span class="label label-info"><spring:message code="button.edit"/></span></a>
 						</c:if>
-						Theme:
+						Theme: ${presentation.theme}
 						</h3>
 						<h3>
 						<c:if test="${author.id == user.id}">
@@ -44,7 +44,7 @@
 						</c:if>
 						Description:
 						</h3>
-						texttexttexttexttexttexttexttex ttexttextte xttext texttex tte xtt extt extte xttexttexttex ttextte x ttextt extt exttexttex ttexttextt exttextte xtte xttexttexttexttexttexttextte xttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+						<h5>${presentation.description}</h5>
 					</td>
 				</tr>
 				<tr>
@@ -52,6 +52,9 @@
 					<c:if test="${author.id == user.id}">
 						<a style="text-decoration:none" href="#"><span class="label label-info"><spring:message code="button.edit"/></span></a>
 					</c:if>
+					<c:forEach var="tag" items="${presentation.tags}" >
+						<a style="text-decoration:none" href="#"><span class="label label-warning">${tag.name}</span></a>
+					</c:forEach>
 					</td>
 				</tr>
 			</c:forEach>

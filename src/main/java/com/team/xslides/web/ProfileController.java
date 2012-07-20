@@ -1,5 +1,7 @@
 package com.team.xslides.web;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +28,12 @@ public class ProfileController {
     @RequestMapping(value = "/newName", method = RequestMethod.POST)
     public ModelAndView newName(HttpServletRequest request, HttpSession session) {
         User user;
+        String displayname = null;
+        try {
+            displayname = new String(request.getParameter("displayname").getBytes("ISO-8859-1"),"utf8");
+        } catch(UnsupportedEncodingException ex) {
+            System.out.println("bad encode");
+        }
         ModelAndView mv = new ModelAndView("settings");
         if ((user = (User) session.getAttribute("user")) == null) {
             mv.setViewName("redirect:/accessDenied");
@@ -33,7 +41,7 @@ public class ProfileController {
             if ((user = userService.getUser(user.getEmail(), request.getParameter("password"))) == null) {
                 mv.addObject("errorPassword", true);
             } else {
-                userService.setNewDisplayname(user.getId(), request.getParameter("displayname"));
+                userService.setNewDisplayname(user.getId(), displayname);
                 session.setAttribute("user", userService.getUser(user.getId()));
                 mv.addObject("nameChanged", true);
             }

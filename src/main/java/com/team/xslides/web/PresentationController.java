@@ -34,13 +34,15 @@ public class PresentationController {
     public ModelAndView createPresentation(HttpServletRequest request, HttpSession session) {
 	if(session.getAttribute("user")==null)
 	{
-	    ModelAndView mv = new ModelAndView("home");
+	    ModelAndView mv = new ModelAndView("redirect:/accessDenied");
 	    return mv;
 	}
 	Set<Tag> tags = new HashSet<Tag>();
     	Presentation presentation = new Presentation();
     	presentation.setAuthor(((User)session.getAttribute("user")));
-    	presentation.setName(request.getParameter("name"));
+    	presentation.setTitle(request.getParameter("title"));
+    	presentation.setTheme(request.getParameter("theme"));
+    	presentation.setDescription(request.getParameter("description"));
     	String[] tagsStrings = request.getParameter("tags").split(" ");
     	for( int i = 0; i < tagsStrings.length; i++ )
     	{
@@ -57,15 +59,15 @@ public class PresentationController {
     }
     
     @RequestMapping(value = "/createPresentation")
-    public String createPresentation(Map<String, Object> map, HttpSession session) {
-	if(session.getAttribute("user") ==  null)
-	    return "redirect:/home";
-    	return "create_presentation";
+    public ModelAndView createPresentation(HttpSession session) {
+	if(session.getAttribute("user") == null) {
+	    return new ModelAndView("redirect:/accessDenied");
+	}
+    	return new ModelAndView("create_presentation");
     }
     
     @RequestMapping(value = "/showcurrent")
     public String show(HttpSession session) {
-    	
     	return "index";
     }
     
@@ -127,6 +129,11 @@ public class PresentationController {
     
     @RequestMapping(value = "/userPresentations", method = RequestMethod.GET)
     public ModelAndView userPresentations(HttpSession session) {
-        return new ModelAndView("user_presentations");
+        ModelAndView mv = new ModelAndView("user_presentations");
+        mv.addObject("presentationsList", session.getAttribute("presentationsList"));
+        mv.addObject("author", session.getAttribute("author"));
+        session.removeAttribute("presentationsList");
+        session.removeAttribute("author");
+        return mv;
     }
 }

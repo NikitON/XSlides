@@ -33,7 +33,7 @@
             if(values["id"])
             {
             	editableId=values["id"]
-                $.get("http://localhost:8080/xslides/getPresentationJSON/"+values["id"],function(data){editable=data;});
+                $.get("http://localhost:8080/XSlides/getPresentationJSON/"+values["id"],function(data){editable=data;});
             }
         });
     	jQuery.fn.selectText = function(){

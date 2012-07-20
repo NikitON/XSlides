@@ -4,7 +4,7 @@
 <script type="text/javascript">
 
 function delayer(){
-    window.location = "http://localhost:8080/xslides/resources/Strut/index.html?id=${id}";
+    window.location = "http://localhost:8080/XSlides/resources/Strut/index.html?id=${id}";
 }
 </script>
 </head>

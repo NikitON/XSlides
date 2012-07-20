@@ -3,6 +3,7 @@
 		<c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/'}"><c:set var="home" value="true"/></c:if>
 		<c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/registration'}"><c:set var="registration" value="true"/></c:if>
 		<c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/login'}"><c:set var="login" value="true"/></c:if>
+		<c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/createPresentation'}"><c:set var="creating" value="true"/></c:if>
 		<c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/about'}"><c:set var="about" value="true"/></c:if>
 		<c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/administration'}"><c:set var="admin" value="true"/></c:if>
 		
@@ -28,6 +29,9 @@
 						<a href="administration"><i class="icon-lock icon-white"></i> <spring:message code="menu.administration"/></a>
 						</li>
 						</c:if>
+						<form action="searchResult" class="navbar-search">
+							<input id="search-query" name="search-query" type="text" class="search-query" placeholder="Search">
+						</form>
 					</ul>
 					<ul class="nav pull-right">
 						<c:if test="${user == null}">
@@ -39,7 +43,7 @@
 						</li>
 						</c:if>
 						<c:if test="${user != null}">
-						<li>
+						<li <c:if test="${creating}">class="active"</c:if>>
 						<a href="createPresentation" target="_blank"> <i class="icon-file icon-white"></i><spring:message code="menu.createpresentation"/></a>
 						</li>
 						<li class="dropdown">
