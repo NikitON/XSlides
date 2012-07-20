@@ -10,6 +10,10 @@ define(["vendor/amd/backbone", "./Templates", "common/Throttler"], function(Back
       "click .ok": "okClicked",
       "keyup input[name='itemUrl']": "urlChanged",
       "paste input[name='itemUrl']": "urlChanged",
+      "change select[name='videoShape']" : "urlChanged",
+      "change input[name='opacity']" : "urlChanged",
+      "keyup input[name='opacity']" : "urlChanged",
+      "paste input[name='opacity']" : "urlChanged",
       "hidden": "hidden"
     },
     initialize: function() {
@@ -21,7 +25,7 @@ define(["vendor/amd/backbone", "./Templates", "common/Throttler"], function(Back
     },
     okClicked: function() {
       if (!this.$el.find(".ok").hasClass("disabled")) {
-        this.cb(this.src);
+    	this.cb(this.src, this.opacity, this.id);
         return this.$el.modal('hide');
       }
     },
@@ -33,6 +37,8 @@ define(["vendor/amd/backbone", "./Templates", "common/Throttler"], function(Back
     urlChanged: function(e) {
       if (e.which === 13) {
         this.src = this.$input.val();
+        this.id = this.item.id;
+        this.opacity = this.item.opacity;
         return this.okClicked();
       } else {
         return this.throttler.submit(this.loadItem, {
@@ -41,7 +47,13 @@ define(["vendor/amd/backbone", "./Templates", "common/Throttler"], function(Back
       }
     },
     loadItem: function() {
+      _this = this;
+      $.get("/xslides/getVideoUrl",{url:this.$input.val()},function(data){_this.item.src = data});
       this.item.src = this.$input.val();
+      this.item.id = this.$videoShape.val();
+      this.item.opacity = this.$opacity.val();
+      this.id = this.item.id;
+      this.opacity = this.item.opacity;
       return this.src = this.item.src;
     },
     _itemLoadError: function() {
@@ -59,7 +71,7 @@ define(["vendor/amd/backbone", "./Templates", "common/Throttler"], function(Back
       this.$el.modal("hide");
       this.item = this.$el.find(this.options.tag)[0];
       if (this.options.tag === "video") {
-        this.$el.find(".modal-body").prepend("<div class='alert alert-success'>Supports <strong>mp4, webm</strong>.<br/>Try out: http://clips.vorwaerts-gmbh.de/VfE_html5.mp4 <br/>or: http://media.w3.org/2010/05/sintel/trailer.mp4</div>");
+        this.$el.find(".modal-body").prepend("<div class='alert alert-success'>Supports <strong>mp4, webm</strong>.<br/>Try out: http://clips.vorwaerts-gmbh.de/VfE_html5.mp4 <br/>or: http://media.w3.org/2010/05/sintel/trailer.mp4</div><select name='videoShape'><option value='square'>Square</option><option value='circle'>Circle</option><option value='egg'>Egg</option><option value='tv'>Tv</option></select>");
       }
       if (!this.options.ignoreErrors) {
         this.item.onerror = function() {
@@ -70,6 +82,8 @@ define(["vendor/amd/backbone", "./Templates", "common/Throttler"], function(Back
         };
       }
       this.$input = this.$el.find("input[name='itemUrl']");
+      this.$videoShape = this.$el.find("select[name='videoShape']");
+      this.$opacity = this.$el.find("input[name='opacity']");
       return this.$el;
     },
     constructor: function ItemGrabber() {
