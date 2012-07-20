@@ -3,15 +3,16 @@ package com.team.xslides.domain;
 import java.util.Set;
 
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.ManyToMany;
-import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "Presentations")
@@ -36,10 +37,12 @@ public class Presentation {
     @Column(columnDefinition = "mediumtext", name = "JSON")
     private String json;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade(value = CascadeType.SAVE_UPDATE)
     private User author;
     
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(value = CascadeType.ALL)
     private Set<Tag> tags;
 
     public String getJson() {

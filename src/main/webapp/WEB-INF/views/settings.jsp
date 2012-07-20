@@ -47,7 +47,7 @@
     		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
     		<h3><spring:message code="label.newdisplayname"/></h3>
   		</div>
-  		<form method="POST" action="newName">
+  		<form style="margin: 0 0 0 0" method="POST" action="newName">
 	  		<div class="modal-body">
 	  			<h3 class="offset1"><spring:message code="text.currentname"/> ${user.displayname}</h3>
 	    		<label class="span3"><spring:message code="label.newdisplayname"/></label> 
@@ -72,7 +72,7 @@
     		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
     		<h3><spring:message code="label.newpassword"/></h3>
   		</div>
-  		<form method="POST" action="newPassword">
+  		<form style="margin: 0 0 0 0" method="POST" action="newPassword">
 	  		<div class="modal-body">
 	    		<label class="span3"><spring:message code="label.newpassword"/></label> 
 				<input id="newPassword" type="password" class="span3" placeholder="<spring:message code="input.newpassword"/>" name="newPassword"/>

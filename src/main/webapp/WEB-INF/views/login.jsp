@@ -30,7 +30,7 @@
     		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
     		<h3><spring:message code="label.passwordrecovery"/></h3>
   		</div>
-  		<form method="POST" action="forgotPassword">
+  		<form style="margin: 0 0 0 0" method="POST" action="forgotPassword">
 	  		<div class="modal-body">
 	    		<label class="span3"><spring:message code="label.email"/></label> 
 				<input id="email" type="text" class="span3" placeholder="<spring:message code="input.email"/>" name="email" />
