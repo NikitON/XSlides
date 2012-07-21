@@ -12,7 +12,6 @@ import com.team.xslides.domain.User;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     @Autowired
     private UserDAO userDAO;
     

@@ -22,10 +22,10 @@ public class Presentation {
     @GeneratedValue
     private Integer id;
 
-    @Column(name = "Title")
+    @Column(name = "Title", length = 120)
     private String title;
 
-    @Column(name = "Theme")
+    @Column(name = "Theme", length = 120)
     private String theme;
 
     @Column(columnDefinition = "mediumtext", name = "Description")

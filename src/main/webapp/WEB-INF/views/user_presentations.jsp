@@ -27,8 +27,8 @@
 					</h3>
 				</div>
 				<c:if test="${author.id == user.id}">
-					<div style="margin: 0 0 -20px 0" class="pull-right">
-						<form action="deletePresentation/${presentation.id}" method="POST">
+					<div class="pull-right">
+						<form style="margin: 0 0 0 0" action="deletePresentation/${presentation.id}" method="POST">
 							<button class="btn btn-danger"><i class="icon-trash icon-white"></i> <spring:message code="button.delete"/></button>
 						</form>
 					</div>
@@ -42,7 +42,10 @@
 					<td>
 						<h3>
 						<c:if test="${author.id == user.id}">
-							<a style="text-decoration:none" href="#"><span class="label label-info"><spring:message code="button.edit"/></span></a>
+							<c:url var="changeTitle" value="#changeTitle">
+					            <c:param name="id" value="${presentation.id}" />
+					        </c:url>
+							<a style="text-decoration:none" data-toggle="modal" href="${changeTitle}"><span class="label label-info"><spring:message code="button.edit"/></span></a>
 						</c:if>
 						Theme: ${presentation.theme}
 						</h3>
@@ -61,13 +64,36 @@
 						<a style="text-decoration:none" href="#"><span class="label label-info"><spring:message code="button.edit"/></span></a>
 					</c:if>
 					<c:forEach var="tag" items="${presentation.tags}" >
-						<a style="text-decoration:none" href="#"><span class="label label-warning">${tag.name}</span></a>
+						<a style="text-decoration:none" href="byTag/${tag.name}"><span class="label label-warning">${tag.name}</span></a>
 					</c:forEach>
 					</td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
+	</div>
+	<div class="modal fade hide" id="changeTitle">
+  		<div class="modal-header">
+    		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
+    		<h3><spring:message code="label.changetitle"/></h3>
+  		</div>
+  		<form style="margin: 0 0 0 0" method="POST" action="newTitle/${id}">
+	  		<div class="modal-body">
+	    		<label class="span3"><spring:message code="label.newtitle"/></label> 
+				<input id="title" type="text" class="span3" placeholder="<spring:message code="input.title"/>" name="title" />
+				<script type="text/javascript">
+					var titleCheck = new LiveValidation('title', {validMessage: 'Nice title!',  wait: 500 });
+					titleCheck.add(Validate.Presence);
+					titleCheck.add(Validate.Format, {pattern: /^[\w]+$/ } );
+					titleCheck.add(Validate.Length, {maximum: 120});
+				</script>
+	  		</div>
+			<div class="modal-footer">
+			    <button type="submit" class="btn btn-success">
+			    <i class="icon-ok icon-white"></i> <spring:message code="button.savechanges"/>
+			    </button>
+			</div>
+		</form>
 	</div>
 </body>
 </html>

@@ -49,4 +49,19 @@ public class PresentationServiceImpl implements PresentationService {
     public List<Presentation> getPresentationForQuery(String searchQuery) {
         return presentationDAO.getPresentationForQuery(searchQuery);
     }
+
+    @Transactional
+    public void setNewTitle(Integer id, String title) {
+        presentationDAO.setNewTitle(id, title);        
+    }
+
+    @Transactional
+    public void setNewTheme(Integer id, String theme) {
+        presentationDAO.setNewTheme(id, theme);
+    }
+
+    @Transactional
+    public void setNewDescription(Integer id, String description) {
+        presentationDAO.setNewDescription(id, description);
+    }
 }

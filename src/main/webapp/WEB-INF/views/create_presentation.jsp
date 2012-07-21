@@ -21,7 +21,7 @@
 									var titleCheck = new LiveValidation('title', {validMessage: 'Nice title!',  wait: 500 });
 									titleCheck.add(Validate.Presence);
 									titleCheck.add(Validate.Format, {pattern: /^[\w]+$/ } );
-									titleCheck.add(Validate.Length, {maximum: 40});
+									titleCheck.add(Validate.Length, {maximum: 120});
 								</script>
 					    	</div>
 					    </div>
@@ -29,6 +29,11 @@
 							<label class="control-label" for="theme"><spring:message code="label.theme"/></label>
 							<div class="controls"> 
 								<input id="theme" type="text" class="span3" placeholder="<spring:message code="input.theme"/>" name="theme" />
+								<script type="text/javascript">
+									var themeCheck = new LiveValidation('theme', {validMessage: 'Nice theme!',  wait: 500 });
+									themeCheck.add(Validate.Format, {pattern: /^[\w]+$/ } );
+									themeCheck.add(Validate.Length, {maximum: 120});
+								</script>
 					    	</div>
 					    </div>
 				    	<div class="control-group">

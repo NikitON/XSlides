@@ -43,7 +43,7 @@
 				<tr>
 					<td style="height: 25px">
 					<c:forEach var="tag" items="${presentation.tags}" >
-						<a style="text-decoration:none" href="#"><span class="label label-warning">${tag.name}</span></a>
+						<a style="text-decoration:none" href="byTag/${tag.name}"><span class="label label-warning">${tag.name}</span></a>
 					</c:forEach>
 					</td>
 				</tr>

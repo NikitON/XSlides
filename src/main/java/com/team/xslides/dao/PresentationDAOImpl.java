@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.team.xslides.domain.Presentation;
+import com.team.xslides.domain.User;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -121,8 +122,26 @@ public class PresentationDAOImpl implements PresentationDAO {
             return getSession().createQuery(query.toString()).list();
         }
     }
-    
+
     private Presentation getPresentationById(Integer id) {
         return (Presentation) getSession().load(Presentation.class, id);
+    }
+
+    public void setNewTitle(Integer id, String title) {
+        Presentation presentation = getPresentationById(id);
+        presentation.setTitle(title);
+        getSession().saveOrUpdate(presentation);
+    }
+
+    public void setNewTheme(Integer id, String theme) {
+        Presentation presentation = getPresentationById(id);
+        presentation.setTheme(theme);
+        getSession().saveOrUpdate(presentation);
+    }
+
+    public void setNewDescription(Integer id, String description) {
+        Presentation presentation = getPresentationById(id);
+        presentation.setDescription(description);
+        getSession().saveOrUpdate(presentation);
     }
 }

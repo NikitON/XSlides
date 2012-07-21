@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.team.xslides.domain.Presentation;
 import com.team.xslides.service.PresentationService;
+import com.team.xslides.service.TagService;
 import com.team.xslides.service.UserService;
 import com.team.xslides.domain.User;
 import com.team.xslides.domain.Tag;
@@ -29,6 +30,9 @@ public class PresentationController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TagService tagService;
 
     @RequestMapping(value = "/createPresentation", method = RequestMethod.POST)
     public ModelAndView createPresentation(HttpServletRequest request, HttpSession session) {
@@ -132,12 +136,35 @@ public class PresentationController {
     @RequestMapping(value = "/deletePresentation/{Id}", method = RequestMethod.POST)
     public ModelAndView deletePresentation(@PathVariable("Id") Integer id, HttpSession session) {
         User user;
-        if ((user = (User) session.getAttribute("user")) == null
-                        || !user.getId().equals(presentationService.getPresentation(id).getAuthor().getId())) {
+        if ((user = (User) session.getAttribute("user")) == null || !user.getId().equals(getAuthorId(id))) {
             return new ModelAndView("redirect:/accessDenied");
         } else {
             presentationService.removePresentation(id);
             return new ModelAndView("redirect:/userPresentations/" + user.getId());
         }
+    }
+
+    @RequestMapping(value = "/byTag/{Name}", method = RequestMethod.GET)
+    public ModelAndView byTag(@PathVariable("Name") String name, HttpSession session) {
+        session.setAttribute("presentationsList", tagService.getPresentations(name));
+        return new ModelAndView("redirect:/byTag");
+    }
+
+    @RequestMapping(value = "/byTag", method = RequestMethod.GET)
+    public ModelAndView byTag(HttpSession session) {
+        ModelAndView mv = new ModelAndView("search_result");
+        mv.addObject("presentationsList", session.getAttribute("presentationsList"));
+        session.removeAttribute("presentationsList");
+        return mv;
+    }
+
+    @RequestMapping(value = "/newTitle/{Id}", method = RequestMethod.POST)
+    public ModelAndView newTitle(@PathVariable("Id") Integer id, HttpServletRequest request) {
+        presentationService.setNewTitle(id, request.getParameter("title"));
+        return new ModelAndView("redirect:/userPresentations/" + getAuthorId(id));
+    }
+
+    private Integer getAuthorId(Integer id) {
+        return presentationService.getPresentation(id).getAuthor().getId();
     }
 }
