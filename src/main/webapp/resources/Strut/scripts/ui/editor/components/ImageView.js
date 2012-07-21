@@ -78,7 +78,7 @@ define(["./ComponentView"], function(ComponentView) {
       var $img,
         _this = this;
       ComponentView.prototype.render.call(this);
-      $img = $("<img src=" + (this.model.get('src')) + "></img>");
+      $img = $("<img src=" + (this.model.get('src')) + " style='"+(this.model.get("style"))+"'></img>");
       $img.load(function() {
         return _this._finishRender($img);
       });

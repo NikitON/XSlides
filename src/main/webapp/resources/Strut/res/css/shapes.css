@@ -1,0 +1,37 @@
+.circle {
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.parallelogram {
+    -webkit-transform: skew(20deg);
+       -moz-transform: skew(20deg);
+         -o-transform: skew(20deg);
+}
+
+.egg { 
+	display:block; 
+	-webkit-border-radius: 63px 63px 63px 63px / 108px 108px 72px 72px; 
+	border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; 
+	}
+	
+.tv { 
+	position: relative; 
+
+	margin: 20px 0; 
+ 
+	border-radius: 50% / 10%; 
+	color: white; 
+	text-align: center; 
+	text-indent: .1em; 
+	} 
+	
+.tv:before { 
+	content: ''; 
+	position: absolute; 
+	top: 10%; bottom: 10%; 
+	right: -5%; left: -5%; 
+	background: inherit; 
+	border-radius: 5% / 50%; 
+	} 

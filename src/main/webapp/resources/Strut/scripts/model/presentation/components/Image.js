@@ -11,6 +11,7 @@ define(["./Component", "common/FileUtils"], function(Component, FileUtils) {
       this.set("type", "ImageModel");
       src = this.get("src");
       this.set("imageType", FileUtils.imageType(src));
+      this.set("style",this.get('style'));
       this.on("change:src", this._updateCache, this);
       this.cachedImage = new Image();
       return this._updateCache();

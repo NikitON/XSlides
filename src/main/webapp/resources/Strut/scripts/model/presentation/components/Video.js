@@ -10,6 +10,9 @@ define(["./Component", "common/FileUtils"], function(Component, FileUtils) {
       Component.prototype.initialize.apply(this, arguments);
       this.set("type", "Video");
       videoType = FileUtils.type(FileUtils.extension(this.get('src')));
+      //alert(this.get('id'));
+      this.set("videoShape",this.get('id'));
+      this.set("style",this.get('style'));
       return this.set("videoType", videoType);
     },
     constructor: function Video() {

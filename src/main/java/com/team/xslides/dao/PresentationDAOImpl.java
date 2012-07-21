@@ -1,10 +1,10 @@
 package com.team.xslides.dao;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import com.team.xslides.domain.Presentation;
-import com.team.xslides.domain.User;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;

@@ -33,8 +33,8 @@ define(["./AbstractButtonBarView", "model/editor/button_bar/ButtonBarModel", "mo
         _this = this;
       activeSlide = this.deck.get("activeSlide");
       if (activeSlide != null) {
-        return this.options.pictureGrabber.show(function(src) {
-          return activeSlide.add(ComponentFactory.createImage(_this.model.itemConfig(src)));
+        return this.options.pictureGrabber.show(function(src, opacity) {
+          return activeSlide.add(ComponentFactory.createImage(_this.model.itemConfig(src, opacity)));
         });
       }
     },
@@ -55,9 +55,9 @@ define(["./AbstractButtonBarView", "model/editor/button_bar/ButtonBarModel", "mo
         _this = this;
       activeSlide = this.deck.get("activeSlide");
       if (activeSlide != null) {
-        return this.options.videoGrabber.show(function(src) {
+        return this.options.videoGrabber.show(function(src, opacity, id) {
           var video;
-          video = ComponentFactory.createVideo(_this.model.itemConfig(src));
+          video = ComponentFactory.createVideo(_this.model.itemConfig(src, opacity, id));
           return activeSlide.add(video);
         });
       }
