@@ -37,20 +37,19 @@ public class UserController {
         return mv;
     }
     
-    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.POST)
-    public ModelAndView removeUser(@PathVariable("userId") Integer id, HttpSession session) {
+    @RequestMapping(value = "/deleteUser/{Id}", method = RequestMethod.POST)
+    public ModelAndView deleteUser(@PathVariable("Id") Integer id, HttpSession session) {
         User user;
-        ModelAndView mv = new ModelAndView("redirect:/administration");
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {
-            mv.setViewName("redirect:/accessDenied");
+            return new ModelAndView("redirect:/accessDenied");
         } else {
             userService.removeUser(id);
+            return new ModelAndView("redirect:/administration");
         }
-        return mv;
     }
     
-    @RequestMapping(value = "/switchAdmin/{userId}", method = RequestMethod.POST)
-    public ModelAndView switchAdminRights(@PathVariable("userId") Integer id, HttpSession session) {
+    @RequestMapping(value = "/switchAdmin/{Id}", method = RequestMethod.POST)
+    public ModelAndView switchAdminRights(@PathVariable("Id") Integer id, HttpSession session) {
         User user;
         ModelAndView mv = new ModelAndView("redirect:/administration");
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {
@@ -63,8 +62,8 @@ public class UserController {
     
     private static final int RANDOM_PASSWORD_LENGTH = 10;
     
-    @RequestMapping(value = "/newPassword/{userId}", method = RequestMethod.POST)
-    public ModelAndView setNewPassword(@PathVariable("userId") Integer id, HttpSession session) {
+    @RequestMapping(value = "/newPassword/{Id}", method = RequestMethod.POST)
+    public ModelAndView setNewPassword(@PathVariable("Id") Integer id, HttpSession session) {
         User user;
         ModelAndView mv = new ModelAndView("redirect:/administration");
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin() || id.equals(user.getId())) {

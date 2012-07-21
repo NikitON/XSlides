@@ -1,10 +1,15 @@
 package com.team.xslides.domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +34,9 @@ public class User {
     
     @Column(name = "Admin")
     private Boolean admin;
+    
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Presentation> presentations;
 
     public Integer getId() {
         return id;
@@ -76,5 +84,13 @@ public class User {
 
     public void setAdmin(Boolean admin) {
         this.admin = admin;
+    }
+
+    public Set<Presentation> getPresentations() {
+        return presentations;
+    }
+
+    public void setPresentations(Set<Presentation> presentations) {
+        this.presentations = presentations;
     }
 }

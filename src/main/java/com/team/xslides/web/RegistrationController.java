@@ -47,7 +47,7 @@ public class RegistrationController {
                 mv.addObject("errorServer", true);
             } else {
                 userService.addUser(user);
-                mv.setViewName("registration_success");
+                mv.setViewName("redirect:/registrationSuccess");
             }
         }
         return mv;
@@ -71,5 +71,10 @@ public class RegistrationController {
     @RequestMapping("/confirmSuccess")
     public ModelAndView confirmSuccess() {
         return new ModelAndView("confirm_success");
+    }
+    
+    @RequestMapping("/registrationSuccess")
+    public ModelAndView registrationSuccess() {
+        return new ModelAndView("registration_success");
     }
 }

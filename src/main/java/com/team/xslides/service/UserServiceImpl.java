@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.*;
 
 import com.team.xslides.dao.UserDAO;
+import com.team.xslides.domain.Presentation;
 import com.team.xslides.domain.User;
 
 @Service
@@ -79,5 +80,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void setNewDisplayname(Integer id, String displayname) {
         userDAO.setNewDisplayname(id, displayname);
+    }
+
+    @Transactional
+    public List<Presentation> getUserPresentations(Integer id) {
+        return userDAO.getUserPresentations(id);
     }
 }

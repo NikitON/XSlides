@@ -2,86 +2,107 @@ package com.team.xslides.domain;
 
 import java.util.Set;
 
-
-
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 
 @Entity
 @Table(name = "Presentations")
 public class Presentation {
-	@Id
-	@Column(name = "Id")
-	@GeneratedValue
-	private Integer id;
+    @Id
+    @Column(name = "Id")
+    @GeneratedValue
+    private Integer id;
 
-	@Column(name = "Name")
-	private String name;
+    @Column(name = "Title")
+    private String title;
 
-	@Column(columnDefinition = "mediumtext", name = "Content")
-	private String content;
+    @Column(name = "Theme")
+    private String theme;
 
-	@Column(columnDefinition = "mediumtext", name = "JSON")
-	private String json;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private User author;
+    @Column(columnDefinition = "mediumtext", name = "Description")
+    private String description;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Tag> tags;
-	
-	public String getJson() {
-	    return json;
-	}
+    @Column(columnDefinition = "mediumtext", name = "Content")
+    private String content;
 
-	public void setJson(String json) {
-	    this.json = json;
-	}
+    @Column(columnDefinition = "mediumtext", name = "JSON")
+    private String json;
 
-	public Integer getId() {
-		return id;
-	}
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private User author;
+    
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Set<Tag> tags;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public String getJson() {
+        return json;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setJson(String json) {
+        this.json = json;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public String getTitle() {
+        return title;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public User getAuthor() { 
-		return author; 
-	}
-	 
+    public String getTheme() {
+        return theme;
+    }
 
-	public void setAuthor(User author) { 
-		this.author = author; 
-	}
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
 
-	public Set<Tag> getTags() { return tags; }
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setTags(Set<Tag> tags) { this.tags = tags; }
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
 }
