@@ -106,6 +106,11 @@ function program5(depth0,data) {
   stack1 = foundHelper || depth0.src;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "src", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\" style=\"";
+  foundHelper = helpers.style;
+  stack1 = foundHelper || depth0.style;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "style", { hash: {} }); }
   buffer += escapeExpression(stack1) + "\"></img>\n</div>\n</div>";
   return buffer;}
 
@@ -349,10 +354,11 @@ function program25(depth0,data) {
   stack1 = depth0;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, ".", { hash: {} }); }
-  buffer += escapeExpression(stack1) + ";\nif (interval >= 1000) {\n    setInterval(function() {\n        impress().next();\n    }, interval);\n}\n</script>\n";
+  buffer += escapeExpression(stack1) + ";\nif (interval >= 1000) {\n    setInterval(function() {\n        impress().next();\n    }, interval);\n}\n " +
+  		"</script>\n";
   return buffer;}
 
-  buffer += "<head>\n<meta charset=\"utf-8\" />\n<meta name=\"viewport\" content=\"width=1024\" />\n<meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n<title>Deck Title</title>\n\n<meta name=\"description\" content=\"TODO\" />\n<meta name=\"author\" content=\"TODO\" />\n\n<style>\n.componentContainer {\n    position: absolute;\n    -webkit-transform-origin: 0 0;\n    -moz-transform-origin: 0 0;\n    transform-origin: 0 0;\n}\n\n.bg {\n    width: 100%;\n    height: 100%;\n}\n</style>\n<link href=\"/xslides/resources/Strut/preview_export/css/main.css\" rel=\"stylesheet\" />\n<link href='preview_export/css/web-fonts.css' rel='stylesheet' type='text/css'>\n\n<link rel=\"shortcut icon\" href=\"favicon.png\" />\n<link rel=\"apple-touch-icon\" href=\"apple-touch-icon.png\" />\n</head>\n<body class=\"impress-not-supported\">\n\n<!-- This is a work around / hack to get the user's browser to download the fonts \n if they decide to save the presentation. -->\n<div style=\"visibility: hidden; width: 0px; height: 0px\">\n<img src=\"preview_export/css/Lato-Bold.woff\" />\n<img src=\"preview_export/css/HammersmithOne.woff\" />\n<img src=\"preview_export/css/Gorditas-Regular.woff\" />\n<img src=\"preview_export/css/FredokaOne-Regular.woff\" />\n<img src=\"preview_export/css/Ubuntu.woff\" />\n<img src=\"preview_export/css/Ubuntu-Bold.woff\" />\n<img src=\"preview_export/css/PressStart2P-Regular.woff\" />\n<img src=\"preview_export/css/Lato-BoldItalic.woff\" />\n<img src=\"preview_export/css/AbrilFatface-Regular.woff\" />\n<img src=\"preview_export/css/Lato-Regular.woff\" />\n</div>\n\n<div class=\"fallback-message\">\n    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>\n    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>\n</div>\n<div class=\"bg\" style=\"";
+  buffer += "<head>\n<meta charset=\"utf-8\" />\n<meta name=\"viewport\" content=\"width=1024\" />\n<meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n<link rel='stylesheet' href='/xslides/resources/Strut/res/css/shapes.css'></link>\n<title>Deck Title</title>\n\n<meta name=\"description\" content=\"TODO\" />\n<meta name=\"author\" content=\"TODO\" />\n\n<style>\n.componentContainer {\n    position: absolute;\n    -webkit-transform-origin: 0 0;\n    -moz-transform-origin: 0 0;\n    transform-origin: 0 0;\n}\n\n.bg {\n    width: 100%;\n    height: 100%;\n}\n</style>\n<link href=\"/xslides/resources/Strut/preview_export/css/main.css\" rel=\"stylesheet\" />\n<link href='preview_export/css/web-fonts.css' rel='stylesheet' type='text/css'>\n\n<link rel=\"shortcut icon\" href=\"favicon.png\" />\n<link rel=\"apple-touch-icon\" href=\"apple-touch-icon.png\" />\n</head>\n<body class=\"impress-not-supported\">\n\n<!-- This is a work around / hack to get the user's browser to download the fonts \n if they decide to save the presentation. -->\n<div style=\"visibility: hidden; width: 0px; height: 0px\">\n<img src=\"preview_export/css/Lato-Bold.woff\" />\n<img src=\"preview_export/css/HammersmithOne.woff\" />\n<img src=\"preview_export/css/Gorditas-Regular.woff\" />\n<img src=\"preview_export/css/FredokaOne-Regular.woff\" />\n<img src=\"preview_export/css/Ubuntu.woff\" />\n<img src=\"preview_export/css/Ubuntu-Bold.woff\" />\n<img src=\"preview_export/css/PressStart2P-Regular.woff\" />\n<img src=\"preview_export/css/Lato-BoldItalic.woff\" />\n<img src=\"preview_export/css/AbrilFatface-Regular.woff\" />\n<img src=\"preview_export/css/Lato-Regular.woff\" />\n</div>\n\n<div class=\"fallback-message\">\n    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>\n    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>\n</div>\n<div class=\"bg\" style=\"";
   foundHelper = helpers.background;
   stack1 = foundHelper || depth0.background;
   stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.styles);
@@ -386,7 +392,9 @@ function program25(depth0,data) {
   if(foundHelper && typeof stack1 === functionType) { stack1 = stack1.call(depth0, tmp1); }
   else { stack1 = blockHelperMissing.call(depth0, stack1, tmp1); }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n</div>\n<script type=\"text/javascript\" src=\"/xslides/resources/Strut/preview_export/scripts/impress.js\">\n</script>\n<script>\nif (!window.impressStarted) {\n    startImpress(document, window);\n    impress().init();   \n}\n</script>\n</body>";
+  buffer += "\n</div>\n" +
+  "<script type=\"text/javascript\" src=\"/xslides/resources/Strut/preview_export/scripts/impress.js\"></script>\n<script type=\"text/javascript\" src=\"/xslides/resources/Strut/preview_export/scripts/jquery.js\">\n</script>\n<script>\nif (!window.impressStarted) {\n    startImpress(document, window);\n    impress().init();   \n}\n</script>\n" +
+  "<script type=\"text/javascript\">\n$(document).ready(\nfunction(){\n$('video').each(\nfunction(index){_this=this;\n$.get('/xslides/getVideoUrl',{url:$(this).attr('src')},function(data){$(_this).attr('src',data);});}); });\n</script>	\n</body>";
   return buffer;}
 
 ),
@@ -698,7 +706,7 @@ function program17(depth0,data) {
   stack1 = depth0;
   stack1 = self.invokePartial(partials.ComponentContainer, 'ComponentContainer', stack1, helpers, partials);;
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n<video controls>\n	<source src=\"";
+  buffer += "\n<video src=\"";
   foundHelper = helpers.src;
   stack1 = foundHelper || depth0.src;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
@@ -708,7 +716,17 @@ function program17(depth0,data) {
   stack1 = foundHelper || depth0.videoType;
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "videoType", { hash: {} }); }
-  buffer += escapeExpression(stack1) + "\"></source>\n</video>\n</div>\n</div>";
+  buffer += escapeExpression(stack1) + "\" class=\"";
+  foundHelper = helpers.videoShape;
+  stack1 = foundHelper || depth0.videoShape;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "videoShape", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\" style=\"";
+  foundHelper = helpers.style;
+  stack1 = foundHelper || depth0.style;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "style", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\" controls>\n</video>\n</div>\n</div>";
   return buffer;}
 
 )

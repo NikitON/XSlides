@@ -2,10 +2,12 @@ package com.team.xslides.web;
 
 import java.util.Map;
 
+
 import java.util.Set;
 import java.util.HashSet;
 
 
+import java.io.UnsupportedEncodingException;
 import java.lang.*;
 
 import javax.servlet.http.Cookie;
@@ -119,5 +121,15 @@ public class PresentationController {
 	//map.put("width", presentation.getWidth());
 	//map.put("height", presentation.getHeight());
 	return "viewPresentation";
+    }
+    
+    @RequestMapping(value = "/getVideoUrl")
+    public ModelAndView getYoutubeVideoDirectLink( HttpServletRequest request ) throws UnsupportedEncodingException
+    {
+	ModelAndView mv = new ModelAndView("message");
+	String url = request.getParameter("url");
+	Youtube video = new Youtube( url );
+	mv.addObject("message",video.getLinks().values().toArray()[1]);
+	return mv;
     }
 }

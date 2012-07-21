@@ -77,9 +77,11 @@ define(["vendor/amd/backbone"], function(Backbone) {
     		*
     */
 
-    itemConfig: function(src) {
-      return {
-        src: src
+    itemConfig: function(src, opacity, id) {
+    	return {
+        src: src,
+        id : id,
+        style: "opacity:" + opacity + ";"
       };
     },
     /**
