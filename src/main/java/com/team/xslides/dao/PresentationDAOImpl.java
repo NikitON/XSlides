@@ -2,9 +2,12 @@ package com.team.xslides.dao;
 
 import java.io.IOException;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.team.xslides.domain.Presentation;
+import com.team.xslides.domain.Tag;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -39,6 +42,11 @@ public class PresentationDAOImpl implements PresentationDAO {
     public void removePresentation(Integer id) {
         Presentation presentation = getPresentationById(id);
         if (null != presentation) {
+            for (Tag tag : presentation.getTags()) {
+                if (tag.getPresentations().size() == 1) {
+                    getSession().delete(tag);
+                }
+            }
             getSession().delete(presentation);
         }
     }
@@ -130,18 +138,30 @@ public class PresentationDAOImpl implements PresentationDAO {
     public void setNewTitle(Integer id, String title) {
         Presentation presentation = getPresentationById(id);
         presentation.setTitle(title);
-        getSession().saveOrUpdate(presentation);
     }
 
     public void setNewTheme(Integer id, String theme) {
         Presentation presentation = getPresentationById(id);
         presentation.setTheme(theme);
-        getSession().saveOrUpdate(presentation);
     }
 
     public void setNewDescription(Integer id, String description) {
         Presentation presentation = getPresentationById(id);
         presentation.setDescription(description);
-        getSession().saveOrUpdate(presentation);
+    }
+
+    public void clearTags(Integer id) {
+        Presentation presentation = getPresentationById(id);
+        for (Tag tag : presentation.getTags()) {
+            if (tag.getPresentations().size() == 1) {
+                getSession().delete(tag);
+            }
+        }
+        presentation.getTags().clear();
+    }
+
+    public void setNewTags(Integer id, Set<Tag> tags) {
+        Presentation presentation = getPresentationById(id);
+        presentation.getTags().addAll(tags);
     }
 }

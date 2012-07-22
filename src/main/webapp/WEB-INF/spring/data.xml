@@ -36,9 +36,10 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="${jdbc.driverClassName}" 
-		p:url="${jdbc.databaseurl}"
 		p:username="${jdbc.username}" 
-		p:password="${jdbc.password}" />
+		p:password="${jdbc.password}">
+		<property name="url" value="jdbc:mysql://localhost:3306/xslides?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
+	</bean>
 
 	<!-- Настройки фабрики сессий Хибернейта -->
 	<bean id="sessionFactory"

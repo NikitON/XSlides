@@ -3,6 +3,8 @@ package com.team.xslides.web;
 import java.util.Map;
 
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -40,19 +42,20 @@ public class PresentationController {
     @RequestMapping(value = "/createPresentation", method = RequestMethod.POST)
     public ModelAndView createPresentation(HttpServletRequest request, HttpSession session) {
         if (session.getAttribute("user") == null) {
-            ModelAndView mv = new ModelAndView("redirect:/accessDenied");
-            return mv;
+            return new ModelAndView("redirect:/accessDenied");
         }
-        Set<Tag> tags = new HashSet<Tag>();
         Presentation presentation = new Presentation();
         presentation.setAuthor(((User) session.getAttribute("user")));
         presentation.setTitle(request.getParameter("title"));
+        presentation.setContent("");
+        presentation.setJson("");
         presentation.setTheme(request.getParameter("theme"));
         presentation.setDescription(request.getParameter("description"));
-        String[] tagsStrings = request.getParameter("tags").split(" ");
-        for (int i = 0; i < tagsStrings.length; i++) {
+        List<String> names = Arrays.asList(request.getParameter("tags").split(","));
+        Set<Tag> tags = new HashSet<Tag>();
+        for (String name : names) {
             Tag tag = new Tag();
-            tag.setName(tagsStrings[i]);
+            tag.setName(name);
             tags.add(tag);
         }
         presentation.setTags(tags);
@@ -161,9 +164,51 @@ public class PresentationController {
         return mv;
     }
 
-    @RequestMapping(value = "/newTitle/{Id}", method = RequestMethod.POST)
-    public ModelAndView newTitle(@PathVariable("Id") Integer id, HttpServletRequest request) {
+    @RequestMapping(value = "/newTitle", method = RequestMethod.POST)
+    public ModelAndView newTitle(HttpServletRequest request, HttpSession session) {
+        Integer id = Integer.parseInt(request.getParameter("titleId"));
+        if (!getAuthorId(id).equals(((User)session.getAttribute("user")).getId())) {
+            return new ModelAndView("redirect:/accessDenied");
+        }
         presentationService.setNewTitle(id, request.getParameter("title"));
+        return new ModelAndView("redirect:/userPresentations/" + getAuthorId(id));
+    }
+    
+    @RequestMapping(value = "/newTheme", method = RequestMethod.POST)
+    public ModelAndView newTheme(HttpServletRequest request, HttpSession session) {
+        Integer id = Integer.parseInt(request.getParameter("themeId"));
+        if (!getAuthorId(id).equals(((User)session.getAttribute("user")).getId())) {
+            return new ModelAndView("redirect:/accessDenied");
+        }
+        presentationService.setNewTheme(id, request.getParameter("theme"));
+        return new ModelAndView("redirect:/userPresentations/" + getAuthorId(id));
+    }
+    
+    @RequestMapping(value = "/newDescription", method = RequestMethod.POST)
+    public ModelAndView newDescription(HttpServletRequest request, HttpSession session) {
+        Integer id = Integer.parseInt(request.getParameter("descriptionId"));
+        if (!getAuthorId(id).equals(((User)session.getAttribute("user")).getId())) {
+            return new ModelAndView("redirect:/accessDenied");
+        }
+        presentationService.setNewDescription(id, request.getParameter("description"));
+        return new ModelAndView("redirect:/userPresentations/" + getAuthorId(id));
+    }
+    
+    @RequestMapping(value = "/newTags", method = RequestMethod.POST)
+    public ModelAndView newTags(HttpServletRequest request, HttpSession session) {
+        Integer id = Integer.parseInt(request.getParameter("tagsId"));
+        if (!getAuthorId(id).equals(((User)session.getAttribute("user")).getId())) {
+            return new ModelAndView("redirect:/accessDenied");
+        }
+        List<String> names = Arrays.asList(request.getParameter("tags").split(","));
+        Set<Tag> tags = new HashSet<Tag>();
+        for (String name : names) {
+            Tag tag = new Tag();
+            tag.setName(name);
+            tags.add(tag);
+        }
+        presentationService.clearTags(id);
+        presentationService.setNewTags(id, tags);
         return new ModelAndView("redirect:/userPresentations/" + getAuthorId(id));
     }
 
@@ -172,8 +217,7 @@ public class PresentationController {
     }
 
     @RequestMapping(value = "/getVideoUrl")
-    public ModelAndView getYoutubeVideoDirectLink( HttpServletRequest request ) throws UnsupportedEncodingException
-    {
+    public ModelAndView getYoutubeVideoDirectLink( HttpServletRequest request ) throws UnsupportedEncodingException {
 	ModelAndView mv = new ModelAndView("message");
 	String url = request.getParameter("url");
 	Youtube video = new Youtube( url );

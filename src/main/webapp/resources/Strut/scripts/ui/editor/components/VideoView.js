@@ -24,7 +24,7 @@ define(["./ComponentView"], function(ComponentView) {
       //$video = $("<video preload='metadata' src='" + (this.model.get("src")) + "' type='" + (this.model.get("videoType")) + "' controls/>");     
       //alert( this.model.get("videoShape") );
       $video = $("<video class='"+(this.model.get("videoShape"))+"' id='' style='"+(this.model.get("style"))+"' preload='metadata' src='' type='" + (this.model.get("videoType")) + "' controls/>");     
-      $.get("/xslides/getVideoUrl",{url:(this.model.get("src"))},function(data){$video.attr("src",data);});
+      $.get("/XSlides/getVideoUrl",{url:(this.model.get("src"))},function(data){$video.attr("src",data);});
       $video.bind("loadedmetadata", function() {
         return _this._finishRender($video);
       });

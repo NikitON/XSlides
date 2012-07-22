@@ -44,7 +44,7 @@
 						</c:if>
 						<c:if test="${user != null}">
 						<li <c:if test="${creating}">class="active"</c:if>>
-						<a href="createPresentation" target="_blank"> <i class="icon-file icon-white"></i><spring:message code="menu.createpresentation"/></a>
+						<a href="createPresentation"> <i class="icon-file icon-white"></i><spring:message code="menu.createpresentation"/></a>
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -63,7 +63,6 @@
 							</ul>
 						</li>
 						</c:if>
-						<li>
 						<li>
 						<div style="padding: 0 0 0 5px">
 						<a href="${englishLocaleUrl}"><img src="<c:url value="/resources/img/eng.png"/>" alt="eng"/></a><br>

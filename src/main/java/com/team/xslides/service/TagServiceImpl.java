@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.team.xslides.dao.TagDAO;
 import com.team.xslides.domain.Presentation;
+import com.team.xslides.domain.Tag;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -17,5 +18,10 @@ public class TagServiceImpl implements TagService {
     @Transactional
     public List<Presentation> getPresentations(String name) {
         return tagDAO.getPresentations(name);
+    }
+    
+    @Transactional
+    public List<Tag> getTagsList() {
+        return tagDAO.getTagsList();
     }
 }

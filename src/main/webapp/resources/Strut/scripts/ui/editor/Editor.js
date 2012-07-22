@@ -36,8 +36,8 @@ define(["vendor/amd/backbone", "./SlideEditor", "./transition_editor/TransitionE
     },
     openRecent: function(e) {},
     save: function(e) {
-      $.post("http://localhost:8080/xslides/saveCurrentPresentation",{id:editableId,content:ImpressRenderer.render(this.model.attributes),json:JSON.stringify(this.model.toJSON(false, true))}, function(data){alert(data);});
-      //window.open("http://localhost:8080/xslides/saveCurrentPresentation?id="+editableId+"&content="+encodeURIComponent(ImpressRenderer.render(this.model.attributes))+"&json="+JSON.stringify(this.model.toJSON(false, true)), "displayWindow", "width=400,height=300,status=no,toolbar=no,menubar=no,location=no");
+      $.post("http://localhost:8080/XSlides/saveCurrentPresentation",{id:editableId,content:ImpressRenderer.render(this.model.attributes),json:JSON.stringify(this.model.toJSON(false, true))}, function(data){alert(data);});
+      //window.open("http://localhost:8080/XSlides/saveCurrentPresentation?id="+editableId+"&content="+encodeURIComponent(ImpressRenderer.render(this.model.attributes))+"&json="+JSON.stringify(this.model.toJSON(false, true)), "displayWindow", "width=400,height=300,status=no,toolbar=no,menubar=no,location=no");
     },
     saveAs: function(e) {
       var _this = this;
@@ -90,7 +90,7 @@ define(["vendor/amd/backbone", "./SlideEditor", "./transition_editor/TransitionE
       return this.$el.trigger("preview");
     },
     exportJSON: function(e) {
-        //window.open("http://localhost:8080/xslides/saveCurrentPresentation?content="+JSON.stringify(this.model.toJSON(false, true)));
+        //window.open("http://localhost:8080/XSlides/saveCurrentPresentation?content="+JSON.stringify(this.model.toJSON(false, true)));
     },
     importJSON: function(e) {
       var _this = this;

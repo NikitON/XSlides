@@ -25,7 +25,7 @@ define(["vendor/amd/backbone", "./Templates", "common/Throttler"], function(Back
     },
     okClicked: function() {
       if (!this.$el.find(".ok").hasClass("disabled")) {
-    	this.cb(this.src, this.opacity, this.id);
+    	this.cb(this.src, parseInt(this.opacity)/100, this.id);
         return this.$el.modal('hide');
       }
     },
@@ -48,7 +48,7 @@ define(["vendor/amd/backbone", "./Templates", "common/Throttler"], function(Back
     },
     loadItem: function() {
       _this = this;
-      $.get("/xslides/getVideoUrl",{url:this.$input.val()},function(data){_this.item.src = data});
+      $.get("/XSlides/getVideoUrl",{url:this.$input.val()},function(data){_this.item.src = data});
       this.item.src = this.$input.val();
       this.item.id = this.$videoShape.val();
       this.item.opacity = this.$opacity.val();

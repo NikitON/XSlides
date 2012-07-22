@@ -1,11 +1,12 @@
 package com.team.xslides.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.team.xslides.domain.Presentation;
+import com.team.xslides.domain.Tag;
 
 public interface PresentationService {
-
     public void addPresentation(Presentation presentation);
 
     public void removePresentation(Integer id);
@@ -25,4 +26,8 @@ public interface PresentationService {
     public void setNewTheme(Integer id, String theme);
     
     public void setNewDescription(Integer id, String description);
+    
+    public void clearTags(Integer id);
+    
+    public void setNewTags(Integer id, Set<Tag> tags);
 }

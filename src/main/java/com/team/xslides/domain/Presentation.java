@@ -42,7 +42,7 @@ public class Presentation {
     private User author;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade(value = CascadeType.ALL)
+    @Cascade(value = CascadeType.SAVE_UPDATE)
     private Set<Tag> tags;
 
     public String getJson() {

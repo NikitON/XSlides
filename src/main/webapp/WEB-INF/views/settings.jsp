@@ -53,10 +53,9 @@
 	    		<label class="span3"><spring:message code="label.newdisplayname"/></label> 
 				<input id="displayname" type="text" class="span3" placeholder="<spring:message code="input.newdisplayname"/>" name="displayname" />
 				<script type="text/javascript">
-					var displaynameCheck = new LiveValidation('displayname', {validMessage: 'Nice name!',  wait: 500 });
-					displaynameCheck.add(Validate.Presence);
-					displaynameCheck.add(Validate.Format, {pattern: /^[\w]+$/ } );
-					displaynameCheck.add(Validate.Length, {maximum: 40});
+					var displaynameCheck = new LiveValidation('displayname', {validMessage: '<spring:message code="valid.name"/>',  wait: 500 });
+					displaynameCheck.add(Validate.Presence, {failureMessage: "<spring:message code="invalid.cantbeempty"/>"});
+					displaynameCheck.add(Validate.Length, {tooLongMessage: '<spring:message code="invalid.length60"/>', maximum: 60});
 				</script>
 				<label class="span3"><spring:message code="label.password"/></label> 
 				<input id="password" type="password" class="span3" placeholder="<spring:message code="input.password"/>" name="password" />
@@ -78,16 +77,16 @@
 	    		<label class="span3"><spring:message code="label.newpassword"/></label> 
 				<input id="newPassword" type="password" class="span3" placeholder="<spring:message code="input.newpassword"/>" name="newPassword"/>
 				<script type="text/javascript">
-					var passwordLength = new LiveValidation('newPassword', { validMessage: 'Nice password!', wait: 500 });
-					passwordLength.add(Validate.Presence);
-					passwordLength.add(Validate.Length, { minimum: 7 });
-					passwordLength.add(Validate.Length, { maximum: 40});
+					var passwordLength = new LiveValidation('newPassword', { validMessage: '<spring:message code="valid.password"/>', wait: 500 });
+					passwordLength.add(Validate.Presence, {failureMessage: "<spring:message code="invalid.cantbeempty"/>"});
+					passwordLength.add(Validate.Length, {tooShortMessage: '<spring:message code="invalid.length7"/>', minimum: 7 });
+					passwordLength.add(Validate.Length, {tooLongMessage: '<spring:message code="invalid.length60"/>', maximum: 60});
 				</script>
 				<label class="span3"><spring:message code="label.confirmnewpassword"/></label>
 				<input id="confirm" type="password" class="span3" placeholder="<spring:message code="input.confirmnewpassword"/>" />
 				<script type="text/javascript">
-					var passwordConfirm = new LiveValidation('confirm', { validMessage: 'Passwords are equal.', wait: 500 });
-					passwordConfirm.add(Validate.Confirmation, { match: 'newPassword' });		          
+					var passwordConfirm = new LiveValidation('confirm', { validMessage: '<spring:message code="valid.equalpasswords"/>', wait: 500 });
+					passwordConfirm.add(Validate.Confirmation, {failureMessage: '<spring:message code="invalid.doesnotmatch"/>', match: 'newPassword' });		          
 				</script>
 				<label class="span3"><spring:message code="label.currentpassword"/></label> 
 				<input id="password" type="password" class="span3" placeholder="<spring:message code="input.currentpassword"/>" name="password" />

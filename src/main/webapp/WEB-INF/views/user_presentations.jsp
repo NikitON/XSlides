@@ -3,6 +3,9 @@
 <html>
 <head>
 <%@ include file="static/resources.resource" %>
+<script type="text/javascript" src="<c:url value="/resources/js/livevalidation.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.tagsinput.js"/>"></script>
+<link href="<c:url value="/resources/styles/jquery.tagsinput.css"/>" rel="stylesheet"/>
 <title><spring:message code="title.userpresentations"/></title>
 </head>
 <body>
@@ -23,6 +26,11 @@
 				<th colspan="2">
 				<div class="pull-left">
 					<h3>
+						<c:if test="${author.id == user.id}">
+							<a class="edittitle" style="text-decoration:none" data-id="${presentation.id}" href="#changeTitle">
+								<span class="label label-info"><spring:message code="button.edit"/></span>
+							</a>
+						</c:if>
 						<a href="viewPresentation/${presentation.id}" target="_blank">${presentation.title}</a>
 					</h3>
 				</div>
@@ -42,16 +50,17 @@
 					<td>
 						<h3>
 						<c:if test="${author.id == user.id}">
-							<c:url var="changeTitle" value="#changeTitle">
-					            <c:param name="id" value="${presentation.id}" />
-					        </c:url>
-							<a style="text-decoration:none" data-toggle="modal" href="${changeTitle}"><span class="label label-info"><spring:message code="button.edit"/></span></a>
+							<a class="edittheme" style="text-decoration:none" data-id="${presentation.id}" href="#changeTheme">
+								<span class="label label-info"><spring:message code="button.edit"/></span>
+							</a>
 						</c:if>
 						Theme: ${presentation.theme}
 						</h3>
 						<h3>
 						<c:if test="${author.id == user.id}">
-							<a style="text-decoration:none" href="#"><span class="label label-info"><spring:message code="button.edit"/></span></a>
+							<a class="editdescription" style="text-decoration:none" data-id="${presentation.id}" href="#changeDescription">
+								<span class="label label-info"><spring:message code="button.edit"/></span>
+							</a>
 						</c:if>
 						Description:
 						</h3>
@@ -61,7 +70,9 @@
 				<tr>
 					<td style="height: 25px">
 					<c:if test="${author.id == user.id}">
-						<a style="text-decoration:none" href="#"><span class="label label-info"><spring:message code="button.edit"/></span></a>
+						<a class="edittags" style="text-decoration:none" data-id="${presentation.id}" href="#changeTags">
+							<span class="label label-info"><spring:message code="button.edit"/></span>
+						</a>
 					</c:if>
 					<c:forEach var="tag" items="${presentation.tags}" >
 						<a style="text-decoration:none" href="byTag/${tag.name}"><span class="label label-warning">${tag.name}</span></a>
@@ -77,15 +88,15 @@
     		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
     		<h3><spring:message code="label.changetitle"/></h3>
   		</div>
-  		<form style="margin: 0 0 0 0" method="POST" action="newTitle/${id}">
+  		<form style="margin: 0 0 0 0" method="POST" action="newTitle">
 	  		<div class="modal-body">
+	  			<input type="hidden" name="titleId" id="titleId"/>
 	    		<label class="span3"><spring:message code="label.newtitle"/></label> 
 				<input id="title" type="text" class="span3" placeholder="<spring:message code="input.title"/>" name="title" />
 				<script type="text/javascript">
-					var titleCheck = new LiveValidation('title', {validMessage: 'Nice title!',  wait: 500 });
-					titleCheck.add(Validate.Presence);
-					titleCheck.add(Validate.Format, {pattern: /^[\w]+$/ } );
-					titleCheck.add(Validate.Length, {maximum: 120});
+					var titleCheck = new LiveValidation('title', {validMessage: '<spring:message code="valid.title"/>',  wait: 500 });
+					titleCheck.add(Validate.Presence, {failureMessage: "<spring:message code="invalid.cantbeempty"/>"});
+					titleCheck.add(Validate.Length, {tooLongMessage: '<spring:message code="invalid.length120"/>', maximum: 120});
 				</script>
 	  		</div>
 			<div class="modal-footer">
@@ -95,5 +106,88 @@
 			</div>
 		</form>
 	</div>
+	<div class="modal fade hide" id="changeTheme">
+  		<div class="modal-header">
+    		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
+    		<h3><spring:message code="label.changetheme"/></h3>
+  		</div>
+  		<form style="margin: 0 0 0 0" method="POST" action="newTheme">
+	  		<div class="modal-body">
+	  			<input type="hidden" name="themeId" id="themeId"/>
+	    		<label class="span3"><spring:message code="label.newtheme"/></label> 
+				<input id="theme" type="text" class="span3" placeholder="<spring:message code="input.theme"/>" name="theme" />
+				<script type="text/javascript">
+					var themeCheck = new LiveValidation('theme', { validMessage: ' ', wait: 500 });
+					themeCheck.add(Validate.Length, {tooLongMessage: '<spring:message code="invalid.length120"/>', maximum: 120});
+				</script>
+	  		</div>
+			<div class="modal-footer">
+			    <button type="submit" class="btn btn-success">
+			    <i class="icon-ok icon-white"></i> <spring:message code="button.savechanges"/>
+			    </button>
+			</div>
+		</form>
+	</div>
+	<div class="modal fade hide" id="changeDescription">
+  		<div class="modal-header">
+    		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
+    		<h3><spring:message code="label.changedescription"/></h3>
+  		</div>
+  		<form style="margin: 0 0 0 0" method="POST" action="newDescription">
+	  		<div class="modal-body">
+	  			<input type="hidden" name="descriptionId" id="descriptionId"/>
+	    		<label class="span3"><spring:message code="label.newdescription"/></label> 
+				<textarea id="description" class="span5" rows="6" placeholder="<spring:message code="input.description"/>" name="description"></textarea>
+	  		</div>
+			<div class="modal-footer">
+			    <button type="submit" class="btn btn-success">
+			    <i class="icon-ok icon-white"></i> <spring:message code="button.savechanges"/>
+			    </button>
+			</div>
+		</form>
+	</div>
+	<div class="modal fade hide" id="changeTags">
+  		<div class="modal-header">
+    		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
+    		<h3><spring:message code="label.changetags"/></h3>
+  		</div>
+  		<form style="margin: 0 0 0 0" method="POST" action="newTags">
+	  		<div class="modal-body">
+	  			<input type="hidden" name="tagsId" id="tagsId"/>
+	    		<label class="span3"><spring:message code="label.newtags"/></label> 
+				<input id="tags" type="text" name="tags" placeholder="mytxt"/>
+				<script type="text/javascript">
+					var tagCheck = new LiveValidation('tags', {validMessage: ' ',  wait: 500 });
+					tagCheck.add(Validate.Presence, {failureMessage: "<spring:message code="invalid.cantbeempty"/>"});
+					$('#tags').tagsInput();
+				</script>
+	  		</div>
+			<div class="modal-footer">
+			    <button type="submit" class="btn btn-success">
+			    <i class="icon-ok icon-white"></i> <spring:message code="button.savechanges"/>
+			    </button>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    $(".edittitle").click(function() {
+	        $("#titleId").val($(this).data('id'));
+	        $('#changeTitle').modal('show');
+		});
+	    $(".edittheme").click(function() {
+	        $("#themeId").val($(this).data('id'));
+	        $('#changeTheme').modal('show');
+		});
+	    $(".editdescription").click(function() {
+	        $("#descriptionId").val($(this).data('id'));
+	        $('#changeDescription').modal('show');
+		});
+	    $(".edittags").click(function() {
+	        $("#tagsId").val($(this).data('id'));
+	        $('#changeTags').modal('show');
+		});
+	});
+   </script>
 </body>
 </html>

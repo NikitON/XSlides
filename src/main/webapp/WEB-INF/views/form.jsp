@@ -7,7 +7,7 @@
 $(document).ready(function(){
 $("#test").click(function(){
 	$.get(
-		"/xslides/saveCurrentPresentation",
+		"/XSlides/saveCurrentPresentation",
 		{content:"text12342424"},
 		function(data){
 			alert("OK");
@@ -18,7 +18,7 @@ $("#test").click(function(){
 </script>
 </head>
 <body>
-<form method="post" action="/xslides/saveCurrentPresentation">
+<form method="post" action="/XSlides/saveCurrentPresentation">
 <input name="content" />
 <input type="submit" value="Submit" />
 </form>
