@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.useUnicode">true</property>
+		<property name="hibernate.connection.characterEncoding">UTF-8</property>
+		<property name="hibernate.connection.characterSetResults">UTF-8</property>
+		<property name="hibernate.connection.charSet">UTF8</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hbm2ddl.auto">update</property>
+		<mapping class="com.team.xslides.domain.User" />
+		<mapping class="com.team.xslides.domain.Presentation" />
+		<mapping class="com.team.xslides.domain.Tag" />
+		<mapping class="com.team.xslides.domain.Template" />
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,31 @@
+package com.team.xslides.dao;
+
+import java.util.List;
+
+import com.team.xslides.domain.Presentation;
+
+public interface PresentationDAO {
+    public void addPresentation(Presentation presentation);
+
+    public void removePresentation(Integer id);
+
+    public String getContent(Integer id);
+
+    public Presentation getPresentation(Integer id);
+
+    public String getPresentationJson(Integer id);
+    
+    public List<Presentation> getPresentationsList();
+    
+    public List<Presentation> getPresentationForQuery(String searchQuery);
+    
+    public void setNewTitle(Integer id, String title);
+
+    public void setNewTheme(Integer id, String theme);
+    
+    public void setNewDescription(Integer id, String description);
+    
+    public String getTemplate(Integer id);
+    
+    public void setTemplate(Integer presentationID, Integer templateID);
+}
