@@ -67,7 +67,7 @@ function program5(depth0,data) {
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += ";\n-moz-transform: ";
-  foundHelper = helpers.scale;
+  /*foundHelper = helpers.scale;
   stack1 = foundHelper || depth0.scale;
   stack2 = helpers['if'];
   tmp1 = self.program(3, program3, data);
@@ -75,8 +75,8 @@ function program5(depth0,data) {
   tmp1.fn = tmp1;
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += ";\ntransform: ";
+  if(stack1 || stack1 === 0) { buffer += stack1; }*/
+  buffer += stack1 + ";\ntransform: ";
   foundHelper = helpers.scale;
   stack1 = foundHelper || depth0.scale;
   stack2 = helpers['if'];
@@ -358,7 +358,7 @@ function program25(depth0,data) {
   		"</script>\n";
   return buffer;}
 
-  buffer += "<head>\n<meta charset=\"utf-8\" />\n<meta name=\"viewport\" content=\"width=1024\" />\n<meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n<link rel='stylesheet' href='/XSlides/resources/Strut/res/css/shapes.css'></link>\n<title>Deck Title</title>\n\n<meta name=\"description\" content=\"TODO\" />\n<meta name=\"author\" content=\"TODO\" />\n\n<style>\n.componentContainer {\n    position: absolute;\n    -webkit-transform-origin: 0 0;\n    -moz-transform-origin: 0 0;\n    transform-origin: 0 0;\n}\n\n.bg {\n    width: 100%;\n    height: 100%;\n}\n</style>\n<link href=\"/XSlides/resources/Strut/preview_export/css/main.css\" rel=\"stylesheet\" />\n<link href='preview_export/css/web-fonts.css' rel='stylesheet' type='text/css'>\n\n<link rel=\"shortcut icon\" href=\"favicon.png\" />\n<link rel=\"apple-touch-icon\" href=\"apple-touch-icon.png\" />\n</head>\n<body class=\"impress-not-supported\">\n\n<!-- This is a work around / hack to get the user's browser to download the fonts \n if they decide to save the presentation. -->\n<div style=\"visibility: hidden; width: 0px; height: 0px\">\n<img src=\"preview_export/css/Lato-Bold.woff\" />\n<img src=\"preview_export/css/HammersmithOne.woff\" />\n<img src=\"preview_export/css/Gorditas-Regular.woff\" />\n<img src=\"preview_export/css/FredokaOne-Regular.woff\" />\n<img src=\"preview_export/css/Ubuntu.woff\" />\n<img src=\"preview_export/css/Ubuntu-Bold.woff\" />\n<img src=\"preview_export/css/PressStart2P-Regular.woff\" />\n<img src=\"preview_export/css/Lato-BoldItalic.woff\" />\n<img src=\"preview_export/css/AbrilFatface-Regular.woff\" />\n<img src=\"preview_export/css/Lato-Regular.woff\" />\n</div>\n\n<div class=\"fallback-message\">\n    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>\n    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>\n</div>\n<div class=\"bg\" style=\"";
+  buffer += "<head>\n<meta charset=\"utf-8\" />\n<meta name=\"viewport\" content=\"width=1024\" />\n<meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n<link rel='stylesheet' href='/XSlides/resources/Strut/res/css/shapes.css'></link>\n<title>Deck Title</title>\n\n<meta name=\"description\" content=\"TODO\" />\n<meta name=\"author\" content=\"TODO\" />\n\n<style>\n.componentContainer {\n    position: absolute;\n    -webkit-transform-origin: 0 0;\n    -moz-transform-origin: 0 0;\n    transform-origin: 0 0;\n}\n\n.bg {\n    width: 100%;\n    height: 100%;\n}\n</style>\n<link href=\"/XSlides/resources/Strut/preview_export/css/main.css\" rel=\"stylesheet\" />\n<link href='preview_export/css/web-fonts.css' rel='stylesheet' type='text/css'>\n\n<link rel=\"shortcut icon\" href=\"favicon.png\" />\n<link rel=\"apple-touch-icon\" href=\"apple-touch-icon.png\" />\n</head>\n<body class=\"impress-not-supported\"> <a href='#' class='btn' style='position:static; z-index:10000;' onclick='alert(\"ok\");if(autoSlideShow == true){autoSlideShow = false}else{autoSlideShow = true;}'>Slide show</a> \n\n<!-- This is a work around / hack to get the user's browser to download the fonts \n if they decide to save the presentation. -->\n<div style=\"visibility: hidden; width: 0px; height: 0px\">\n<img src=\"preview_export/css/Lato-Bold.woff\" />\n<img src=\"preview_export/css/HammersmithOne.woff\" />\n<img src=\"preview_export/css/Gorditas-Regular.woff\" />\n<img src=\"preview_export/css/FredokaOne-Regular.woff\" />\n<img src=\"preview_export/css/Ubuntu.woff\" />\n<img src=\"preview_export/css/Ubuntu-Bold.woff\" />\n<img src=\"preview_export/css/PressStart2P-Regular.woff\" />\n<img src=\"preview_export/css/Lato-BoldItalic.woff\" />\n<img src=\"preview_export/css/AbrilFatface-Regular.woff\" />\n<img src=\"preview_export/css/Lato-Regular.woff\" />\n</div>\n\n<div class=\"fallback-message\">\n    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>\n    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>\n</div>\n<div class=\"bg\" style=\"";
   foundHelper = helpers.background;
   stack1 = foundHelper || depth0.background;
   stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.styles);
@@ -394,7 +394,7 @@ function program25(depth0,data) {
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</div>\n" +
   "<script type=\"text/javascript\" src=\"/XSlides/resources/Strut/preview_export/scripts/impress.js\"></script>\n<script type=\"text/javascript\" src=\"/XSlides/resources/Strut/preview_export/scripts/jquery.js\">\n</script>\n<script>\nif (!window.impressStarted) {\n    startImpress(document, window);\n    impress().init();   \n}\n</script>\n" +
-  "<script type=\"text/javascript\">\n$(document).ready(\nfunction(){\n$('video').each(\nfunction(index){_this=this;\n$.get('/XSlides/getVideoUrl',{url:$(this).attr('src')},function(data){$(_this).attr('src',data);});}); });\n</script>	\n</body>";
+  "<script type=\"text/javascript\">\n$(document).ready(\nfunction(){setInterval( slideShow, 4000 ); var autoSlideShow = false;function slideShow(){if( autoSlideShow == true )impress().next();}\n$('video').each(\nfunction(index){_this=this;\n$.get('/XSlides/getVideoUrl',{url:$(this).attr('src')},function(data){$(_this).attr('src',data);});}); });\n</script>	\n</body>";
   return buffer;}
 
 ),

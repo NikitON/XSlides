@@ -10,14 +10,25 @@ define(["common/Calcium", "./SlideCollection", "./Slide", "model/common_applicat
     return this;
   };
   NewSlideAction.prototype = {
-    "do": function() {
+    "do": function(template) {
       var slides;
       slides = this.deck.get("slides");
       if (!(this.slide != null)) {
-        this.slide = new Slide({
+        /*this.slide = new Slide({
           num: slides.length
-        });
+        });*/
+//    	  alert("{"+
+//    	          "num:" + slides.length  + template
+//    	          +"}");
+    	  this.slide = new Slide({
+          num : slides.length,
+          components : eval(template)
+    	  });
       }
+      //alert(this.slide.num);
+      //this.slide.components = [eval('('+template+')')];
+      //alert(this.slide.components);
+      //alert(JSON.stringify(this.slide));
       slides.add(this.slide);
       return this.slide;
     },
@@ -55,10 +66,10 @@ define(["common/Calcium", "./SlideCollection", "./Slide", "model/common_applicat
       slides.on("reset", this._slidesReset, this);
       return this._lastSelected = null;
     },
-    newSlide: function() {
+    newSlide: function(template) {
       var action, slide;
       action = new NewSlideAction(this);
-      slide = action["do"]();
+      slide = action["do"](template);
       this.undoHistory.push(action);
       return slide;
     },

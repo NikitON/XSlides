@@ -14,12 +14,12 @@ import com.team.xslides.domain.Tag;
 public class TagServiceImpl implements TagService {
     @Autowired
     private TagDAO tagDAO;
-    
+
     @Transactional
     public List<Presentation> getPresentations(String name) {
         return tagDAO.getPresentations(name);
     }
-    
+
     @Transactional
     public List<Tag> getTagsList() {
         return tagDAO.getTagsList();

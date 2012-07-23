@@ -7,6 +7,6 @@ import com.team.xslides.domain.Tag;
 
 public interface TagService {
     public List<Tag> getTagsList();
-    
+
     public List<Presentation> getPresentations(String name);
 }

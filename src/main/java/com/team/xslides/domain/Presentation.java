@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.ManyToMany;
 import javax.persistence.FetchType;
@@ -40,10 +41,22 @@ public class Presentation {
     @ManyToOne(fetch = FetchType.EAGER)
     @Cascade(value = CascadeType.SAVE_UPDATE)
     private User author;
-    
+
     @ManyToMany(fetch = FetchType.EAGER)
     @Cascade(value = CascadeType.SAVE_UPDATE)
     private Set<Tag> tags;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @Cascade(value = CascadeType.SAVE_UPDATE)
+    private Template template;
+
+    public Template getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(Template template) {
+        this.template = template;
+    }
 
     public String getJson() {
         return json;

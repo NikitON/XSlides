@@ -57,9 +57,6 @@
 								<li><a href="userPresentations/${user.id}">
 								<i class="icon-list"></i> <spring:message code="menu.mypresentations"/>
 								</a></li>
-								<li><a href="favorites">
-								<i class="icon-star"></i> <spring:message code="menu.favorites"/>
-								</a></li>
 							</ul>
 						</li>
 						</c:if>

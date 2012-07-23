@@ -22,21 +22,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "Displayname", nullable = false,  length = 60)
+    @Column(name = "Displayname", nullable = false, length = 60)
     private String displayname;
-    
+
     @Column(name = "Email", nullable = false, unique = true, length = 60)
     private String email;
 
     @Column(name = "Password", nullable = false, length = 60)
     private String password;
-    
+
     @Column(name = "Confirmed")
     private Boolean confirmed;
-    
+
     @Column(name = "Admin")
     private Boolean admin;
-    
+
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     @Cascade(value = CascadeType.ALL)
     private Set<Presentation> presentations;

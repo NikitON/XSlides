@@ -1,14 +1,13 @@
 package com.team.xslides.web;
 
 import java.util.Map;
-
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.team.xslides.domain.Presentation;
 import com.team.xslides.service.PresentationService;
 import com.team.xslides.service.TagService;
+import com.team.xslides.service.TemplateService;
 import com.team.xslides.service.UserService;
 import com.team.xslides.domain.User;
 import com.team.xslides.domain.Tag;
@@ -29,7 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PresentationController {
-
     @Autowired
     private PresentationService presentationService;
 
@@ -38,6 +37,9 @@ public class PresentationController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private TemplateService templateService;
 
     @RequestMapping(value = "/createPresentation", method = RequestMethod.POST)
     public ModelAndView createPresentation(HttpServletRequest request, HttpSession session) {
@@ -60,7 +62,11 @@ public class PresentationController {
         }
         presentation.setTags(tags);
         session.setAttribute("currentPresentation", presentation);
+        
+        Integer templateID = Integer.parseInt(request.getParameter("template"));
+        presentation.setTemplate(templateService.getTemplateById(templateID));
         presentationService.addPresentation(presentation);
+        //presentationService.setTemplate(presentation.getId(), Integer.parseInt(request.getParameter("template")));
         ModelAndView mv = new ModelAndView("editor");
         mv.addObject("id", presentation.getId());
         return mv;
@@ -75,7 +81,7 @@ public class PresentationController {
     }
 
     @RequestMapping(value = "/showcurrent")
-    public String show(HttpSession session) {
+    public String show() {
         return "index";
     }
 
@@ -95,8 +101,6 @@ public class PresentationController {
         }
         presentation.setContent(request.getParameter("content"));
         presentation.setJson(request.getParameter("json"));
-        // session.removeAttribute("currentPresentation");
-        // session.setAttribute("currentPresentation", presentation);
         presentationService.addPresentation(presentation);
         mv.addObject("message", "Save ok");
         return mv;
@@ -104,21 +108,19 @@ public class PresentationController {
 
     @RequestMapping(value = "/viewPresentation/{presentationId}")
     public String viewPresentation(@PathVariable("presentationId") String presentationId, Map<String, Object> map) {
-        Integer id = Integer.parseInt(presentationId);
-        // Presentation presentation = presentationService.getPresentation(id);
-        map.put("html", presentationService.getContent(id));
-        // map.put("width", presentation.getWidth());
-        // map.put("height", presentation.getHeight());
-        return "viewPresentation";
+        try {
+            Integer id = Integer.parseInt(presentationId);
+            map.put("html", presentationService.getContent(id));
+            return "viewPresentation";
+        } catch(NumberFormatException exception) {
+            return "viewPresentation";
+        }
     }
 
     @RequestMapping(value = "/getPresentationJSON/{presentationId}")
     public String getPresentationJSON(@PathVariable("presentationId") String presentationId, Map<String, Object> map) {
         Integer id = Integer.parseInt(presentationId);
-        // Presentation presentation = presentationService.getPresentation(id);
         map.put("html", presentationService.getPresentationJson(id));
-        // map.put("width", presentation.getWidth());
-        // map.put("height", presentation.getHeight());
         return "viewPresentation";
     }
 
@@ -150,17 +152,11 @@ public class PresentationController {
         }
     }
 
-    @RequestMapping(value = "/byTag/{Name}", method = RequestMethod.GET)
-    public ModelAndView byTag(@PathVariable("Name") String name, HttpSession session) {
-        session.setAttribute("presentationsList", tagService.getPresentations(name));
-        return new ModelAndView("redirect:/byTag");
-    }
-
     @RequestMapping(value = "/byTag", method = RequestMethod.GET)
-    public ModelAndView byTag(HttpSession session) {
+    public ModelAndView byTag(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
         ModelAndView mv = new ModelAndView("search_result");
-        mv.addObject("presentationsList", session.getAttribute("presentationsList"));
-        session.removeAttribute("presentationsList");
+        String name = (URLDecoder.decode(request.getParameter("tagName"), "UTF-8"));
+        mv.addObject("presentationsList", tagService.getPresentations(name));
         return mv;
     }
 
@@ -223,5 +219,12 @@ public class PresentationController {
 	Youtube video = new Youtube( url );
 	mv.addObject("message",video.getLinks().values().toArray()[1]);
 	return mv;
+    }
+    
+    @RequestMapping(value = "/getPresentationTemplate/{Id}", method = RequestMethod.GET)
+    public ModelAndView getPresentationTemplate(@PathVariable("Id") Integer id, HttpSession session) {
+        ModelAndView mv = new ModelAndView("message");
+        mv.addObject("message", presentationService.getTemplate(id));
+        return mv;
     }
 }

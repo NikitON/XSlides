@@ -15,17 +15,17 @@ import com.team.xslides.domain.Tag;
 public class TagDAOImpl implements TagDAO {
     @Autowired
     private SessionFactory sessionFactory;
-    
+
     @SuppressWarnings("unchecked")
     public List<Tag> getTagsList() {
         return getSession().createQuery("from Tag").list();
     }
-    
+
     public List<Presentation> getPresentations(String name) {
         Tag tag = (Tag) getSession().load(Tag.class, name);
         return new ArrayList<Presentation>(tag.getPresentations());
     }
-    
+
     private Session getSession() {
         return sessionFactory.getCurrentSession();
     }

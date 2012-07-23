@@ -25,16 +25,7 @@ public class EmailService {
             email = new HtmlEmail();
             setDefaults();
             email.setSubject("XSlides registration");
-            email.setHtmlMsg("<h3>" + user.getDisplayname() + "</h3>" +
-                          "<h4>Welcome and thank you for registering at XSlides!</h4>" +
-                          "<h4>Please follow this link to confirm your e-mail:</h4>" +
-                          "<a href=http://localhost:8080/XSlides/confirm/" + link + ">Confirm e-mail</a>" +
-                          "<h4>If you don't understand what we are talking about, just ignore this message.</h4>" +
-                          "<h4>===================================================</h4>" +
-                          "<h4>Добро пожаловать на XSlides! Спасибо, что зарегистрировались на нашем сервисе.</h4>" +
-                          "<h4>Пожалуйста, пройдите по ссылке для подтверждения e-mail:</h4>" +
-                          "<a href=http://localhost:8080/XSlides/confirm/" + link + ">Подтвердить e-mail</a>" +
-                          "<h4>Если вы не понимаете, о чем речь, то просто проигнорируйте это сообщение.</h4>");
+            email.setHtmlMsg(getConfirmHtml(user.getDisplayname(), link));
             email.addTo(user.getEmail());
             email.send();
         } catch (EmailException exception) {
@@ -48,19 +39,40 @@ public class EmailService {
             email = new HtmlEmail();
             setDefaults();
             email.setSubject("XSlides New password");
-            email.setHtmlMsg("<h3>" + user.getDisplayname() + " " + "</h3>" +
-                          "<h4>This is your new password:</h4>" +
-                          "<h3>" + newPassword + "</h3>" +
-                          "<h4>Use it to login. Further you can change it at your settings page.</h4>" +
-                          "<h4>===================================================</h4>" +
-                          "<h4>Это ваш новый пароль:</h4>" +
-                          "<h3>" + newPassword + "</h3>" +
-                          "<h4>Используйте его, чтобы войти в систему. В дальнейшем вы можете его изменить в настройках профиля.</h4>");
+            email.setHtmlMsg(getNewPasswordHtml(user.getDisplayname(), newPassword));
             email.addTo(user.getEmail());
             email.send();
         } catch (EmailException exception) {
             return false;
         }
         return true;
+    }
+    
+    private static final String CONFIRM_TEMPLATE = "<h3>%1$s</h3>" +
+                    "<h4>Welcome and thank you for registering at XSlides!</h4>" +
+                    "<h4>Please follow this link to confirm your e-mail:</h4>" +
+                    "<a href='http://localhost:8080/XSlides/confirm/%2$s'>Confirm e-mail</a>" +
+                    "<h4>If you don't understand what we are talking about, just ignore this message.</h4>" +
+                    "<h4>===================================================</h4>" +
+                    "<h4>Добро пожаловать на XSlides! Спасибо, что зарегистрировались на нашем сервисе.</h4>" +
+                    "<h4>Пожалуйста, пройдите по ссылке для подтверждения e-mail:</h4>" +
+                    "<a href='http://localhost:8080/XSlides/confirm/%2$s'>Подтвердить e-mail</a>" +
+                    "<h4>Если вы не понимаете, о чем речь, то просто проигнорируйте это сообщение.</h4>";
+    
+    private static final String NEW_PASSWORD_TEMPLATE = "<h3>%1$s</h3>" +
+                    "<h4>This is your new password:</h4>" +
+                    "<h3>%2$s</h3>" +
+                    "<h4>Use it to login. Further you can change it at your settings page.</h4>" +
+                    "<h4>===================================================</h4>" +
+                    "<h4>Это ваш новый пароль:</h4>" +
+                    "<h3>%2$s</h3>" +
+                    "<h4>Используйте его, чтобы войти в систему. В дальнейшем вы можете его изменить в настройках профиля.</h4>";
+    
+    private String getConfirmHtml(String name, String link) {
+        return String.format(CONFIRM_TEMPLATE, name, link);
+    }
+    
+    private String getNewPasswordHtml(String name, String newPassword) {
+        return String.format(NEW_PASSWORD_TEMPLATE, name, newPassword);
     }
 }

@@ -2,12 +2,12 @@ package com.team.xslides.dao;
 
 import java.io.IOException;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.team.xslides.domain.Presentation;
 import com.team.xslides.domain.Tag;
+import com.team.xslides.domain.Template;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -31,7 +31,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class PresentationDAOImpl implements PresentationDAO {
-
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -163,5 +162,16 @@ public class PresentationDAOImpl implements PresentationDAO {
     public void setNewTags(Integer id, Set<Tag> tags) {
         Presentation presentation = getPresentationById(id);
         presentation.getTags().addAll(tags);
+    }
+
+    public String getTemplate(Integer presentationID) {
+        Presentation presentation = getPresentationById(presentationID);
+        return presentation.getTemplate().getContent();
+    }
+
+    public void setTemplate(Integer presentationID, Integer templateID) {
+        Presentation presentation = getPresentationById(presentationID);
+        Template template = (Template) getSession().load(Template.class, templateID);
+        presentation.setTemplate(template);
     }
 }

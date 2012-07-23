@@ -14,10 +14,10 @@ import com.team.xslides.domain.User;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDAO;
-    
+
     @Autowired
     private HashService hashService;
-    
+
     @Transactional
     public void addUser(User user) {
         user.setPassword(hashService.getHash(user.getPassword()));
@@ -30,17 +30,17 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsersList() {
         return userDAO.getUsersList();
     }
-    
+
     @Transactional
     public void removeUser(Integer id) {
         userDAO.removeUser(id);
     }
-    
+
     @Transactional
     public boolean hasUserWithEmail(String email) {
         return userDAO.hasUserWithEmail(email);
     }
-    
+
     @Transactional
     public User getUser(String email, String password) {
         return userDAO.getUser(email, hashService.getHash(password));
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     public void switchAdminStatus(Integer id) {
         userDAO.switchAdminStatus(id);
     }
-    
+
     @Transactional
     public void switchConfirmedStatus(Integer id) {
         userDAO.switchConfirmedStatus(id);
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
     public void setNewPassword(Integer id, String password) {
         userDAO.setNewPassword(id, hashService.getHash(password));
     }
-    
+
     @Transactional
     public User getUser(Integer id) {
         return userDAO.getUser(id);

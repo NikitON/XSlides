@@ -9,6 +9,16 @@
 <body>
 	<div class="container">
 		<%@ include file="static/menu.resource" %>
+		<script type="text/javascript">
+			function bytag(val) {
+				var frm=document.mylink;
+				frm.tagName.value = encodeURIComponent(val);
+				frm.submit();
+			}
+		</script>
+		<form name="mylink" method="GET" action="byTag">
+			<input type="hidden" name="tagName">
+		</form>
 		<table class="table table-bordered">
 			<tbody>
 			<c:if test="${empty presentationsList}">
@@ -29,7 +39,9 @@
 				</div>
 				</th>
 				<tr>
-					<td rowspan="2" style="width: 25%"><a href="viewPresentation/${presentation.id}" target="_blank">First slide</a></td>
+					<td rowspan="2" style="width: 20%">
+					<iframe width="100%" src="http://localhost:8080/XSlides/viewPresentation/${presentation.id}"></iframe>
+					</td>
 					<td>
 						<h3>
 						Theme: ${presentation.theme}
@@ -43,7 +55,7 @@
 				<tr>
 					<td style="height: 25px">
 					<c:forEach var="tag" items="${presentation.tags}" >
-						<a style="text-decoration:none" href="byTag/${tag.name}"><span class="label label-warning">${tag.name}</span></a>
+						<a style="text-decoration:none" href="#" onclick="bytag('${tag.name}')"><span class="label label-warning">${tag.name}</span></a>
 					</c:forEach>
 					</td>
 				</tr>

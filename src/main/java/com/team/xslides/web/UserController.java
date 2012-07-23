@@ -19,24 +19,26 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
     @Autowired
     private UserService userService;
-        
+
     @Autowired
     private EmailService emailService;
-        
+
     @RequestMapping(value = "/administration", method = RequestMethod.GET)
     public ModelAndView administration(HttpSession session) {
         User user;
         ModelAndView mv = new ModelAndView("administration");
         if ((user = (User) session.getAttribute("user")) == null || !user.getAdmin()) {
             mv.setViewName("redirect:/accessDenied");
+            mv.addObject("sent", session.getAttribute("sent"));
         } else {
-            mv.addObject("errorServer",session.getAttribute("errorServer"));
+            mv.addObject("errorServer", session.getAttribute("errorServer"));
             mv.addObject("userList", userService.getUsersList());
         }
         session.removeAttribute("errorServer");
+        session.removeAttribute("sent");
         return mv;
     }
-    
+
     @RequestMapping(value = "/deleteUser/{Id}", method = RequestMethod.POST)
     public ModelAndView deleteUser(@PathVariable("Id") Integer id, HttpSession session) {
         User user;
@@ -47,7 +49,7 @@ public class UserController {
             return new ModelAndView("redirect:/administration");
         }
     }
-    
+
     @RequestMapping(value = "/switchAdmin/{Id}", method = RequestMethod.POST)
     public ModelAndView switchAdminRights(@PathVariable("Id") Integer id, HttpSession session) {
         User user;
@@ -59,9 +61,9 @@ public class UserController {
         }
         return mv;
     }
-    
+
     private static final int RANDOM_PASSWORD_LENGTH = 10;
-    
+
     @RequestMapping(value = "/newPassword/{Id}", method = RequestMethod.POST)
     public ModelAndView setNewPassword(@PathVariable("Id") Integer id, HttpSession session) {
         User user;
@@ -70,15 +72,16 @@ public class UserController {
             mv.setViewName("redirect:/accessDenied");
         } else {
             String newPassword = RandomStringUtils.randomAlphanumeric(RANDOM_PASSWORD_LENGTH);
-            if (!emailService.sendNewPassowrd(userService.getUser(id),newPassword)) {
+            if (!emailService.sendNewPassowrd(userService.getUser(id), newPassword)) {
                 session.setAttribute("errorServer", true);
             } else {
+                session.setAttribute("sent", true);
                 userService.setNewPassword(id, newPassword);
             }
         }
         return mv;
     }
-    
+
     @RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
     public ModelAndView forgot(HttpServletRequest request) {
         User user = userService.getUser(request.getParameter("email"));

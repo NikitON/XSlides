@@ -9,23 +9,34 @@
 <body>
 	<div class="container">
 		<%@ include file="static/menu.resource" %>
+		<h1 style="margin-bottom: -40px"><spring:message code="text.welcome"/></h1>
 		<div class="row">
-			<div style="margin-top: 80px" class="span5">
+			<div id="bigButtons" style="margin-top: 80px" class="span5">
 				<c:if test="${user == null}">
-					<button class="homebtn btn btn-success span3 offset1"><spring:message code="menu.login"/></button>
-					<button class="homebtn btn btn-success span3 offset1"><spring:message code="menu.login"/></button>
-					<button class="homebtn btn btn-success span3 offset1"><spring:message code="menu.registration"/></button>
+					<a href="login"><button class="homebtn btn btn-success span3 offset1"><spring:message code="menu.login"/></button></a>
+					<a href="registration"><button class="homebtn btn btn-success span3 offset1"><spring:message code="menu.registration"/></button></a>
+					<a href="about"><button class="homebtn btn btn-success span3 offset1"><spring:message code="menu.about"/></button></a>
 				</c:if>
 				<c:if test="${user != null}">
-					<button class="homebtn btn btn-success span3 offset1"><spring:message code="button.create"/></button>
-					<button class="homebtn btn btn-success span3 offset1"><spring:message code="button.create"/></button>
-					<button class="homebtn btn btn-success span3 offset1"><spring:message code="menu.mypresentations"/></button>
+					<a href="createPresentation"><button class="homebtn btn btn-success span3 offset1"><spring:message code="button.create"/></button></a>
+					<a href="userPresentations/${user.id}"><button class="homebtn btn btn-success span3 offset1"><spring:message code="menu.mypresentations"/></button></a>
+					<a href="about"><button class="homebtn btn btn-success span3 offset1"><spring:message code="menu.about"/></button></a>
 				</c:if>
 			</div>
-			<div style="height:590px; position:relative;" class="span7" id="tagCloudContainer">
+			<script type="text/javascript">
+				function bytag(val) {
+					var frm=document.mylink;
+					frm.tagName.value = encodeURIComponent(val);
+					frm.submit();
+				}
+			</script>
+			<form name="mylink" method="GET" action="byTag">
+				<input type="hidden" name="tagName">
+			</form>
+			<div style="height:565px; position:relative;" class="span7" id="tagCloudContainer">
 			 	<canvas id="tagCloud">
 		 			<c:forEach var="tag" items="${tagsList}">
-			 			<a href="byTag/${tag.name}">${tag.name}</a>
+			 			<a href="#" onclick="bytag('${tag.name}')">${tag.name}</a>
 			 		</c:forEach>
 			 	</canvas>
 			</div>
@@ -34,7 +45,7 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		if(!$('#tagCloud').tagcanvas({
-			textFont: 'Broadway',
+			textFont: 'Segoe Script',
 	    	textColour : '#005700',
 	    	textHeight: 60,
 	    	outlineThickness : 1,

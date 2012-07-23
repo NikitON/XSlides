@@ -17,7 +17,12 @@ define(["./AbstractButtonBarView", "model/editor/button_bar/ButtonBarModel", "mo
       return value;
     },
     createSlide: function() {
-      return this.deck.newSlide();
+      //var template = "";
+      var template;
+      _this = this;
+      $.get("/XSlides/getPresentationTemplate/"+editableId, function(data){_this.deck.newSlide(data)});
+      //return this.deck.newSlide(template);
+      return;
     },
     textBox: function() {
       var activeSlide, textBox;

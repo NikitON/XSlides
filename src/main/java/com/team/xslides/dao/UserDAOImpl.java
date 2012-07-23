@@ -2,7 +2,7 @@ package com.team.xslides.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.xslides.domain.Presentation;
+import com.team.xslides.domain.Tag;
 import com.team.xslides.domain.User;
 
 @Repository
@@ -34,23 +35,43 @@ public class UserDAOImpl implements UserDAO {
     public void removeUser(Integer id) {
         User user = getUserById(id);
         if (user != null) {
+            Set<Presentation> presentations = user.getPresentations();
+            for (Presentation presentation : presentations) {
+                for (Tag tag : presentation.getTags()) {
+                    if (tag.getPresentations().size() == presentationsWithTag(presentations, tag)) {
+                        getSession().delete(tag);
+                    }
+                }
+                getSession().delete(presentation);
+            }
             getSession().delete(user);
         }
     }
-    
+
+    private int presentationsWithTag(Set<Presentation> presentations, Tag tag) {
+        int number = 0;
+        for (Presentation presentation : presentations) {
+            if (presentation.getTags().contains(tag)) {
+                number++;
+            }
+        }
+        return number;
+    }
+
     public boolean hasUserWithEmail(String email) {
         Query query = getSession().createQuery("from User u where u.email = :requestEmail");
         query.setParameter("requestEmail", email);
         return !query.list().isEmpty();
     }
-    
+
     @SuppressWarnings("unchecked")
-    public User getUser(String email, String password){
-    	Query query = getSession().createQuery("from User u where u.email = :requestEmail and u.password = :requestPassword");
+    public User getUser(String email, String password) {
+        Query query = getSession().createQuery(
+                        "from User u where u.email = :requestEmail and u.password = :requestPassword");
         query.setParameter("requestEmail", email);
         query.setParameter("requestPassword", password);
         List<User> list;
-        if((list = query.list()).isEmpty()) {
+        if ((list = query.list()).isEmpty()) {
             return null;
         }
         return list.get(0);
@@ -78,18 +99,18 @@ public class UserDAOImpl implements UserDAO {
         user.setPassword(password);
         getSession().saveOrUpdate(user);
     }
-    
+
     @SuppressWarnings("unchecked")
     public User getUser(Integer id) {
         Query query = getSession().createQuery("from User u where u.id = :requestId");
         query.setParameter("requestId", id);
         List<User> list;
-        if((list = query.list()).isEmpty()) {
+        if ((list = query.list()).isEmpty()) {
             return null;
         }
         return list.get(0);
     }
-    
+
     private User getUserById(Integer id) {
         return (User) getSession().load(User.class, id);
     }
@@ -99,7 +120,7 @@ public class UserDAOImpl implements UserDAO {
         Query query = getSession().createQuery("from User u where u.email = :requestEmail");
         query.setParameter("requestEmail", email);
         List<User> list;
-        if((list = query.list()).isEmpty()) {
+        if ((list = query.list()).isEmpty()) {
             return null;
         }
         return list.get(0);

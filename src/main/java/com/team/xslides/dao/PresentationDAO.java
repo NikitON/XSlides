@@ -16,18 +16,22 @@ public interface PresentationDAO {
     public Presentation getPresentation(Integer id);
 
     public String getPresentationJson(Integer id);
-    
+
     public List<Presentation> getPresentationsList();
-    
+
     public List<Presentation> getPresentationForQuery(String searchQuery);
-    
+
     public void setNewTitle(Integer id, String title);
 
     public void setNewTheme(Integer id, String theme);
-    
+
     public void setNewDescription(Integer id, String description);
-    
+
     public void clearTags(Integer id);
-    
+
     public void setNewTags(Integer id, Set<Tag> tags);
+
+    public String getTemplate(Integer id);
+
+    public void setTemplate(Integer presentationID, Integer templateID);
 }

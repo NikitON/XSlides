@@ -17,6 +17,16 @@
 		<c:if test="${author.id != user.id}">
 			<h2><spring:message code="text.presentationsby"/> ${author.displayname}</h2>
 		</c:if>
+		<script type="text/javascript">
+			function bytag(val) {
+				var frm=document.mylink;
+				frm.tagName.value = encodeURIComponent(val);
+				frm.submit();
+			}
+		</script>
+		<form name="mylink" method="GET" action="byTag">
+			<input type="hidden" name="tagName">
+		</form>
 		<table class="table table-bordered">
 			<tbody>
 			<c:if test="${empty presentationsList}">
@@ -36,17 +46,19 @@
 				</div>
 				<c:if test="${author.id == user.id}">
 					<div class="pull-right">
-						<form style="margin: 0 0 0 0" action="deletePresentation/${presentation.id}" method="POST">
+						<form action="deletePresentation/${presentation.id}" method="POST">
 							<button class="btn btn-danger"><i class="icon-trash icon-white"></i> <spring:message code="button.delete"/></button>
 						</form>
 					</div>
 					<div style="padding: 0 5px 0 0" class="pull-right">
-						<a class="btn btn-success" href="http://localhost:8080/XSlides/resources/Strut/index.html?id=${presentation.id}" target="_blank"><i class="icon-pencil icon-white"></i> <spring:message code="button.edit"/></a>
+						<a class="btn btn-success" href="http://localhost:8080/XSlides/resources/Strut/index.html?id=${presentation.id}"><i class="icon-pencil icon-white"></i> <spring:message code="button.edit"/></a>
 					</div>
 				</c:if>
 				</th>
 				<tr>
-					<td rowspan="2" style="width: 25%"><a href="viewPresentation/${presentation.id}" target="_blank">First slide</a></td>
+					<td rowspan="2" style="width: 20%">
+					<iframe width="100%" src="http://localhost:8080/XSlides/viewPresentation/${presentation.id}"></iframe>
+					</td>
 					<td>
 						<h3>
 						<c:if test="${author.id == user.id}">
@@ -75,7 +87,7 @@
 						</a>
 					</c:if>
 					<c:forEach var="tag" items="${presentation.tags}" >
-						<a style="text-decoration:none" href="byTag/${tag.name}"><span class="label label-warning">${tag.name}</span></a>
+						<a style="text-decoration:none" href="#" onclick="bytag('${tag.name}')"><span class="label label-warning">${tag.name}</span></a>
 					</c:forEach>
 					</td>
 				</tr>
@@ -88,7 +100,7 @@
     		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
     		<h3><spring:message code="label.changetitle"/></h3>
   		</div>
-  		<form style="margin: 0 0 0 0" method="POST" action="newTitle">
+  		<form method="POST" action="newTitle">
 	  		<div class="modal-body">
 	  			<input type="hidden" name="titleId" id="titleId"/>
 	    		<label class="span3"><spring:message code="label.newtitle"/></label> 
@@ -111,7 +123,7 @@
     		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
     		<h3><spring:message code="label.changetheme"/></h3>
   		</div>
-  		<form style="margin: 0 0 0 0" method="POST" action="newTheme">
+  		<form method="POST" action="newTheme">
 	  		<div class="modal-body">
 	  			<input type="hidden" name="themeId" id="themeId"/>
 	    		<label class="span3"><spring:message code="label.newtheme"/></label> 
@@ -133,7 +145,7 @@
     		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
     		<h3><spring:message code="label.changedescription"/></h3>
   		</div>
-  		<form style="margin: 0 0 0 0" method="POST" action="newDescription">
+  		<form method="POST" action="newDescription">
 	  		<div class="modal-body">
 	  			<input type="hidden" name="descriptionId" id="descriptionId"/>
 	    		<label class="span3"><spring:message code="label.newdescription"/></label> 
@@ -151,7 +163,7 @@
     		<button type="button" class="close" data-dismiss="modal"><spring:message code="button.close"/></button>
     		<h3><spring:message code="label.changetags"/></h3>
   		</div>
-  		<form style="margin: 0 0 0 0" method="POST" action="newTags">
+  		<form method="POST" action="newTags">
 	  		<div class="modal-body">
 	  			<input type="hidden" name="tagsId" id="tagsId"/>
 	    		<label class="span3"><spring:message code="label.newtags"/></label> 

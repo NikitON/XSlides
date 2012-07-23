@@ -13,7 +13,6 @@ import com.team.xslides.dao.PresentationDAO;
 
 @Service
 public class PresentationServiceImpl implements PresentationService {
-
     @Autowired
     private PresentationDAO presentationDAO;
 
@@ -46,7 +45,7 @@ public class PresentationServiceImpl implements PresentationService {
     public List<Presentation> getPresentationsList() {
         return presentationDAO.getPresentationsList();
     }
-    
+
     @Transactional
     public List<Presentation> getPresentationForQuery(String searchQuery) {
         return presentationDAO.getPresentationForQuery(searchQuery);
@@ -54,7 +53,7 @@ public class PresentationServiceImpl implements PresentationService {
 
     @Transactional
     public void setNewTitle(Integer id, String title) {
-        presentationDAO.setNewTitle(id, title);        
+        presentationDAO.setNewTitle(id, title);
     }
 
     @Transactional
@@ -75,5 +74,15 @@ public class PresentationServiceImpl implements PresentationService {
     @Transactional
     public void setNewTags(Integer id, Set<Tag> tags) {
         presentationDAO.setNewTags(id, tags);
+    }
+
+    @Transactional
+    public String getTemplate(Integer id) {
+        return presentationDAO.getTemplate(id);
+    }
+
+    @Transactional
+    public void setTemplate(Integer presentationID, Integer templateID) {
+        presentationDAO.setTemplate(presentationID, templateID);
     }
 }

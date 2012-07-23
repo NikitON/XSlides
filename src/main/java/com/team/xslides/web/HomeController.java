@@ -17,12 +17,17 @@ import com.team.xslides.service.TagService;
 public class HomeController {
     @Autowired
     private TagService tagService;
-
+    
+    @RequestMapping("/about")
+    public ModelAndView about() {
+        return new ModelAndView("about");
+    }
+    
     @RequestMapping("/index")
     public ModelAndView index() {
         return new ModelAndView("redirect:/");
     }
-    
+
     @RequestMapping("/home")
     public ModelAndView home() {
         return new ModelAndView("redirect:/");
@@ -34,7 +39,7 @@ public class HomeController {
         mv.addObject("tagsList", tagService.getTagsList());
         return mv;
     }
-    
+
     @RequestMapping("/accessDenied")
     public ModelAndView accessDenied(HttpSession session) {
         ModelAndView mv = new ModelAndView("access_denied");

@@ -12,6 +12,7 @@
 		<%@ include file="static/menu.resource" %>
 		<div class="well">
 		<c:if test="${errorServer}"><div class="alert alert-error"><spring:message code="message.serverproblems"/></div></c:if>
+		<c:if test="${sent}"><div class="alert alert-success"><spring:message code="message.sent"/></div></c:if>
 			<c:if test="${!empty userList}">
 				<style>
 				 		table th, table td { overflow: hidden; }
@@ -35,7 +36,7 @@
 							<td><c:if test="${entry.confirmed}"><div align="center"><i class="icon-ok"></i></div></c:if></td>
 							<td>
 							<c:if test="${(entry.admin == true) && !(user.id == entry.id)}">
-							<div align="center"><form style="margin: 0 0 0 0" action="switchAdmin/${entry.id}" method="POST"><button id="switchAdmin" class="btn btn-danger">
+							<div align="center"><form action="switchAdmin/${entry.id}" method="POST"><button id="switchAdmin" class="btn btn-danger">
 							<spring:message code="button.fromadmin"/>
 							</button></form></div>
 							</c:if>
@@ -45,7 +46,7 @@
 							</button></div>
 							</c:if>
 							<c:if test="${entry.admin == false}">
-							<div align="center"><form style="margin: 0 0 0 0" action="switchAdmin/${entry.id}" method="POST"><button id="switchAdmin" class="btn btn-success">
+							<div align="center"><form action="switchAdmin/${entry.id}" method="POST"><button id="switchAdmin" class="btn btn-success">
 							<spring:message code="button.toadmin"/>
 							</button></form></div>
 							</c:if>
@@ -64,12 +65,12 @@
 							</c:if>
 							<c:if test="${!(user.id == entry.id)}">
 							<td>
-							<div align="center"><form style="margin: 0 0 0 0" action="deleteUser/${entry.id}" method="POST"><button class="btn btn-danger">
+							<div align="center"><form action="deleteUser/${entry.id}" method="POST"><button class="btn btn-danger">
 							<i class="icon-remove icon-white"></i> <spring:message code="button.delete"/>
 							</button></form></div>
 							</td>
 							<td>
-							<div align="center"><form style="margin: 0 0 0 0" action="newPassword/${entry.id}" method="POST"><button class="btn btn-warning">
+							<div align="center"><form action="newPassword/${entry.id}" method="POST"><button class="btn btn-warning">
 							<i class="icon-envelope icon-white"></i> <spring:message code="button.newpassword"/>
 							</button></form></div>
 							</td>

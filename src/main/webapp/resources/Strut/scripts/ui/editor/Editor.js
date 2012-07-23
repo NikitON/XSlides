@@ -154,7 +154,13 @@ define(["vendor/amd/backbone", "./SlideEditor", "./transition_editor/TransitionE
     },
     renderPreview: function() {
       var cb, showStr, sourceWind;
-      showStr = ImpressRenderer.render(this.model.attributes);
+      $.post("http://localhost:8080/XSlides/saveCurrentPresentation",{id:editableId,content:ImpressRenderer.render(this.model.attributes),json:JSON.stringify(this.model.toJSON(false, true))}, function(data){
+    	  if(data.indexOf("ok")!=-1){
+    		  window.open("http://localhost:8080/XSlides/viewPresentation/"+editableId);
+    	  }else{
+    		  alert(data);}
+      });
+      /*showStr = ImpressRenderer.render(this.model.attributes);
       window.previewWind = window.open("index.html?preview=true");
       sourceWind = window;
       cb = function() {
@@ -167,8 +173,8 @@ define(["vendor/amd/backbone", "./SlideEditor", "./transition_editor/TransitionE
             return sourceWind.previewWind.impress().init();
           }
         }
-      };
-      return $(window.previewWind.document).ready(cb);
+      };*/
+      return; $(window.previewWind.document).ready(cb);
     },
     changePerspective: function(e, data) {
       var _this = this;

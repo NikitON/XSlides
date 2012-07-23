@@ -42,6 +42,19 @@
 								<textarea id="description" class="span6" rows="6" placeholder="<spring:message code="input.description"/>" name="description"></textarea>
 							</div>
 						</div>
+						<div class="control-group">
+							<label class="control-label" for="template"><spring:message code="label.choosetemplate"/></label>
+							<div class="controls">
+								<select class="span3" name="template">
+									<option value="1">Empty</option>
+									<option value="5">Blank</option>
+									<option value="2">Simple</option>
+									<option value="3">Itransition</option>
+									<option value="4">USSR</option>
+								</select>
+							</div>
+						</div>
+						
 				    	<div class="control-group">
 							<label class="control-label" for="tags"><spring:message code="label.tags"/></label>
 							<div class="controls">

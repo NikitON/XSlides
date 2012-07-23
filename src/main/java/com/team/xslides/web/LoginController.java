@@ -1,7 +1,6 @@
 package com.team.xslides.web;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class LoginController {
         }
         return new ModelAndView("login");
     }
-    
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(HttpServletRequest request, HttpSession session) {
         User user = userService.getUser(request.getParameter("email"), request.getParameter("password"));
@@ -46,7 +45,7 @@ public class LoginController {
         }
         return mv;
     }
-    
+
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView logout(HttpSession session) {
         ModelAndView mv = new ModelAndView("redirect:/home");
